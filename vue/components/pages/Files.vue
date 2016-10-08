@@ -9,9 +9,29 @@
                     </li>
                 </ul>
                 <div class="tab-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form @submit.prevent="search()" class="alert alert-danger alert-borderless">
+                                <div class="input-group">
+                                    <div class="input-cont">
+                                        <input type="text" placeholder="Search files..." class="form-control"/>
+                                    </div>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">
+                                        Search &nbsp; <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <div class="tab-pane active" id="files">
                         <div class="margin-top-10">
                             <ul class="mix-filter">
+                                <li @click="uploadFiles()">
+                                    <i class="fa fa-plus"></i>
+                                    Upload files
+                                </li>
                                 <li class="filter" data-filter="all">
                                      All
                                 </li>
@@ -47,6 +67,19 @@
 
         mounted() {
             $('.mix-grid').mixitup();
+        },
+
+        methods: {
+            search(event) {
+                let text = event.target.value;
+            },
+
+            uploadFiles() {
+                filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
+                filepicker.pickMultiple(files => {
+                    console.log(files);
+                });
+            }
         }
 
     }
