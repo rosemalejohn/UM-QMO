@@ -21,7 +21,11 @@
 				type: Object,
 				required: true
 			}
-		}
+		},
+
+        mounted() {
+            
+        }
 
 	}
 </script>

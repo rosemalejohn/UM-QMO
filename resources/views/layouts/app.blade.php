@@ -30,17 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
-    <link href="/css/components-md.css" id="style_components" rel="stylesheet" type="text/css" />
-    <link href="/css/plugins-md.css" rel="stylesheet" type="text/css" />
-    <link href="/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="/css/default.css" rel="stylesheet" type="text/css" id="style_color" />
-
-    <!-- Pages -->
-    <link rel="stylesheet" href="/css/profile.css">
-
-    <link rel="stylesheet" href="/css/portfolio.css">
-
-    <link rel="stylesheet" href="/css/error.css">
+    <link rel="stylesheet" href="/css/app.css">
 
     <link rel="shortcut icon" href="favicon.ico" />
 
@@ -94,16 +84,14 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
-    <script src="/js/metronic.js" type="text/javascript"></script>
-    <script src="/js/layout.js" type="text/javascript"></script>
-    <script src="/js/portfolio.js" type="text/javascript"></script>
-    <script src="/js/app.js" type="text/javascript"></script>
+    <script src="/js/app-theme.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="/js/app.js"></script>
 
     <script>
         jQuery(document).ready(function() {
             Metronic.init();
             Layout.init();
-            Portfolio.init();
         });
     </script>
 </body>

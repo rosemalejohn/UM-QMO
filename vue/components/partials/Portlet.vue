@@ -1,15 +1,27 @@
 <template>
-	<div class="portlet box grey-cascade">
+	<div class="portlet light">
 		<div class="portlet-title">
-			<div class="caption">
-				Accounts
+			<div class="caption font-purple-plum">
+				<slot name="title"></slot>
 			</div>
-			<div class="tools">
-				<a href="#/accounts/new" class="fa fa-plus"></a>
-			</div>
+			<slot name="tools"></slot>
 		</div>
 		<div class="portlet-body">
-			<slot name="content"></slot>
+			<main><slot></slot></main>
 		</div>
 	</div>
 </template>
+
+<script>
+	export default {
+
+		props: {
+			color: {
+				type: String,
+				required: false,
+				default: 'grey-cascade'
+			}
+		}
+
+	}
+</script>

@@ -21,12 +21,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Uniform.js/4.0.1/css/default.css" rel="stylesheet" type="text/css" />
 
-    <link href="/css/login.css" rel="stylesheet" type="text/css" />
-
-    <link href="/css/components-md.css" id="style_components" rel="stylesheet" type="text/css" />
-    <link href="/css/plugins-md.css" rel="stylesheet" type="text/css" />
-    <link href="/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="/css/default.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/css/guest.css" rel="stylesheet" type="text/css" />
 
     <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -42,7 +37,7 @@
     </div>
 
     <div class="logo">
-        <a href="index.html">
+        <a href="/login">
         </a>
     </div>
 
@@ -70,9 +65,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js" type="text/javascript"></script>
 
-    <script src="/js/metronic.js" type="text/javascript"></script>
-    <script src="/js/layout.js" type="text/javascript"></script>
-    <script src="/js/login.js" type="text/javascript"></script>
+    <script src="/js/guest-theme.js" type="text/javascript"></script>
 
     <script>
         jQuery(document).ready(function() {

@@ -49,8 +49,13 @@
 		                <span class="arrow"></span>
 		            </a>
 		            <ul class="sub-menu">
-		                <li>
+		            	<li>
 		                    <a href="">Add department</a>
+		                </li>
+		                <li v-for="department in departments">
+		                    <router-link 
+		                    	:to="{name: 'Show department', params: {departmentId: department.id}}"
+		                    	>{{ department.name }}</router-link>
 		                </li>
 		            </ul>
 		        </li>
@@ -58,3 +63,20 @@
 		</div>
 	</div>
 </template>
+
+<script>
+	export default {
+
+
+		created() {
+			// fetch departments
+		},
+
+		data() {
+			return {
+				departments: []
+			}
+		}
+
+	}
+</script>

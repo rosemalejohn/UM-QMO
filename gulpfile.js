@@ -13,18 +13,39 @@ require('laravel-elixir-vue-2');
  |
  */
 
+elixir.sourcemaps = false;
+
 elixir(mix => {
-    mix.sass('admin/layout.scss')
-    	.sass('global/plugins-md.scss')
-    	.sass('global/components-md.scss')
-    	.sass('admin/themes/default.scss')
-    	.sass('pages/login.scss')
-        .sass('pages/profile.scss')
-        .sass('pages/portfolio.scss')
-    	.sass('pages/error.scss')
-    	.copy('resources/assets/js/layout.js', 'public/js/layout.js')
-    	.copy('resources/assets/js/metronic.js', 'public/js/metronic.js')
-        .copy('resources/assets/js/login.js', 'public/js/login.js')
-    	.copy('resources/assets/js/portfolio.js', 'public/js/portfolio.js')
-    	.webpack('app.js', null, 'vue');
+    mix
+        .webpack('app.js', null, 'vue')
+
+        .scripts([
+            'metronic.js',
+            'layout.js',
+            'portfolio.js'
+        ], 'public/js/app-theme.js')
+
+        .scripts([
+            'metronic.js',
+            'layout.js',
+            'login.js'
+        ], 'public/js/guest-theme.js')
+
+        .sass([
+            'admin/layout.scss',
+            'global/plugins-md.scss',
+            'global/components-md.scss',
+            'admin/themes/default.scss',
+            'pages/profile.scss',
+            'pages/portfolio.scss',
+            'pages/error.scss',
+        ], 'public/css/app.css')
+
+        .sass([
+            'admin/layout.scss',
+            'global/plugins-md.scss',
+            'global/components-md.scss',
+            'admin/themes/default.scss',
+            'pages/login.scss',
+        ], 'public/css/guest.css');
 });
