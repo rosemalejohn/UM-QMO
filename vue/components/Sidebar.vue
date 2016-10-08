@@ -2,23 +2,23 @@
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 		    <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-		        <li class="start active ">
-		            <a href="index.html">
+		        <li class="">
+		            <a href="#/">
 		                <i class="icon-home"></i>
 		                <span class="title">Dashboard</span>
 		                <span class="selected"></span>
 		            </a>
-		        </li>
+		        </li> 
 		        <li>
-		            <a href="index.html">
-		                <i class="icon-home"></i>
+		            <a href="#/reports">
+		                <i class="icon-notebook"></i>
 		                <span class="title">Reports</span>
 		                <span class="selected"></span>
 		            </a>
 		        </li>
 		        <li>
-		            <a href="javascript:;">
-		                <i class="icon-basket"></i>
+		            <a href="#/files">
+		                <i class="icon-folder-alt"></i>
 		                <span class="title">Files</span>
 		                <span class="arrow "></span>
 		            </a>
@@ -31,26 +31,26 @@
 		            </ul>
 		        </li>
 		        <li>
-		            <a href="javascript:;">
-		                <i class="icon-rocket"></i>
+		            <a href="#/accounts">
+		                <i class="icon-people"></i>
 		                <span class="title">Accounts</span>
 		                <span class="arrow "></span>
 		            </a>
 		            <ul class="sub-menu">
 		                <li>
-		                    <a href="layout_language_bar.html">Language Switch Bar</a>
+		                    <a href="#/account/new">Add new</a>
 		                </li>
 		            </ul>
 		        </li>
 		        <li>
-		            <a href="javascript:;">
+		            <a href="#/departments">
 		                <i class="icon-diamond"></i>
 		                <span class="title">Departments</span>
-		                <span class="arrow "></span>
+		                <span class="arrow"></span>
 		            </a>
 		            <ul class="sub-menu">
 		                <li>
-		                    <a href="ui_general.html">General Components</a>
+		                    <a href="">Add department</a>
 		                </li>
 		            </ul>
 		        </li>

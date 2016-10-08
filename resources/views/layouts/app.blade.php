@@ -22,12 +22,29 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Uniform.js/4.0.1/css/default.css" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
     <link href="/css/components-md.css" id="style_components" rel="stylesheet" type="text/css" />
     <link href="/css/plugins-md.css" rel="stylesheet" type="text/css" />
     <link href="/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="/css/default.css" rel="stylesheet" type="text/css" id="style_color" />
 
+    <!-- Pages -->
+    <link rel="stylesheet" href="/css/profile.css">
+
+    <link rel="stylesheet" href="/css/portfolio.css">
+
     <link rel="shortcut icon" href="favicon.ico" />
+
+    <script>
+        window.Laravel = <?php echo json_encode([
+    'csrfToken' => csrf_token(),
+]); ?>
+    </script>
 </head>
 
 <body class="page-md page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed">
@@ -67,14 +84,22 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js" type="text/javascript"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/1.5.4/jquery.mixitup.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
     <script src="/js/metronic.js" type="text/javascript"></script>
     <script src="/js/layout.js" type="text/javascript"></script>
+    <script src="/js/portfolio.js" type="text/javascript"></script>
     <script src="/js/app.js" type="text/javascript"></script>
 
     <script>
         jQuery(document).ready(function() {
-            Metronic.init(); // init metronic core componets
-            Layout.init(); // init layout
+            Metronic.init();
+            Layout.init();
+            Portfolio.init();
         });
     </script>
 </body>
