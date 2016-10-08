@@ -18,7 +18,7 @@
                                 <li class="filter" data-filter="category_1">
                                      UI Design
                                 </li>
-                                <li class="filter" data-filter="category_2">
+                                <li class="filter" data-filter="">
                                      Web Development
                                 </li>
                             </ul>
@@ -44,6 +44,10 @@
         components: {
             File
         },
+
+        mounted() {
+            $('.mix-grid').mixitup();
+        }
 
     }
 </script>

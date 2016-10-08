@@ -28,6 +28,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+
     <link href="/css/components-md.css" id="style_components" rel="stylesheet" type="text/css" />
     <link href="/css/plugins-md.css" rel="stylesheet" type="text/css" />
     <link href="/css/layout.css" rel="stylesheet" type="text/css" />
@@ -37,6 +39,8 @@
     <link rel="stylesheet" href="/css/profile.css">
 
     <link rel="stylesheet" href="/css/portfolio.css">
+
+    <link rel="stylesheet" href="/css/error.css">
 
     <link rel="shortcut icon" href="favicon.ico" />
 

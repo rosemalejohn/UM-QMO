@@ -23,12 +23,14 @@ import Dashboard from './components/pages/Dashboard.vue'
 import AccountForm from './components/pages/AccountForm.vue'
 import Files from './components/pages/Files.vue'
 import Accounts from './components/pages/Users.vue'
+import Error404 from './components/errors/404.vue'
 
 const routes = [
-	{ path: '/', name: 'dashboard', component: Dashboard },
-	{ path: '/accounts/new', name: 'new-account', component: AccountForm },
-	{ path: '/files', name: 'files', component: Files },
-	{ path: '/accounts', name: 'accounts', component: Accounts },
+	{ path: '/', name: 'Dashboard', component: Dashboard },
+	{ path: '/accounts/new', name: 'Add new account', component: AccountForm },
+	{ path: '/files', name: 'Files', component: Files },
+	{ path: '/accounts', name: 'Accounts', component: Accounts },
+	{ path: '*', 'name': 'Page not found', component: Error404 }
 ]
 
 const router = new VueRouter({

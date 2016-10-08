@@ -2,13 +2,10 @@
 	<div class="page-header md-shadow-z-1-i navbar navbar-fixed-top">
         <div class="page-header-inner container">
             <div class="page-logo">
-                <a href="#/">
-                    
-                </a>
+                <a href="#/"></a>
                 <div class="menu-toggler sidebar-toggler"></div>
             </div>
-            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-            </a>
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
 
             <div class="page-top">
                 <div class="top-menu">
@@ -80,7 +77,8 @@
                     showCancelButton: true,   
                     confirmButtonColor: "#DD6B55",   
                     confirmButtonText: "Yes, Log out!",   
-                    closeOnConfirm: false 
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true 
                 }, () => {
                     this.$http.post('logout', response => {
                         swal("Logged out!", "Your session has been destruct!", "success"); 

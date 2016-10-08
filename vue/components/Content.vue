@@ -1,7 +1,7 @@
 <template>
 	<div class="page-content-wrapper">
         <div class="page-content">
-            <h3 class="page-title">Dashboard</h3>
+            <h3 class="page-title">{{ $route.name }}</h3>
 
             <breadcrumbs></breadcrumbs>
 

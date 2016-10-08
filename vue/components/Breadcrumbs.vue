@@ -7,7 +7,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="#">Dashboard</a>
+                <a :href="'#' + $route.path">{{ $route.name }}</a>
             </li>
         </ul>
     </div>
