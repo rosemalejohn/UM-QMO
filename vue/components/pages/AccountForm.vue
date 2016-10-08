@@ -96,7 +96,7 @@
 								</div>
 							</div>
 							<button type="submit" class="btn btn-success">Save account</button>
-							<button type="submit" class="btn btn-default">Cancel</button>
+							<button type="button" class="btn btn-default">Cancel</button>
 						</div>
 					</div>
 				</div>

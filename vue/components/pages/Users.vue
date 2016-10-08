@@ -35,6 +35,7 @@
 								<th>
 									Department
 								</th>
+								<th>Account type</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -61,6 +62,7 @@
 								<td>
 									Web Team
 								</td>
+								<td>Admin</td>
 							</tr>
 						</tbody>
 					</table>
@@ -72,6 +74,18 @@
 
 <script>
 	export default {
+
+		mounted() {
+
+			// get all users
+
+		},
+
+		data() {
+			return {
+				users: []
+			}
+		}
 
 	}
 </script>

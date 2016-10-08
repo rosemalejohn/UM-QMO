@@ -11,7 +11,7 @@
 		        </li> 
 		        <li>
 		            <a href="#/reports">
-		                <i class="icon-notebook"></i>
+		                <i class="icon-chart"></i>
 		                <span class="title">Reports</span>
 		                <span class="selected"></span>
 		            </a>
@@ -44,7 +44,7 @@
 		        </li>
 		        <li>
 		            <a href="#/departments">
-		                <i class="icon-diamond"></i>
+		                <i class="icon-organization"></i>
 		                <span class="title">Departments</span>
 		                <span class="arrow"></span>
 		            </a>
