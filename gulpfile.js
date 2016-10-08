@@ -1,6 +1,6 @@
 const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue');
+require('laravel-elixir-vue-2');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,6 +14,13 @@ require('laravel-elixir-vue');
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+    mix.sass('admin/layout.scss')
+    	.sass('global/plugins-md.scss')
+    	.sass('global/components-md.scss')
+    	.sass('admin/themes/default.scss')
+    	.sass('pages/login.scss')
+    	.copy('resources/assets/js/layout.js', 'public/js/layout.js')
+    	.copy('resources/assets/js/metronic.js', 'public/js/metronic.js')
+    	.copy('resources/assets/js/login.js', 'public/js/login.js')
+    	.webpack('app.js', null, 'vue');
 });
