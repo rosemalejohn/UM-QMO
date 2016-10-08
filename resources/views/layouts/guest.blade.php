@@ -73,7 +73,6 @@
     <script src="/js/metronic.js" type="text/javascript"></script>
     <script src="/js/layout.js" type="text/javascript"></script>
     <script src="/js/login.js" type="text/javascript"></script>
-    <script src="/js/app.js" type="text/javascript"></script>
 
     <script>
         jQuery(document).ready(function() {

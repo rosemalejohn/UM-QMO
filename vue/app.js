@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
 
+// Main components
 import Header from './components/Header.vue'
 import Sidebar from './components/Sidebar.vue'
 import Footer from './components/Footer.vue'
@@ -15,17 +16,16 @@ Vue.component('app-sidebar', Sidebar)
 Vue.component('app-footer', Footer)
 Vue.component('app-content', Content)
 
-// pages
-
+//pages 
 import Dashboard from './components/pages/Dashboard.vue'
 
 const routes = [
-	{ path: '/', component: Dashboard }
+	{ path: '/', name: 'dashboard', component: Dashboard }
 ]
 
 const router = new VueRouter({
 	routes
-})
+})																																																																																																																																																																																																																																																																																																						
 
 const app = new Vue({
   router

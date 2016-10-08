@@ -5,7 +5,9 @@
 
             <breadcrumbs></breadcrumbs>
 
-            <router-view></router-view>
+            <transition>
+            	<router-view></router-view>
+            </transition>
         </div>
     </div>
 </template>
