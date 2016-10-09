@@ -21,13 +21,13 @@
 			Stat
 		},
 
-		mounted() {
+		created() {
 			StatService.GetTotalFilesUploaded().then(response => {
-				this.files = response.data;
+				this.files = response.data.toString();
 			})
 
 			StatService.GetTotalUsers().then(response => {
-				this.users = response.data;
+				this.users = response.data.toString();
 			})
 		},
 

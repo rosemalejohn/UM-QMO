@@ -4,8 +4,7 @@
             <div class="tabbable tabbable-custom tabbable-noborder ">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#files" data-toggle="tab">
-                        Files </a>
+                        <a href="#files" data-toggle="tab">Files</a>
                     </li>
                 </ul>
                 <div class="tab-content">

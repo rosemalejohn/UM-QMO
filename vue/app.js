@@ -14,6 +14,7 @@ import _ from 'lodash'
 Vue.use(VueResource)
 Vue.use(VueRouter)
 
+Vue.http.options.root = '/api';
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
 Vue.component('app-header', Header)

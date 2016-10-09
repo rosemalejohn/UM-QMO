@@ -63,18 +63,54 @@
 
 <script>
 	import Portlet from './../partials/Portlet.vue'
+	import Department from './../../api/department'
+	import toastr from 'toastr'
 
 	export default {
 		components: {
 			Portlet
 		},
 
+		created() {
+
+			Department.GetAll().then(response => {
+				this.departments = response.data;
+			}).catch(err => {
+				toastr.error('Cannot fetch departments.');
+			})
+
+		},
+
 		methods: {
 
 			removeDepartments() {
-
+				swal({   
+                    title: "Are you sure?",   
+                    text: "This departments will be deleted!",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#DD6B55",   
+                    confirmButtonText: "Yes, delete it!",   
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true 
+                }, () => {
+                    Department.DeleteMultiple(this.checked).then(response => {
+                    	this.departments = _.reject(this.departments, department => {
+                    		return _.contains(this.checked, department.id.toString());
+                    	})
+                    	this.checked = [];
+                    	toastr.success('Departments deleted!')
+                    });
+                });
 			}
 			
+		},
+
+		data() {
+			return {
+				checked: [],
+				departments: []
+			}
 		}
 	}
 </script>
