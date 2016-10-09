@@ -67,6 +67,14 @@ class UserController extends Controller
     }
 
 
+    public function restore($id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->restore();
+
+        return response()->json($user);
+    }
+
     private function validateUser(Request $request, $id=null){
 
          $this->validate($request, [

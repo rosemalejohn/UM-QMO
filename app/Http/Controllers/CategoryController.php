@@ -60,6 +60,15 @@ class CategoryController extends Controller
     }
 
 
+    public function restore($id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->restore();
+
+        return response()->json($category);
+    }
+
+
     private function validateCategory(Request $request){
 
          $this->validate($request, [

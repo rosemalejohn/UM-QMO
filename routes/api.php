@@ -24,6 +24,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::put('/{id}', 'UserController@update');
     Route::delete('/{id}', 'UserController@destroy');
     Route::delete('/delete-multiple', 'UserController@destroyMultiple');
+    Route::delete('/{id}/restore', 'UserController@restore');
 
 });
 
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'categories'], function () {
     Route::post('/', 'CategoryController@store');
     Route::put('/{id}', 'CategoryController@update');
     Route::delete('/{id}', 'CategoryController@destroy');
+    Route::delete('/{id}/restore', 'CategoryController@restore');
 
 });
 
@@ -46,6 +48,7 @@ Route::group(['prefix' => 'departments'], function () {
     Route::put('/{id}', 'DepartmentController@update');
     Route::delete('/{id}', 'DepartmentController@destroy');
     Route::delete('/delete-multiple', 'DepartmentController@destroyMultiple');
+    Route::delete('/{id}/restore', 'DepartmentController@restore');
 
 });
 
@@ -56,5 +59,6 @@ Route::group(['prefix' => 'files'], function () {
     Route::put('/{id}', 'FileController@update');
     Route::delete('/{id}', 'FileController@destroy');
     Route::get('/{key}/by-search', 'FileController@search');
+    Route::delete('/{id}/restore', 'FileController@restore');
 
 });

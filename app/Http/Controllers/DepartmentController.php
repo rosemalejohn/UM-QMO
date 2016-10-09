@@ -72,6 +72,14 @@ class DepartmentController extends Controller
         Department::destroy($request->departments);
     }
 
+    public function restore($id)
+    {
+        $department = Department::onlyTrashed()->findOrFail($id);
+        $department->restore();
+
+        return response()->json($department);
+    }
+
 
     private function validateDepartment(Request $request){
 
