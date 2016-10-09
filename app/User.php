@@ -4,10 +4,15 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+use App\Models\File;
+use App\Models\Department;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +31,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $dates = ['deleted_at'];
+    
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
 }
