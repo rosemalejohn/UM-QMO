@@ -7,11 +7,11 @@ export default {
 	},
 
 	GetByDepartment(department) {
-		return Vue.http.get(`/files/${department.id}/by-department`);
+		return Vue.http.get(`/departments/${department.id}/files`);
 	},
 
 	GetByCategory(category) {
-		return Vue.http.get(`/files/${category.id}/by-category`);
+		return Vue.http.get(`/categories/${category.id}/files`);
 	},
 
 	Add(file) {
