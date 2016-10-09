@@ -15,6 +15,8 @@ class Department extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['users_count','files_count'];
+
     public function files()
     {
         return $this->hasMany(File::class);
@@ -23,6 +25,16 @@ class Department extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function getUsersCountAttribute()
+    {
+        return $this->users()->count();
+    }
+
+    public function getFilesCountAttribute()
+    {
+        return $this->files()->count();
     }
     
 
