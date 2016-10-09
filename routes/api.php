@@ -25,6 +25,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::delete('/{id}', 'UserController@destroy');
     Route::delete('/delete-multiple', 'UserController@destroyMultiple');
     Route::delete('/{id}/restore', 'UserController@restore');
+    Route::get('/count', 'UserController@usersCount');
 
 });
 
@@ -60,5 +61,7 @@ Route::group(['prefix' => 'files'], function () {
     Route::delete('/{id}', 'FileController@destroy');
     Route::get('/{key}/by-search', 'FileController@search');
     Route::delete('/{id}/restore', 'FileController@restore');
+    Route::get('/count', 'FileController@filesCount');
+    Route::get('/count/{date}/by-date', 'FileController@filesCountByDate');
 
 });

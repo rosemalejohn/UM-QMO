@@ -8,12 +8,14 @@ use App\Http\Requests;
 
 use App\Models\File;
 
+use Carbon\Carbon;
+
 class FileController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
 
@@ -67,6 +69,23 @@ class FileController extends Controller
         $file->restore();
 
         return response()->json($file);
+    }
+
+    public function filesCount()
+    {
+        $count = File::all()->count();
+
+        return response()->json($count);
+    }
+
+
+    public function filesCountByDate($date)
+    {
+        $date = new Carbon($date);   
+        
+        $count = File::whereDate('created_at',$date->toDateString())->count();
+
+        return response()->json($count);
     }
 
 

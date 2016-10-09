@@ -75,6 +75,13 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function usersCount()
+    {
+        $user = User::all()->count();
+
+        return response()->json($user);
+    }
+
     private function validateUser(Request $request, $id=null){
 
          $this->validate($request, [
