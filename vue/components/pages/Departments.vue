@@ -8,7 +8,7 @@
 						<a href="#/departments/new" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-plus"></i>Add
 						</a>
-						<button class="btn btn-circle btn-sm">
+						<button v-if="checked.length == 1" class="btn btn-circle btn-sm">
 							<i class="fa fa-edit"></i>Edit
 						</button>
 						<button @click="removeDepartments()" class="btn btn-circle btn-sm red-sunglo">
@@ -37,21 +37,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="odd gradeX">
+						<tr v-for="department in departments" class="odd gradeX">
 							<td width="5%">
-								<input type="checkbox" class="checkboxes" value="1"/>
+								<input type="checkbox" class="checkboxes" :value="department.id"/>
 							</td>
 							<td>
-								College of Computing
+								{{ department.name }}
 							</td>
 							<td>
-								234672
+								{{ department.file_count }}
 							</td>
 							<td>
-								12
+								{{ department.user_count }}
 							</td>
 							<td class="center">
-								October 12
+								{{ department.created_at }}
 							</td>
 						</tr>
 					</tbody>

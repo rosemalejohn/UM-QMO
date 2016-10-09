@@ -48,30 +48,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="odd gradeX">
+						<tr class="odd gradeX" v-for="user in users">
 							<td>
 								<input v-model="checked" type="checkbox" class="checkboxes" value="123"/>
 							</td>
 							<td>
-								<router-link :to="{ name: 'Show account', params: { userId: 123 }}">Rosemale-John</router-link>
+								<router-link :to="{ name: 'Show account', params: { userId: user.id }}">{{ user.name }}</router-link>
 							</td>
 							<td>
-								234672
+								{{ user.id_number }}
 							</td>
 							<td>
-								<a href="mailto:shuxer@gmail.com">
-								rosemalejohn@gmail.com </a>
+								<a :href="'mailto:' + user.email">{{ user.email }}</a>
 							</td>
 							<td class="center">
-								Male
+								{{ user.gender }}
 							</td>
 							<td>
-								Senior Web Developer
+								{{ user.position }}
 							</td>
 							<td>
-								Web Team
+								{{ user.department_id }}
 							</td>
-							<td>Admin</td>
+							<td>{{ user.type }}</td>
 						</tr>
 					</tbody>
 				</table>

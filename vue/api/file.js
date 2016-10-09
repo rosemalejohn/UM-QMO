@@ -3,35 +3,35 @@ import Vue from 'vue'
 export default {
 
 	GetAll() {
-		return Vue.http.get('/files');
+		return Vue.http.get('/api/files');
 	},
 
 	GetByDepartment(department) {
-		return Vue.http.get(`/departments/${department.id}/files`);
+		return Vue.http.get(`/api/departments/${department.id}/files`);
 	},
 
 	GetByCategory(category) {
-		return Vue.http.get(`/categories/${category.id}/files`);
+		return Vue.http.get(`/api/categories/${category.id}/files`);
 	},
 
 	Add(file) {
-		return Vue.http.post('/files', file);
+		return Vue.http.post('/api/files', file);
 	},
 
 	AddFiles(files) {
-		return Vue.http.post('/files/upload-multiple', files);
+		return Vue.http.post('/api/files/upload-multiple', files);
 	},
 
 	Update(file) {
-		return Vue.http.put(`/files/${file.id}`, file);
+		return Vue.http.put(`/api/files/${file.id}`, file);
 	},
 
 	Delete(file) {
-		return Vue.http.delete(`/files/${file.id}`);
+		return Vue.http.delete(`/api/files/${file.id}`);
 	},
 
 	Search(search) {
-		return Vue.http.get(`/files/${search}/by-search`);
+		return Vue.http.get(`/api/files/${search}/by-search`);
 	}
 
 }

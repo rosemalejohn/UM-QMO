@@ -71,9 +71,10 @@
         },
 
         created() {
-            Category.GetAll().then(response => {
-                this.categories = response.data;
-            })
+            
+            this.getFiles();
+            this.getCategories();
+            
         },
 
         data() {
@@ -98,6 +99,18 @@
                     this.files = response.data;
                 })
             }),
+
+            getFiles() {
+                FileService.GetAll().then(response => {
+                    this.files = response.data;
+                })
+            },
+
+            getCategories() {
+                Category.GetAll().then(response => {
+                    this.categories = response.data;
+                })
+            },
 
             uploadFiles() {
                 filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
