@@ -24,6 +24,10 @@ export default {
 
 	DeleteUsers(users) {
 		return Vue.http.delete('/users/delete-multiple', users);
+	},
+
+	UpdatePassword(user_id, data) {
+		return Vue.http.put(`/users/${user_id}`, data);
 	}
 
 }
