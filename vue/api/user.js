@@ -22,7 +22,7 @@ export default {
 		return Vue.http.delete(`/users/${user.id}`);
 	},
 
-	DeleteUsers(users) {
+	DeleteMultiple(users) {
 		return Vue.http.delete('/users/delete-multiple', users);
 	},
 
