@@ -80,8 +80,10 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true 
                 }, () => {
-                    this.$http.post('logout', response => {
-                        swal("Logged out!", "Your session has been destruct!", "success"); 
+                    this.$http.post('/logout').then(response => {
+                        window.location.reload();
+                    }).catch(err => {
+                        window.location.reload();
                     });
                 });
             }
