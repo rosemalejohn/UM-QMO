@@ -84,6 +84,7 @@
 	import Portlet from './../partials/Portlet.vue'
 	import swal from 'sweetalert'
 	import User from './../../api/user'
+	import toastr from 'toastr'
 
 	export default {
 
@@ -93,7 +94,7 @@
 
 		created() {
 
-			// get all users
+			this.fetchUsers();
 
 		},
 
@@ -115,6 +116,14 @@
 
 		methods: {
 
+			fetchUsers() {
+				User.GetAll().then(response => {
+					this.users = response.data;
+				}).catch(err => {
+					toastr.error('Cannot fetch users.');
+				})
+			},
+
 			removeAccounts() {
 				swal({   
                     title: "Are you sure?",   
@@ -135,7 +144,7 @@
                     });
                 });
 			}
-		}
+		},
 
 	}
 </script>
