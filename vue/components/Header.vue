@@ -65,6 +65,7 @@
 
 <script>
     import swal from 'sweetalert'
+    import User from './../api/user'
 
     export default {
 
@@ -80,11 +81,11 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true 
                 }, () => {
-                    this.$http.post('/logout').then(response => {
-                        window.location.reload();
+                    User.Logout().then(response => {
+                        window.location.reload()
                     }).catch(err => {
-                        window.location.reload();
-                    });
+                        window.location.reload()
+                    })
                 });
             }
         }
