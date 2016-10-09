@@ -83,6 +83,7 @@
 <script>
 	import Portlet from './../partials/Portlet.vue'
 	import swal from 'sweetalert'
+	import User from './../../api/user'
 
 	export default {
 
@@ -125,8 +126,12 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true 
                 }, () => {
-                    this.$http.post('logout', response => {
-                        swal("Deleted!", "User has been deleted!", "success"); 
+                    User.DeleteMultiple(this.checked).then(response => {
+                    	this.users = _.reject(this.users, user => {
+                    		return _.contains(this.checked, user.id.toString());
+                    	})
+                    	this.checked = [];
+                    	toastr.success('Users deleted!')
                     });
                 });
 			}

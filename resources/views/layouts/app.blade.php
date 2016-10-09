@@ -30,6 +30,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/toastr/2.1.3/toastr.min.css">
+
     <link rel="stylesheet" href="/css/app.css">
 
     <link rel="shortcut icon" href="favicon.ico" />

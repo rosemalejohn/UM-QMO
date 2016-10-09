@@ -18,6 +18,10 @@ export default {
 		return Vue.http.post('/files', file);
 	},
 
+	AddFiles(files) {
+		return Vue.http.post('/files/upload-multiple', files);
+	},
+
 	Update(file) {
 		return Vue.http.put(`/files/${file.id}`, file);
 	},

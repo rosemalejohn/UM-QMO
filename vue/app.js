@@ -9,6 +9,8 @@ import Sidebar from './components/Sidebar.vue'
 import Footer from './components/Footer.vue'
 import Content from './components/Content.vue'
 
+import _ from 'lodash'
+
 Vue.use(VueResource)
 Vue.use(VueRouter)
 

@@ -107,6 +107,8 @@
 
 <script>
 	import filepicker from 'filepicker-js'
+	import User from './../../api/user'
+	import toastr from 'toastr'
 
 	export default {
 
@@ -123,7 +125,11 @@
 		methods: {
 
 			submit() {
-				alert('form Submitted!');
+				User.AddUser(this.user).then(response => {
+					toastr.success('User added!');
+				}).catch(err => {
+					toastr.error('User not added!');
+				})
 			},
 
 			uploadPhoto() {
