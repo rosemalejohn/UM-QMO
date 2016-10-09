@@ -73,15 +73,19 @@
 
 		created() {
 
-			Department.GetAll().then(response => {
-				this.departments = response.data;
-			}).catch(err => {
-				toastr.error('Cannot fetch departments.');
-			})
+			this.fetchDepartments();
 
 		},
 
 		methods: {
+
+			fetchDepartments() {
+				Department.GetAll().then(response => {
+					this.departments = response.data;
+				}).catch(err => {
+					toastr.error('Cannot fetch departments.');
+				})
+			},
 
 			removeDepartments() {
 				swal({   
@@ -102,7 +106,7 @@
                     	toastr.success('Departments deleted!')
                     });
                 });
-			}
+			},
 			
 		},
 
