@@ -1,5 +1,5 @@
-@import '../../global/_variables'; // global variables.
-@import '../../global/components/_mixins'; // global mixings.
+@import '../global/_variables'; // global variables.
+@import '../global/components/_mixins'; // global mixings.
 
 /***
 New Profile Page
@@ -53,7 +53,7 @@ New Profile Page
 
 .profile-userbuttons {
 	text-align: center;
-	margin-top: 10px;
+	padding: 20px;
 }
 
 .profile-userbuttons .btn {
