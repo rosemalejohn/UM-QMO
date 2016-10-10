@@ -117,7 +117,7 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true 
                 }, () => {
-                    Department.DeleteMultiple(this.checked).then(response => {
+                    Department.DeleteMultiple({departments: this.checked}).then(response => {
                     	this.departments = _.reject(this.departments, department => {
                     		return _.contains(this.checked, department.id.toString());
                     	})

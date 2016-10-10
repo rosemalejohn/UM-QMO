@@ -34,5 +34,4 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male',
         ]);
     }
-    }
 }

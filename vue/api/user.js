@@ -27,7 +27,7 @@ export default {
 	},
 
 	DeleteMultiple(users) {
-		return Vue.http.delete('/api/users/delete-multiple', users);
+		return Vue.http.delete('/api/users/delete-multiple', {users});
 	},
 
 	UpdatePassword(user_id, data) {

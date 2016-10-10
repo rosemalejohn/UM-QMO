@@ -63,6 +63,7 @@
     import FileService from './../../api/file'
     import toastr from 'toastr'
     import _ from 'lodash'
+    import User from './../../api/user'
 
     export default {
 
@@ -119,8 +120,16 @@
             uploadFiles() {
                 filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
                 filepicker.pickMultiple(fileArray => {
-                    FileService.AddFiles({fileArray}).then(response => {
-                        this.files = fileArray;
+                    fileArray = _.map(fileArray, (file) => {
+                        file['user_id'] = 1;
+                        file['description'] = 'Test description';
+                        delete file['client'];
+                        delete file['isWriteable'];
+                        delete file['id'];
+                        return file;
+                    });
+                    FileService.AddFiles(fileArray).then(response => {
+                        this.files = _.concat(this.files, fileArray);
                     }).catch(err => {
                         toastr.error('Files not uploaded!');
                     }).bind(this);

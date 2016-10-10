@@ -22,8 +22,8 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'UserController@index');
     Route::post('/', 'UserController@store');
     Route::put('/{id}', 'UserController@update');
-    Route::delete('/{id}', 'UserController@destroy');
     Route::delete('/delete-multiple', 'UserController@destroyMultiple');
+    // Route::delete('/{id}', 'UserController@destroy');
     Route::delete('/{id}/restore', 'UserController@restore');
     Route::get('/trashed', 'UserController@trashed');
     Route::get('/count', 'UserController@usersCount');
@@ -49,8 +49,8 @@ Route::group(['prefix' => 'departments'], function () {
     Route::get('/{id}/users', 'DepartmentController@showUsers');
     Route::post('/', 'DepartmentController@store');
     Route::put('/{id}', 'DepartmentController@update');
-    Route::delete('/{id}', 'DepartmentController@destroy');
     Route::delete('/delete-multiple', 'DepartmentController@destroyMultiple');
+    // Route::delete('/{id}', 'DepartmentController@destroy');
     Route::delete('/{id}/restore', 'DepartmentController@restore');
     Route::get('/trashed', 'DepartmentController@trashed');
 

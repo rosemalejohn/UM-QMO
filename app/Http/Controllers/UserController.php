@@ -64,7 +64,6 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-
     public function restore($id)
     {
         $user = User::onlyTrashed()->findOrFail($id);

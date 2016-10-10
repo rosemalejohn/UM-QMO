@@ -115,8 +115,6 @@ class FileController extends Controller
             'filename' => 'required|min:1|max:255',
             'description' => 'required|min:1|max:255',
             'mimetype' => 'required',
-            'category_id' => 'required|exists:categories,id',
-            'department_id' => 'required|exists:departments,id',
         ])->validate();
 
     }

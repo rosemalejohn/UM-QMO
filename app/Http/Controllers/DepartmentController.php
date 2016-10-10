@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use App\Models\Department;
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
@@ -16,24 +13,21 @@ class DepartmentController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index()
     {
         $departments = Department::all();
 
         return response()->json($departments);
     }
-    
 
     public function store(Request $request)
     {
         $this->validateDepartment($request);
-        
+
         $newDepartment = Department::create($request->all());
 
-        return response()->json($newDepartment,201);
+        return response()->json($newDepartment, 201);
     }
-
 
     public function showFiles($id)
     {
@@ -49,7 +43,6 @@ class DepartmentController extends Controller
         return response()->json($departmentWithUsers);
     }
 
-
     public function update(Request $request, $id)
     {
         $department = Department::findOrFail($id);
@@ -60,7 +53,6 @@ class DepartmentController extends Controller
 
         return response()->json($department);
     }
-
 
     public function destroy($id)
     {
@@ -87,10 +79,10 @@ class DepartmentController extends Controller
         return response()->json($department);
     }
 
+    private function validateDepartment(Request $request)
+    {
 
-    private function validateDepartment(Request $request){
-
-         $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required|min:2|max:50',
             'code' => 'required|min:2|max:50',
         ]);
@@ -98,4 +90,3 @@ class DepartmentController extends Controller
     }
 
 }
-

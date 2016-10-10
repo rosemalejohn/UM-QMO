@@ -18,8 +18,8 @@ export default {
 		return Vue.http.post('/api/files', file);
 	},
 
-	AddFiles(files) {
-		return Vue.http.post('/api/files/upload-multiple', files);
+	AddFiles(fileArray) {
+		return Vue.http.post('/api/files/upload-multiple', {fileArray});
 	},
 
 	Update(file) {

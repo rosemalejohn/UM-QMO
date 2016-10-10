@@ -27,7 +27,7 @@ export default {
 	},
 
 	DeleteMultiple(departments) {
-		return Vue.http.delete(`/api/departments/delete-multiple`, departments);
+		return Vue.http.delete(`/api/departments/delete-multiple`, {departments});
 	}
 
 }
