@@ -59,6 +59,12 @@ class CategoryController extends Controller
         Category::destroy($id);
     }
 
+    public function trashed()
+    {
+        $categories = Category::onlyTrashed()->get();
+
+        return response()->json($categories);
+    }
 
     public function restore($id)
     {

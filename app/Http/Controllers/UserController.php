@@ -57,6 +57,14 @@ class UserController extends Controller
         User::destroy($request->users);
     }
 
+    public function trashed()
+    {
+        $users = User::onlyTrashed()->get();
+
+        return response()->json($users);
+    }
+
+
     public function restore($id)
     {
         $user = User::onlyTrashed()->findOrFail($id);
