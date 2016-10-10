@@ -7,7 +7,7 @@
 			<stat color="red-intense" icon="fa fa-users" description="User registered" :stat="users" url="#/accounts"></stat>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-			<stat color="green-haze" icon="fa fa-dashboard" description="Todays activity" stat="12" url="#/files"></stat>
+			<stat color="green-haze" icon="fa fa-dashboard" description="Departments" :stat="departments" url="#/departments"></stat>
 		</div>
 	</div>
 </template>
@@ -29,12 +29,17 @@
 			StatService.GetTotalUsers().then(response => {
 				this.users = response.data.toString();
 			})
+
+			StatService.GetTotalDepartments().then(response => {
+				this.departments = response.data.toString();
+			})
 		},
 
 		data() {
 			return {
 				files: 0,
-				users: 0
+				users: 0,
+				departments: 0
 			}
 		}
 	}

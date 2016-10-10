@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use App\Models\File;
-
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 use Validator;
 
@@ -20,22 +16,23 @@ class FileController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index()
     {
         $files = File::all();
 
         return response()->json($files);
     }
-    
 
     public function store(Request $request)
     {
-        $this->validateFile($request->all());
-        
+
+        $this->validateFile($request->all());        
+
+        $this->validateFile($request);
+
         $newFile = File::create($request->all());
 
-        return response()->json($newFile,201);
+        return response()->json($newFile, 201);
     }
 
 
@@ -55,8 +52,8 @@ class FileController extends Controller
 
     public function search($key)
     {
-        $searchResults = File::where('filename','like',"%$key%")
-            ->orWhere('description','like',"%$key%")
+        $searchResults = File::where('filename', 'like', "%$key%")
+            ->orWhere('description', 'like', "%$key%")
             ->get();
 
         return response()->json($searchResults);
@@ -72,7 +69,6 @@ class FileController extends Controller
 
         return response()->json($file);
     }
-
 
     public function destroy($id)
     {
@@ -94,12 +90,11 @@ class FileController extends Controller
         return response()->json($count);
     }
 
-
     public function filesCountByDate($date)
     {
-        $date = new Carbon($date);   
-        
-        $count = File::whereDate('created_at',$date->toDateString())->count();
+        $date = new Carbon($date);
+
+        $count = File::whereDate('created_at', $date->toDateString())->count();
 
         return response()->json($count);
     }

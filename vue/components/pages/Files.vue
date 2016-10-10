@@ -95,10 +95,11 @@
 
         methods: {
             search: _.debounce(() => {
+                toastr.info('Searching...');
                 FileService.Search(this.searchText).then(response => {
                     this.files = response.data;
                 })
-            }),
+            }, 1000),
 
             getFiles() {
                 FileService.GetAll().then(response => {
@@ -124,7 +125,7 @@
                     }).catch(err => {
                         toastr.error('Files not uploaded!');
                     }).bind(this);
-                });
+                })
             }
         },
 
