@@ -2,22 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use App\Models\File;
-
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
 
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
-
 
     public function index()
     {
@@ -25,22 +20,20 @@ class FileController extends Controller
 
         return response()->json($files);
     }
-    
 
     public function store(Request $request)
     {
         $this->validateFile($request);
-        
+
         $newFile = File::create($request->all());
 
-        return response()->json($newFile,201);
+        return response()->json($newFile, 201);
     }
-
 
     public function search($key)
     {
-        $searchResults = File::where('filename','like',"%$key%")
-            ->orWhere('description','like',"%$key%")
+        $searchResults = File::where('filename', 'like', "%$key%")
+            ->orWhere('description', 'like', "%$key%")
             ->get();
 
         return response()->json($searchResults);
@@ -56,7 +49,6 @@ class FileController extends Controller
 
         return response()->json($file);
     }
-
 
     public function destroy($id)
     {
@@ -78,26 +70,25 @@ class FileController extends Controller
         return response()->json($count);
     }
 
-
     public function filesCountByDate($date)
     {
-        $date = new Carbon($date);   
-        
-        $count = File::whereDate('created_at',$date->toDateString())->count();
+        $date = new Carbon($date);
+
+        $count = File::whereDate('created_at', $date->toDateString())->count();
 
         return response()->json($count);
     }
 
+    private function validateFile(Request $request)
+    {
 
-    private function validateFile(Request $request){
-
-         $this->validate($request, [
-            'user_id'       => 'required',
-            'url'           => 'required',
-            'filename'      => 'required|min:1|max:255',
-            'description'   => 'required|min:1|max:255',
-            'mimetype'      => 'required',
-            'category_id'   => 'required|exists:categories,id',
+        $this->validate($request, [
+            'user_id' => 'required',
+            'url' => 'required',
+            'filename' => 'required|min:1|max:255',
+            'description' => 'required|min:1|max:255',
+            'mimetype' => 'required',
+            'category_id' => 'required|exists:categories,id',
             'department_id' => 'required|exists:departments,id',
         ]);
 

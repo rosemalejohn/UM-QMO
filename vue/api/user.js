@@ -10,7 +10,7 @@ export default {
 		return Vue.http.get('/api/users');
 	},
 
-	AddUser() {
+	AddUser(user) {
 		return Vue.http.post('/api/users', user);
 	},
 

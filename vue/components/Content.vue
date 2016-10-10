@@ -20,6 +20,6 @@
 	export default {
 		components: {
 			Breadcrumbs
-		}
+		},
 	}
 </script> 

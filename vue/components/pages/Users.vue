@@ -20,7 +20,7 @@
 						</button>
 					</div>
 				</div>
-				<table class="table table-striped table-bordered table-hover">
+				<table v-if="users.length" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th class="table-checkbox">
@@ -50,7 +50,7 @@
 					<tbody>
 						<tr class="odd gradeX" v-for="user in users">
 							<td>
-								<input v-model="checked" type="checkbox" class="checkboxes" value="123"/>
+								<input v-model="checked" type="checkbox" class="checkboxes" :value="user.id"/>
 							</td>
 							<td>
 								<router-link :to="{ name: 'Show account', params: { userId: user.id }}">{{ user.name }}</router-link>
@@ -74,6 +74,9 @@
 						</tr>
 					</tbody>
 				</table>
+				<div v-else class="note note-info note-bordered">
+	                <p>No users on this site. Click <strong>upload</strong> above.</p>
+	            </div>
 			</portlet>
 		</div>
 	</div>
