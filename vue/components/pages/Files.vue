@@ -4,8 +4,7 @@
             <div class="tabbable tabbable-custom tabbable-noborder ">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#files" data-toggle="tab">
-                        Files </a>
+                        <a href="#files" data-toggle="tab">Files</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -14,7 +13,7 @@
                             <form @submit.prevent="search()" class="alert alert-danger alert-borderless">
                                 <div class="input-group">
                                     <div class="input-cont">
-                                        <input v-model="searchText" type="text" placeholder="Search files..." class="form-control"/>
+                                        <input v-on:keyup="search()" v-model="searchText" type="text" placeholder="Search files..." class="form-control"/>
                                     </div>
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-default">
@@ -35,11 +34,11 @@
                                 <li class="filter" data-filter="all">
                                      All
                                 </li>
-                                <li class="filter" data-filter="category_1">
-                                     UI Design
-                                </li>
-                                <li class="filter" data-filter="">
-                                     Web Development
+                                <li 
+                                    v-for="category in categories" 
+                                    class="filter" 
+                                    :data-filter="category.id">
+                                    {{ category.name }}
                                 </li>
                             </ul>
                             <div class="row mix-grid">
@@ -58,9 +57,12 @@
     </div>
 </template>
 
-<script type="text/javascript" src="/js/portfolio.js"></script>
 <script>
     import File from './../partials/File.vue'
+    import Category from './../../api/category'
+    import FileService from './../../api/file'
+    import toastr from 'toastr'
+    import _ from 'lodash'
 
     export default {
 
@@ -68,9 +70,17 @@
             File
         },
 
+        created() {
+            
+            this.getFiles();
+            this.getCategories();
+            
+        },
+
         data() {
             return {
                 files: [],
+                categories: [],
                 searchText: ''
             }
         },
@@ -84,15 +94,38 @@
         },
 
         methods: {
-            search(event) {
-                let text = event.target.value;
+            search: _.debounce(() => {
+                toastr.info('Searching...');
+                FileService.Search(this.searchText).then(response => {
+                    this.files = response.data;
+                })
+            }, 1000),
+
+            getFiles() {
+                FileService.GetAll().then(response => {
+                    this.files = response.data;
+                }).catch(err => {
+                    toastr.error('Cannot fetch files.')
+                })
+            },
+
+            getCategories() {
+                Category.GetAll().then(response => {
+                    this.categories = response.data;
+                }).catch(err => {
+                    toastr.error('Cannot fetch categories.')
+                })
             },
 
             uploadFiles() {
                 filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
                 filepicker.pickMultiple(files => {
-                    this.files = files;
-                });
+                    FileService.AddFiles(files).then(response => {
+                        this.files = files;
+                    }).catch(err => {
+                        toastr.error('Files not uploaded!');
+                    }).bind(this);
+                })
             }
         },
 

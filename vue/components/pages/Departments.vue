@@ -1,14 +1,20 @@
 <template>
 	<div class="row">
+		<div class="col-md-12" v-if="showDepartmentForm">
+			<portlet>
+				<span slot="title">Add department</span>
+				<department-form :isUpdate="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
+			</portlet>
+		</div>
 		<div class="col-md-12">
 			<portlet>
 				<span slot="title">Departments</span>
 				<div slot="tools" class="tools">
 					<div class="actions">
-						<a href="#/departments/new" class="btn btn-circle btn-default btn-sm">
+						<a @click="showDepartmentForm = true" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-plus"></i>Add
 						</a>
-						<button class="btn btn-circle btn-sm">
+						<button @click="editDepartment()" v-if="checked.length == 1" class="btn btn-circle btn-sm">
 							<i class="fa fa-edit"></i>Edit
 						</button>
 						<button @click="removeDepartments()" class="btn btn-circle btn-sm red-sunglo">
@@ -16,7 +22,7 @@
 						</button>
 					</div>
 				</div>
-				<table class="table table-striped table-bordered table-hover">
+				<table v-if="departments.length" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th class="table-checkbox">
@@ -37,25 +43,28 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="odd gradeX">
+						<tr v-for="department in departments" class="odd gradeX">
 							<td width="5%">
-								<input type="checkbox" class="checkboxes" value="1"/>
+								<input v-model="checked" type="checkbox" class="checkboxes" :value="department.id"/>
 							</td>
 							<td>
-								College of Computing
+								{{ department.name }}
 							</td>
 							<td>
-								234672
+								{{ department.files_count }}
 							</td>
 							<td>
-								12
+								{{ department.users_count }}
 							</td>
 							<td class="center">
-								October 12
+								{{ department.created_at }}
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				<div v-else class="note note-info note-bordered">
+                    <p>No departments yet. Click <strong>add</strong> above.</p>
+                </div>
 			</portlet>
 		</div>
 	</div>
@@ -63,18 +72,77 @@
 
 <script>
 	import Portlet from './../partials/Portlet.vue'
+	import Department from './../../api/department'
+	import toastr from 'toastr'
+	import DepartmentForm from './DepartmentForm.vue'
 
 	export default {
+		
 		components: {
-			Portlet
+			Portlet, DepartmentForm
+		},
+
+		created() {
+
+			this.fetchDepartments();
+
 		},
 
 		methods: {
 
-			removeDepartments() {
+			fetchDepartments() {
+				Department.GetAll().then(response => {
+					this.departments = response.data;
+				}).catch(err => {
+					toastr.error('Cannot fetch departments.');
+				})
+			},
 
-			}
+			editDepartment() {
+				this.isUpdate = true;
+				this.department = _.find(this.departments, (department) => { 
+					return department.id == this.checked[0] 
+				});
+				this.showDepartmentForm = true;
+			},
+
+			removeDepartments() {
+				swal({   
+                    title: "Are you sure?",   
+                    text: "This departments will be deleted!",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#DD6B55",   
+                    confirmButtonText: "Yes, delete it!",   
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true 
+                }, () => {
+                    Department.DeleteMultiple(this.checked).then(response => {
+                    	this.departments = _.reject(this.departments, department => {
+                    		return _.contains(this.checked, department.id.toString());
+                    	})
+                    	this.checked = [];
+                    	toastr.success('Departments deleted!')
+                    });
+                });
+			},
 			
+		},
+
+		data() {
+			return {
+				checked: [],
+				departments: [],
+				department: {},
+				showDepartmentForm: false,
+				isUpdate: false 
+			}
+		},
+
+		events: {
+			departmentCreated(department) {
+				this.departments.push(department);
+			}
 		}
 	}
 </script>

@@ -45,31 +45,40 @@
 										<div class="tab-pane active" id="personal-info">
 											<div class="form-group">
 												<label class="control-label">Name</label>
-												<input v-model="user.name" type="text" placeholder="John" class="form-control"/>
+												<input v-model="user.name" type="text" placeholder="John" class="form-control" required />
 											</div>
 											<div class="form-group">
 												<label class="control-label">ID No.</label>
-												<input v-model="user.id_number" type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control"/>
+												<input v-model="user.id_number" type="text" class="form-control" required />
 											</div>
 											<div class="form-group">
 												<label class="control-label">Gender</label>
 												<div class="radio-list">
 													<label class="radio-inline">
-													<input v-model="user.gender" type="radio" name="optionsRadios" id="optionsRadios4" value="option1"> Male</label>
+													<input v-model="user.gender" type="radio" name="optionsRadios" value="male" required> Male</label>
 													<label class="radio-inline">
-													<input v-model="user.gender" type="radio" name="optionsRadios" id="optionsRadios5" value="option2"> Female </label>
+													<input v-model="user.gender" type="radio" name="optionsRadios" value="female" required> Female </label>
 												</div>
 
 											</div>
 											<div class="form-group">
 												<label class="control-label">Position</label>
-												<input v-model="user.position" type="text" placeholder="Web Developer" class="form-control"/>
+												<input v-model="user.position" type="text" placeholder="Web Developer" class="form-control" required/>
 											</div>
 											<div class="form-group">
 												<label class="control-label">Department</label>
-												<select v-model="user.department_id" class="form-control">
-													<option>Option 1</option>
-													<option>Option 2</option>
+												<select v-model="user.department_id" class="form-control" required>
+													<option value="">Select department</option>
+													<option :value="department.id" v-for="department in departments">{{ department.name }}</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="control-label">Account type</label>
+												<select v-model="user.type" class="form-control" required>
+													<option>Select account type</option>
+													<option value="faculty">Faculty</option>
+													<option value="staff">Staff</option>
+													<option value="standard">Standard</option>
 												</select>
 											</div>
 										</div>
@@ -77,7 +86,7 @@
 										<div class="tab-pane" id="account-info">
 											<div class="form-group">
 												<label class="control-label">Email</label>
-												<input v-model="user.email" type="email" class="form-control"/>
+												<input v-model="user.email" type="email" class="form-control" required/>
 											</div>
 											<div class="form-group">
 												<label class="control-label">Current Password</label>
@@ -107,6 +116,9 @@
 
 <script>
 	import filepicker from 'filepicker-js'
+	import User from './../../api/user'
+	import toastr from 'toastr'
+	import Department from './../../api/department'
 
 	export default {
 
@@ -116,14 +128,25 @@
 					photo_url: '',
 					name: '',
 					position: ''
-				}
+				},
+				departments: [],
+				errors: []
 			}
+		},
+
+		created() {
+			this.fetchDepartments();
 		},
 
 		methods: {
 
 			submit() {
-				alert('form Submitted!');
+				User.AddUser(this.user).then(response => {
+					toastr.success('User added!');
+				}).catch(err => {
+					this.errors = err.data;
+					toastr.error('User not added!');
+				})
 			},
 
 			uploadPhoto() {
@@ -131,6 +154,12 @@
 				filepicker.pick(blob => {
 					this.user.photo_url = blob.url;
 				});
+			},
+
+			fetchDepartments() {
+				Department.GetAll().then(response => {
+					this.departments = response.data;
+				})
 			}
 
 		}

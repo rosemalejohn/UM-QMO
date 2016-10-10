@@ -4,20 +4,17 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 
 // Main components
-import Header from './components/Header.vue'
-import Sidebar from './components/Sidebar.vue'
-import Footer from './components/Footer.vue'
-import Content from './components/Content.vue'
+import App from './App.vue'
+
+import _ from 'lodash'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
 
+Vue.http.options.root = '/api';
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
-Vue.component('app-header', Header)
-Vue.component('app-sidebar', Sidebar)
-Vue.component('app-footer', Footer)
-Vue.component('app-content', Content)
+Vue.component('app', App)
 
 const router = new VueRouter(routes)																																																																																																																																																																																																																																																																																																						
 

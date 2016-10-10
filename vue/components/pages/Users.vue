@@ -20,7 +20,7 @@
 						</button>
 					</div>
 				</div>
-				<table class="table table-striped table-bordered table-hover">
+				<table v-if="users.length" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th class="table-checkbox">
@@ -48,33 +48,35 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="odd gradeX">
+						<tr class="odd gradeX" v-for="user in users">
 							<td>
-								<input v-model="checked" type="checkbox" class="checkboxes" value="123"/>
+								<input v-model="checked" type="checkbox" class="checkboxes" :value="user.id"/>
 							</td>
 							<td>
-								<router-link :to="{ name: 'Show account', params: { userId: 123 }}">Rosemale-John</router-link>
+								<router-link :to="{ name: 'Show account', params: { userId: user.id }}">{{ user.name }}</router-link>
 							</td>
 							<td>
-								234672
+								{{ user.id_number }}
 							</td>
 							<td>
-								<a href="mailto:shuxer@gmail.com">
-								rosemalejohn@gmail.com </a>
+								<a :href="'mailto:' + user.email">{{ user.email }}</a>
 							</td>
 							<td class="center">
-								Male
+								{{ user.gender }}
 							</td>
 							<td>
-								Senior Web Developer
+								{{ user.position }}
 							</td>
 							<td>
-								Web Team
+								{{ user.department ? user.department.name : ''  }}
 							</td>
-							<td>Admin</td>
+							<td>{{ user.type }}</td>
 						</tr>
 					</tbody>
 				</table>
+				<div v-else class="note note-info note-bordered">
+	                <p>No users on this site. Click <strong>upload</strong> above.</p>
+	            </div>
 			</portlet>
 		</div>
 	</div>
@@ -83,6 +85,8 @@
 <script>
 	import Portlet from './../partials/Portlet.vue'
 	import swal from 'sweetalert'
+	import User from './../../api/user'
+	import toastr from 'toastr'
 
 	export default {
 
@@ -92,7 +96,7 @@
 
 		created() {
 
-			// get all users
+			this.fetchUsers();
 
 		},
 
@@ -114,6 +118,14 @@
 
 		methods: {
 
+			fetchUsers() {
+				User.GetAll().then(response => {
+					this.users = response.data;
+				}).catch(err => {
+					toastr.error('Cannot fetch users.');
+				})
+			},
+
 			removeAccounts() {
 				swal({   
                     title: "Are you sure?",   
@@ -125,8 +137,12 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true 
                 }, () => {
-                    this.$http.post('logout', response => {
-                        swal("Deleted!", "User has been deleted!", "success"); 
+                    User.DeleteMultiple(this.checked).then(response => {
+                    	this.users = _.reject(this.users, user => {
+                    		return _.contains(this.checked, user.id.toString());
+                    	})
+                    	this.checked = [];
+                    	toastr.success('Users deleted!')
                     });
                 });
 			}

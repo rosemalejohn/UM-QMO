@@ -22,5 +22,17 @@ class DatabaseSeeder extends Seeder
             'position' => 'Super admin',
             'gender' => 'male',
         ]);
+
+        User::create([
+            'email' => 'cobrador.kszyrver@gmail.com',
+            'password' => bcrypt('kszyrvercobrador'),
+            'id_number' => '2016-10-09-ID',
+            'name' => 'Kszyr Ver Cobrador',
+            'department_id' => null,
+            'type' => 'admin',
+            'position' => 'Super admin',
+            'gender' => 'male',
+        ]);
+    }
     }
 }

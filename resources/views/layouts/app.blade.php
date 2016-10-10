@@ -30,6 +30,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/toastr/2.1.3/toastr.min.css">
+
     <link rel="stylesheet" href="/css/app.css">
 
     <link rel="shortcut icon" href="favicon.ico" />
@@ -44,22 +46,7 @@
 <body class="page-md page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed">
 
     <div id="app">
-        <app-header></app-header>
-
-        <div class="clearfix"></div>
-
-        <div class="container">
-            <div class="page-container">
-
-                <app-sidebar></app-sidebar>
-
-                <app-content></app-content>
-
-            </div>
-
-            <app-footer></app-footer>
-
-        </div>
+        <app></app>
     </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
