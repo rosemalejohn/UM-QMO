@@ -49,6 +49,13 @@ class DepartmentController extends Controller
         return response()->json($departmentWithUsers);
     }
 
+    public function departmentsCount()
+    {
+        $count = Department::all()->count();
+
+        return response()->json($count);
+    }
+
 
     public function update(Request $request, $id)
     {

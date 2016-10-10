@@ -47,6 +47,7 @@ Route::group(['prefix' => 'departments'], function () {
     Route::get('/', 'DepartmentController@index');
     Route::get('/{id}/files', 'DepartmentController@showFiles');
     Route::get('/{id}/users', 'DepartmentController@showUsers');
+    Route::get('/count', 'DepartmentController@departmentsCount');
     Route::post('/', 'DepartmentController@store');
     Route::put('/{id}', 'DepartmentController@update');
     Route::delete('/{id}', 'DepartmentController@destroy');
