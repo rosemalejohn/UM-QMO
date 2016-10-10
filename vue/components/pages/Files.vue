@@ -118,9 +118,9 @@
 
             uploadFiles() {
                 filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
-                filepicker.pickMultiple(files => {
-                    FileService.AddFiles({files: files}).then(response => {
-                        this.files = files;
+                filepicker.pickMultiple(fileArray => {
+                    FileService.AddFiles({fileArray}).then(response => {
+                        this.files = fileArray;
                     }).catch(err => {
                         toastr.error('Files not uploaded!');
                     }).bind(this);
