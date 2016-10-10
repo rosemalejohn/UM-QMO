@@ -3,7 +3,7 @@
 		<div class="col-md-12" v-if="showDepartmentForm">
 			<portlet>
 				<span slot="title">Add department</span>
-				<department-form :isUpdate="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
+				<department-form :is-update="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
 			</portlet>
 		</div>
 		<div class="col-md-12">

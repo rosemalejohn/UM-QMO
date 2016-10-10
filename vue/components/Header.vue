@@ -12,7 +12,7 @@
                     <ul class="nav navbar-nav pull-right">
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle" src="/img/default-photo.jpg" />
+                                <img alt="" class="img-circle" :src="authUser.photo_url || '/img/default-photo.jpg'" />
                                 <span class="username username-hide-on-mobile">{{ authUser.name }} </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
