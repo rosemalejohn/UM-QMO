@@ -30,6 +30,10 @@ export default {
 		return Vue.http.delete(`/api/files/${file.id}`);
 	},
 
+	DeleteMultiple(fileArray) {
+		return Vue.http.post('/api/files/delete-multiple', {fileArray});
+	},
+
 	Search(search) {
 		return Vue.http.get(`/api/files/${search}/by-search`);
 	}

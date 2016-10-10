@@ -75,6 +75,7 @@
 	import Department from './../../api/department'
 	import toastr from 'toastr'
 	import DepartmentForm from './DepartmentForm.vue'
+	import swal from 'sweetalert'
 
 	export default {
 		
@@ -118,6 +119,7 @@
                     showLoaderOnConfirm: true 
                 }, () => {
                     Department.DeleteMultiple({departments: this.checked}).then(response => {
+                    	swal("Deleted!", "Department deleted!.", "success");
                     	this.departments = _.reject(this.departments, department => {
                     		return _.contains(this.checked, department.id.toString());
                     	})

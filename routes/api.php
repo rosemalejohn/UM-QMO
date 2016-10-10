@@ -22,7 +22,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'UserController@index');
     Route::post('/', 'UserController@store');
     Route::put('/{id}', 'UserController@update');
-    Route::delete('/delete-multiple', 'UserController@destroyMultiple');
+    Route::post('/delete-multiple', 'UserController@destroyMultiple');
     // Route::delete('/{id}', 'UserController@destroy');
     Route::delete('/{id}/restore', 'UserController@restore');
     Route::delete('/{id}/remove', 'UserController@remove');
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'departments'], function () {
     Route::get('/count', 'DepartmentController@departmentsCount');
     Route::post('/', 'DepartmentController@store');
     Route::put('/{id}', 'DepartmentController@update');
-    Route::delete('/delete-multiple', 'DepartmentController@destroyMultiple');
+    Route::post('/delete-multiple', 'DepartmentController@destroyMultiple');
     // Route::delete('/{id}', 'DepartmentController@destroy');
     Route::delete('/{id}/restore', 'DepartmentController@restore');
     Route::delete('/{id}/remove', 'DepartmentController@remove');

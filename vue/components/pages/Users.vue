@@ -95,6 +95,7 @@
 	import swal from 'sweetalert'
 	import User from './../../api/user'
 	import toastr from 'toastr'
+	import swal from 'sweetalert'
 
 	export default {
 
@@ -146,6 +147,7 @@
                     showLoaderOnConfirm: true 
                 }, () => {
                     User.DeleteMultiple(this.checked).then(response => {
+                    	swal("Deleted!", "Users deleted!.", "success");
                     	this.users = _.reject(this.users, user => {
                     		return _.contains(this.checked, user.id.toString());
                     	})

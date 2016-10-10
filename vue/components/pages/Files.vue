@@ -57,6 +57,16 @@
     </div>
 </template>
 
+<style lang="sass">
+    .mix-grid {
+        .mix {
+            .mix-inner {
+                height: 150px;
+            }
+        }
+    }
+</style>
+
 <script>
     import File from './../partials/File.vue'
     import Category from './../../api/category'
