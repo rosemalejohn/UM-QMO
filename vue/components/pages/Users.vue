@@ -68,7 +68,7 @@
 								{{ user.position }}
 							</td>
 							<td>
-								{{ user.department_id }}
+								{{ user.department ? user.department.name : ''  }}
 							</td>
 							<td>{{ user.type }}</td>
 						</tr>

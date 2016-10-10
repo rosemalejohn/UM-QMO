@@ -103,12 +103,16 @@
             getFiles() {
                 FileService.GetAll().then(response => {
                     this.files = response.data;
+                }).catch(err => {
+                    toastr.error('Cannot fetch files.')
                 })
             },
 
             getCategories() {
                 Category.GetAll().then(response => {
                     this.categories = response.data;
+                }).catch(err => {
+                    toastr.error('Cannot fetch categories.')
                 })
             },
 
