@@ -27,6 +27,8 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('admin');
+        
         $this->validateDepartment($request);
         
         $newDepartment = Department::create($request->all());
@@ -59,6 +61,8 @@ class DepartmentController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('admin');
+        
         $department = Department::findOrFail($id);
 
         $this->validateDepartment($request);
@@ -71,11 +75,15 @@ class DepartmentController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('admin');
+        
         Department::destroy($id);
     }
 
     public function destroyMultiple(Request $request)
     {
+        $this->authorize('admin');
+        
         Department::destroy($request->departments);
     }
 
@@ -88,6 +96,8 @@ class DepartmentController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('admin');
+        
         $department = Department::onlyTrashed()->findOrFail($id);
         $department->restore();
 
@@ -96,6 +106,8 @@ class DepartmentController extends Controller
 
     public function remove($id)
     {
+        $this->authorize('admin');
+        
         $department = Department::onlyTrashed()->findOrFail($id);
         $department->forceDelete();
 

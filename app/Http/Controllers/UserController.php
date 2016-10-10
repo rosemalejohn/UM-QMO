@@ -22,6 +22,8 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('admin');
+
         $this->validateUser($request);
 
         $newUser = User::create($request->all());
@@ -38,6 +40,8 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('admin');
+
         $user = User::findOrFail($id);
 
         $this->validateUser($request, $id);
@@ -49,11 +53,15 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('admin');
+
         User::destroy($id);
     }
 
     public function destroyMultiple(Request $request)
     {
+        $this->authorize('admin');
+
         User::destroy($request->users);
     }
 
@@ -67,6 +75,8 @@ class UserController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('admin');
+
         $user = User::onlyTrashed()->findOrFail($id);
         $user->restore();
 
@@ -75,6 +85,8 @@ class UserController extends Controller
 
     public function remove($id)
     {
+        $this->authorize('admin');
+
         $user = User::onlyTrashed()->findOrFail($id);
         $user->forceDelete();
 
@@ -96,7 +108,7 @@ class UserController extends Controller
             'id_number' => 'required|min:2|max:50|unique:users,id_number,' . $id,
             'gender' => 'required|in:male,female',
             'position' => 'required|min:2|max:50',
-            // 'department_id' => 'required|exists:departments,id',
+            'department_id' => 'required|exists:departments,id',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'required|min:8',
             'type' => 'required|in:admin,faculty,staff,standard',

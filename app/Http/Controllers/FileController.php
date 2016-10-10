@@ -25,6 +25,7 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('admin');
 
         $this->validateFile($request->all());        
 
@@ -36,6 +37,8 @@ class FileController extends Controller
 
     public function storeMultiple(Request $request)
     {
+        $this->authorize('admin');
+
         foreach ($request->files as $key => $file) {
 
             $this->validateFile($file);
@@ -59,6 +62,8 @@ class FileController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('admin');
+
         $file = File::findOrFail($id);
 
         $this->validateFile($request->all());
@@ -70,11 +75,15 @@ class FileController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('admin');
+
         File::destroy($id);
     }
 
     public function destroyMultiple(Request $request)
     {
+        $this->authorize('admin');
+
         File::destroy($request->files);
     }
 
@@ -87,6 +96,8 @@ class FileController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('admin');
+
         $file = File::onlyTrashed()->findOrFail($id);
         $file->restore();
 
@@ -95,6 +106,8 @@ class FileController extends Controller
 
     public function remove($id)
     {
+        $this->authorize('admin');
+        
         $file = File::onlyTrashed()->findOrFail($id);
         $file->forceDelete();
 
