@@ -75,6 +75,13 @@ class FileController extends Controller
         File::destroy($request->files);
     }
 
+    public function trashed()
+    {
+        $files = File::onlyTrashed()->get();
+
+        return response()->json($files);
+    }
+
     public function restore($id)
     {
         $file = File::onlyTrashed()->findOrFail($id);
