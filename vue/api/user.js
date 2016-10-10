@@ -14,6 +14,10 @@ export default {
 		return Vue.http.get('/api/users');
 	},
 
+	Get(user_id) {
+		return Vue.http.get(`/api/users/${user_id}`);
+	},
+
 	AddUser(user) {
 		return Vue.http.post('/api/users', user);
 	},

@@ -65,7 +65,7 @@
 </template>
 
 <script>
-	import Department from './../api/departments'
+	import Department from './../api/department'
 
 	export default {
 

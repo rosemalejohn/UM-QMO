@@ -21,6 +21,7 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('/', 'UserController@index');
     Route::post('/', 'UserController@store');
+    Route::get('/{id}', 'UserController@show');
     Route::put('/{id}', 'UserController@update');
     Route::post('/delete-multiple', 'UserController@destroyMultiple');
     // Route::delete('/{id}', 'UserController@destroy');
