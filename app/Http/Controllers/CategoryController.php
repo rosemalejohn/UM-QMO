@@ -26,6 +26,8 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('admin');
+        
         $this->validateCategory($request);
         
         $newCategory = Category::create($request->all());
@@ -44,6 +46,8 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('admin');
+        
         $category = Category::findOrFail($id);
 
         $this->validateCategory($request);
@@ -56,6 +60,8 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('admin');
+        
         Category::destroy($id);
     }
 
@@ -68,8 +74,20 @@ class CategoryController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('admin');
+        
         $category = Category::onlyTrashed()->findOrFail($id);
         $category->restore();
+
+        return response()->json($category);
+    }
+
+    public function remove($id)
+    {
+        $this->authorize('admin');
+        
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->forceDelete();
 
         return response()->json($category);
     }

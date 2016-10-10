@@ -24,6 +24,7 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('admin');
 
         $this->validateFile($request->all());
 
@@ -34,13 +35,15 @@ class FileController extends Controller
 
     public function storeMultiple(Request $request)
     {
-        foreach ($request->fileArray as $key => $file) {
+        $this->authorize('admin');
+
+        foreach ($request->files as $key => $file) {
 
             $this->validateFile($file);
 
         }
 
-        $newFiles = File::insert($request->fileArray);
+        $newFiles = File::insert($request->files);
 
         return response()->json($newFiles, 201);
     }
@@ -56,6 +59,8 @@ class FileController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('admin');
+
         $file = File::findOrFail($id);
 
         $this->validateFile($request->all());
@@ -67,11 +72,15 @@ class FileController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('admin');
+
         File::destroy($id);
     }
 
     public function destroyMultiple(Request $request)
     {
+        $this->authorize('admin');
+
         File::destroy($request->files);
     }
 
@@ -84,8 +93,20 @@ class FileController extends Controller
 
     public function restore($id)
     {
+        $this->authorize('admin');
+
         $file = File::onlyTrashed()->findOrFail($id);
         $file->restore();
+
+        return response()->json($file);
+    }
+
+    public function remove($id)
+    {
+        $this->authorize('admin');
+
+        $file = File::onlyTrashed()->findOrFail($id);
+        $file->forceDelete();
 
         return response()->json($file);
     }
