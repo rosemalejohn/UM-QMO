@@ -41,14 +41,15 @@
 <script>
     import swal from 'sweetalert'
     import User from './../api/user'
+    import Cookie from 'js-cookie'
 
     export default {
 
         created() {
 
             User.GetAuthenticatedUser().then(response => {
-                document.cookie = `auth_user_id=${response.data.id}`;
                 this.authUser = response.data;
+                Cookie.set('auth_user_id', response.data.id);
             })
         },
 

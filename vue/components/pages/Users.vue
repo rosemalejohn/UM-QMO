@@ -149,7 +149,7 @@
                     User.DeleteMultiple(this.checked).then(response => {
                     	swal("Deleted!", "Users deleted!.", "success");
                     	this.users = _.reject(this.users, user => {
-                    		return _.contains(this.checked, user.id.toString());
+                    		return this.checked.indexOf(user.id) > -1;
                     	})
                     	this.checked = [];
                     	toastr.success('Users deleted!')

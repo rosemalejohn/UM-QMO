@@ -118,10 +118,10 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true 
                 }, () => {
-                    Department.DeleteMultiple({departments: this.checked}).then(response => {
+                    Department.DeleteMultiple(this.checked).then(response => {
                     	swal("Deleted!", "Department deleted!.", "success");
                     	this.departments = _.reject(this.departments, department => {
-                    		return _.contains(this.checked, department.id.toString());
+                    		return this.checked.indexOf(department.id) > -1;
                     	})
                     	this.checked = [];
                     	toastr.success('Departments deleted!')

@@ -131,7 +131,7 @@
                 filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
                 filepicker.pickMultiple(fileArray => {
                     fileArray = _.map(fileArray, (file) => {
-                        file['user_id'] = 1;
+                        file['user_id'] = Cookie.get('auth_user_id');
                         file['description'] = 'Test description';
                         delete file['client'];
                         delete file['isWriteable'];
