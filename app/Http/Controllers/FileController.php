@@ -37,7 +37,7 @@ class FileController extends Controller
     public function storeMultiple(Request $request)
     {
         foreach ($request->files as $key => $file) {
-            
+
             $this->validateFile($file);
         
         }
