@@ -70,6 +70,11 @@ class FileController extends Controller
         File::destroy($id);
     }
 
+    public function destroyMultiple(Request $request)
+    {
+        File::destroy($request->files);
+    }
+
     public function restore($id)
     {
         $file = File::onlyTrashed()->findOrFail($id);

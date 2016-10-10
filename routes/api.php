@@ -60,8 +60,9 @@ Route::group(['prefix' => 'files'], function () {
     Route::post('/upload-multiple', 'FileController@storeMultiple');
     Route::put('/{id}', 'FileController@update');
     Route::delete('/{id}', 'FileController@destroy');
-    Route::get('/{key}/by-search', 'FileController@search');
+    Route::delete('/delete-multiple', 'FileController@destroyMultiple');
     Route::delete('/{id}/restore', 'FileController@restore');
+    Route::get('/{key}/by-search', 'FileController@search');
     Route::get('/count', 'FileController@filesCount');
     Route::get('/count/{date}/by-date', 'FileController@filesCountByDate');
 
