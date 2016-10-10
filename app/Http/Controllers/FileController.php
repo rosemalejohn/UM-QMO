@@ -15,7 +15,7 @@ class FileController extends Controller
 
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
 
@@ -35,7 +35,7 @@ class FileController extends Controller
 
         return response()->json($newFile,201);
     }
-
+    
 
     public function search($key)
     {
