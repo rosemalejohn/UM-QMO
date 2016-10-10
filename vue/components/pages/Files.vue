@@ -95,7 +95,6 @@
 
         methods: {
             search: _.debounce(() => {
-                toastr.info('Searching...');
                 FileService.Search(this.searchText).then(response => {
                     this.files = response.data;
                 })
@@ -120,7 +119,7 @@
             uploadFiles() {
                 filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
                 filepicker.pickMultiple(files => {
-                    FileService.AddFiles(files).then(response => {
+                    FileService.AddFiles({files: files}).then(response => {
                         this.files = files;
                     }).catch(err => {
                         toastr.error('Files not uploaded!');
