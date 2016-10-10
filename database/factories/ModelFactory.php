@@ -33,3 +33,11 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
         'name' => $faker->text,
     ];
 });
+
+
+$factory->define(App\Department::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->text,
+        'code' => $faker->word,
+    ];
+});
