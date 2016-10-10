@@ -93,6 +93,14 @@ class FileController extends Controller
         return response()->json($file);
     }
 
+    public function remove($id)
+    {
+        $file = File::onlyTrashed()->findOrFail($id);
+        $file->forceDelete();
+
+        return response()->json($file);
+    }
+    
     public function filesCount()
     {
         $count = File::all()->count();

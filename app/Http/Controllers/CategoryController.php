@@ -74,6 +74,14 @@ class CategoryController extends Controller
         return response()->json($category);
     }
 
+    public function remove($id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->forceDelete();
+
+        return response()->json($category);
+    }
+
 
     private function validateCategory(Request $request){
 

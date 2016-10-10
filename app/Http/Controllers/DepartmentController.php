@@ -94,6 +94,14 @@ class DepartmentController extends Controller
         return response()->json($department);
     }
 
+    public function remove($id)
+    {
+        $department = Department::onlyTrashed()->findOrFail($id);
+        $department->forceDelete();
+
+        return response()->json($department);
+    }
+
 
     private function validateDepartment(Request $request){
 

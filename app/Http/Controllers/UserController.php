@@ -73,6 +73,14 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function remove($id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->forceDelete();
+
+        return response()->json($user);
+    }
+
     public function usersCount()
     {
         $user = User::all()->count();
