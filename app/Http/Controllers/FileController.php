@@ -28,8 +28,6 @@ class FileController extends Controller
 
         $this->validateFile($request->all());        
 
-        $this->validateFile($request);
-
         $newFile = File::create($request->all());
 
         return response()->json($newFile, 201);
@@ -39,7 +37,7 @@ class FileController extends Controller
     public function storeMultiple(Request $request)
     {
         foreach ($request->files as $key => $file) {
-
+            
             $this->validateFile($file);
         
         }
