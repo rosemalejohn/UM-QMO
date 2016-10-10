@@ -57,6 +57,7 @@ Route::group(['prefix' => 'files'], function () {
 
     Route::get('/', 'FileController@index');
     Route::post('/', 'FileController@store');
+    Route::post('/upload-multiple', 'FileController@storeMultiple');
     Route::put('/{id}', 'FileController@update');
     Route::delete('/{id}', 'FileController@destroy');
     Route::get('/{key}/by-search', 'FileController@search');

@@ -10,6 +10,8 @@ use App\Models\File;
 
 use Carbon\Carbon;
 
+use Validator;
+
 class FileController extends Controller
 {
 
@@ -29,11 +31,25 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
-        $this->validateFile($request);
+        $this->validateFile($request->all());
         
         $newFile = File::create($request->all());
 
         return response()->json($newFile,201);
+    }
+
+
+    public function storeMultiple(Request $request)
+    {
+        foreach ($request->files as $key => $file) {
+
+            $this->validateFile($file);
+        
+        }
+
+        $newFiles = File::insert($request->files);
+        
+        return response()->json($newFiles,201);
     }
     
 
@@ -50,7 +66,7 @@ class FileController extends Controller
     {
         $file = File::findOrFail($id);
 
-        $this->validateFile($request);
+        $this->validateFile($request->all());
 
         $file->update($request->all());
 
@@ -89,9 +105,9 @@ class FileController extends Controller
     }
 
 
-    private function validateFile(Request $request){
+    private function validateFile($file){
 
-         $this->validate($request, [
+        Validator::make($file, [
             'user_id'       => 'required',
             'url'           => 'required',
             'filename'      => 'required|min:1|max:255',
@@ -99,7 +115,7 @@ class FileController extends Controller
             'mimetype'      => 'required',
             'category_id'   => 'required|exists:categories,id',
             'department_id' => 'required|exists:departments,id',
-        ]);
+        ])->validate();
 
     }
 
