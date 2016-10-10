@@ -26,6 +26,7 @@
 							<th class="table-checkbox">
 								<input type="checkbox" class="group-checkable"/>
 							</th>
+							<th></th>
 							<th>
 								Name
 							</th>
@@ -52,6 +53,7 @@
 							<td>
 								<input v-model="checked" type="checkbox" class="checkboxes" :value="user.id"/>
 							</td>
+							<td><img class="user-pic" :src="user.photo_url" /></td>
 							<td>
 								<router-link :to="{ name: 'Show account', params: { userId: user.id }}">{{ user.name }}</router-link>
 							</td>
@@ -81,6 +83,12 @@
 		</div>
 	</div>
 </template>
+
+<style lang="sass">
+	.user-pic {
+		height: 30px;
+	}
+</style>
 
 <script>
 	import Portlet from './../partials/Portlet.vue'
