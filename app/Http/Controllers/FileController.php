@@ -37,13 +37,13 @@ class FileController extends Controller
     {
         $this->authorize('admin');
 
-        foreach ($request->files as $key => $file) {
+        foreach ($request->fileArray as $key => $file) {
 
             $this->validateFile($file);
 
         }
 
-        $newFiles = File::insert($request->files);
+        $newFiles = File::insert($request->fileArray);
 
         return response()->json($newFiles, 201);
     }
