@@ -2,6 +2,10 @@ import Vue from 'vue'
 
 export default {
 
+	GetAuthenticatedUser() {
+		return Vue.http.get('/api/user');
+	},
+
 	Logout() {
 		return Vue.http.post('/logout');
 	},
