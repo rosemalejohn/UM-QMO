@@ -130,6 +130,7 @@ class FileController extends Controller
 
     public function report($year)
     {
+        // dd($year);
         $months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
         $results = [];
@@ -138,8 +139,8 @@ class FileController extends Controller
 
             $stat = new stdClass;
             $stat->month    = $mon;
-            $stat->files    = File::whereYear('created_at',$year)->whereMonth('created_at',$key+1)->get()->count();
-            $stat->deleted  = File::onlyTrashed()->whereYear('created_at',$year)->whereMonth('created_at',$key+1)->get()->count();
+            $stat->files    = File::whereYear('created_at',$year)->whereMonth('created_at',$key+1)->count();
+            $stat->deleted  = File::onlyTrashed()->whereYear('created_at',$year)->whereMonth('created_at',$key+1)->count();
             
             array_push($results,$stat);
 
