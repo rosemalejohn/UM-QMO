@@ -26,7 +26,7 @@ export default {
 
 		{ path: '/departments', name: 'Departments', component: Departments },
 		{ path: '/departments/new', name: 'Add new department', component: DepartmentForm },
-		{ path: '/departments/:departmentId', name: 'Show department', component: Departments },
+		{ path: '/departments/:departmentId', name: 'Show department', component: Accounts },
 		{ path: '/departments/:departmentId/files', name: 'Department files', component: DepartmentFiles },
 
 		{ path: '/reports', name: 'Reports', component: Report },

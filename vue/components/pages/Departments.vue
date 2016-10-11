@@ -49,7 +49,7 @@
 								<input v-model="checked" type="checkbox" class="checkboxes" :value="department.id"/>
 							</td>
 							<td>
-								{{ department.name }}
+								<router-link :to="{ name: 'Show department', params: { departmentId: department.id }}">{{ department.name }}</router-link>
 							</td>
 							<td>
 								<router-link :to="{ name: 'Department files', params: { departmentId: department.id }}">{{ department.files_count }}</router-link>
@@ -62,6 +62,7 @@
 							</td>
 							<td>
 								<router-link class="btn btn-xs btn-success" :to="{ name: 'Department files', params: { departmentId: department.id }}"><i class="fa fa-file"></i></router-link>
+								<router-link class="btn btn-xs btn-success" :to="{ name: 'Show department', params: { departmentId: department.id }}"><i class="fa fa-users"></i></router-link>
 							</td>
 						</tr>
 					</tbody>

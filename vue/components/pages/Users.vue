@@ -74,7 +74,7 @@
 					</tbody>
 				</table>
 				<div v-else class="note note-info note-bordered">
-	                <p>No users on this site. Click <strong>upload</strong> above.</p>
+	                <p>No users on this site. Click <strong>add</strong> above.</p>
 	            </div>
 			</portlet>
 		</div>
@@ -93,6 +93,7 @@
 	import User from './../../api/user'
 	import toastr from 'toastr'
 	import swal from 'sweetalert'
+	import Department from './../../api/department'
 
 	export default {
 
@@ -101,13 +102,22 @@
 		},
 
 		beforeRouteEnter(to, from, next) {
-            User.GetAll().then(response => {
-				next(vm => {
-                    vm.users = response.data;
-                })
-			}).catch(err => {
-				toastr.error('Cannot fetch users.');
-			})
+			let { params: {departmentId} } = to;
+			if (departmentId) {
+				Department.GetUsers(to.params.departmentId).then(response => {
+					next(vm => {
+						vm.users = response.data.users
+					})
+				})
+			} else {
+				User.GetAll().then(response => {
+					next(vm => {
+	                    vm.users = response.data;
+	                })
+				}).catch(err => {
+					toastr.error('Cannot fetch users.');
+				})
+			}
         },
 
 		data() {
