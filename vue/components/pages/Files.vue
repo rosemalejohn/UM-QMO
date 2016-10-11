@@ -13,7 +13,7 @@
                             <form @submit.prevent="search()" class="alert alert-danger alert-borderless">
                                 <div class="input-group">
                                     <div class="input-cont">
-                                        <input v-on:keyup="search()" v-model="searchText" type="text" placeholder="Search files..." class="form-control"/>
+                                        <input v-model="searchText" type="text" placeholder="Search files..." class="form-control"/>
                                     </div>
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-default">
@@ -115,11 +115,11 @@
         },
 
         methods: {
-            search: _.debounce(() => {
+            search() {
                 FileService.Search(this.searchText).then(response => {
                     this.files = response.data;
                 })
-            }, 1000),
+            },
 
             getCategories() {
                 Category.GetAll().then(response => {
