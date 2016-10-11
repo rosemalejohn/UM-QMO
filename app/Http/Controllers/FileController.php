@@ -6,6 +6,7 @@ use App\Models\File;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
+use stdClass;
 
 class FileController extends Controller
 {
@@ -125,6 +126,26 @@ class FileController extends Controller
         $count = File::whereDate('created_at', $date->toDateString())->count();
 
         return response()->json($count);
+    }
+
+    public function report($year)
+    {
+        $months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+        $results = [];
+
+        foreach ($months as $key => $mon) {
+
+            $stat = new stdClass;
+            $stat->month    = $mon;
+            $stat->files    = File::whereYear('created_at',$year)->whereMonth('created_at',$key+1)->count();
+            $stat->deleted  = File::onlyTrashed()->whereYear('created_at',$year)->whereMonth('created_at',$key+1)->count();
+            
+            array_push($results,$stat);
+
+        }
+
+        return response()->json($results);
     }
 
     private function validateFile($file)
