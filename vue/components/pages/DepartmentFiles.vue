@@ -43,7 +43,7 @@
                             </ul>
                             <div class="row mix-grid">
                                 <div v-for="file in files" class="col-md-3 col-sm-4 mix category_1">
-                                    <file :file="file"></file>
+                                    <file v-on:remove="files.splice(index, 1)" :file="file"></file>
                                 </div>
                             </div>
                             <div v-if="noFiles" class="note note-info note-bordered">

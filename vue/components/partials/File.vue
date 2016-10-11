@@ -6,7 +6,7 @@
             <a class="mix-link" :href="file.url" download>
             	<i class="fa fa-download"></i>
             </a>
-            <a @click="removeFile(file)" class="mix-preview fancybox-button" title="Project Name" data-rel="fancybox-button">
+            <a v-on:click="remove" class="mix-preview fancybox-button" title="Project Name" data-rel="fancybox-button">
             	<i class="fa fa-trash"></i>
             </a>
         </div>
@@ -32,7 +32,7 @@
         },
 
         methods: {
-            removeFile(file) {
+            remove() {
                 swal({
                     title: "Are you sure?",   
                     text: "This file will be deleted!",   
@@ -43,11 +43,11 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true 
                 }, () => {
-                    File.Delete(file).then(response => {
-                        swal("Deleted!", `${file.filename} deleted!.`, "success");
-                        this.$dispatch('fileDeleted', file);
+                    File.Delete(this.file).then(response => {
+                        swal("Deleted!", `${this.file.filename} deleted!.`, "success");
+                        this.$emit('remove', this.file);
                     })
-                });
+                }); 
             }
         }
 

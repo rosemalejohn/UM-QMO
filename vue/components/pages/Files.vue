@@ -42,8 +42,8 @@
                                 </li>
                             </ul>
                             <div class="row mix-grid">
-                                <div v-for="file in files" class="col-md-3 col-sm-4 mix category_1">
-                                    <file :file="file"></file>
+                                <div v-for="(file, index) in files" class="col-md-3 col-sm-4 mix category_1">
+                                    <file v-on:remove="files.splice(index, 1)" :file="file"></file>
                                 </div>
                             </div>
                             <div v-if="noFiles" class="note note-info note-bordered">
@@ -147,7 +147,7 @@
                         toastr.error('Files not uploaded!');
                     }).bind(this);
                 })
-            }
+            },
         },
 
         watch: {
