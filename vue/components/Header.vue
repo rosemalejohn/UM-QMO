@@ -49,6 +49,7 @@
 
             User.GetAuthenticatedUser().then(response => {
                 this.authUser = response.data;
+                window.AuthUser = response.data;
                 Cookie.set('auth_user_id', response.data.id);
             })
         },

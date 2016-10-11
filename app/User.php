@@ -2,12 +2,11 @@
 
 namespace App;
 
+use App\Models\Department;
+use App\Models\File;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-use App\Models\File;
-use App\Models\Department;
 
 class User extends Authenticatable
 {
@@ -32,8 +31,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['is_admin'];
+
     protected $dates = ['deleted_at'];
-    
+
     public function department()
     {
         return $this->belongsTo(Department::class);
@@ -42,5 +43,10 @@ class User extends Authenticatable
     public function files()
     {
         return $this->hasMany(File::class);
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->type == 'admin';
     }
 }

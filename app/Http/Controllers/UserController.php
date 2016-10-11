@@ -109,7 +109,7 @@ class UserController extends Controller
             'position' => 'required|min:2|max:50',
             'department_id' => 'required|exists:departments,id',
             'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'required|min:8',
+            'password' => 'required|min:8|confirmed',
             'type' => 'required|in:admin,faculty,staff,standard',
         ]);
 

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Validator;
 use stdClass;
+use Validator;
 
 class FileController extends Controller
 {
@@ -130,18 +130,18 @@ class FileController extends Controller
 
     public function report($year)
     {
-        $months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         $results = [];
 
         foreach ($months as $key => $mon) {
 
             $stat = new stdClass;
-            $stat->month    = $mon;
-            $stat->files    = File::whereYear('created_at',$year)->whereMonth('created_at',$key+1)->count();
-            $stat->deleted  = File::onlyTrashed()->whereYear('created_at',$year)->whereMonth('created_at',$key+1)->count();
-            
-            array_push($results,$stat);
+            $stat->month = $mon;
+            $stat->files = File::whereYear('created_at', $year)->whereMonth('created_at', $key + 1)->count();
+            $stat->deleted = File::onlyTrashed()->whereYear('created_at', $year)->whereMonth('created_at', $key + 1)->count();
+
+            array_push($results, $stat);
 
         }
 

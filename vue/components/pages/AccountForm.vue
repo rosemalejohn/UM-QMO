@@ -61,9 +61,9 @@
 												<label class="control-label">Gender</label>
 												<div class="radio-list">
 													<label class="radio-inline">
-													<input v-model="user.gender" type="radio" name="optionsRadios" value="male" required> Male</label>
+													<input :selected="user.gender == 'male'" v-model="user.gender" type="radio" name="optionsRadios" value="male" required> Male</label>
 													<label class="radio-inline">
-													<input v-model="user.gender" type="radio" name="optionsRadios" value="female" required> Female </label>
+													<input :selected="user.gender == 'female'" v-model="user.gender" type="radio" name="optionsRadios" value="female" required> Female </label>
 												</div>
 												<span v-for="error in errors['gender']" class="error">
 													{{ error }}
@@ -87,9 +87,9 @@
 												<label class="control-label">Account type</label>
 												<select v-model="user.type" class="form-control" required>
 													<option>Select account type</option>
-													<option value="faculty">Faculty</option>
-													<option value="staff">Staff</option>
-													<option value="standard">Standard</option>
+													<option :selected="user.type == 'admin'" value="admin">Admin</option>
+													<option :selected="user.type == 'faculty'" value="faculty">Faculty</option>
+													<option :selected="user.type == 'staff'" value="staff">Staff</option>
 												</select>
 												<span v-for="error in errors['type']" class="error">
 													{{ error }}
@@ -189,6 +189,9 @@
 				} else {
 					User.UpdateUser(this.user).then(response => {
 						toastr.success('User updated!');
+					}).catch(err => {
+						this.errors = err.data;
+						toastr.error('Cannot update user.');
 					})
 				}
 			},
