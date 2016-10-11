@@ -76,5 +76,6 @@ Route::group(['prefix' => 'files'], function () {
     Route::get('/count', 'FileController@filesCount');
     Route::get('/count/{date}/by-date', 'FileController@filesCountByDate');
     Route::get('/graph-uploaded-yearly/{year}', 'FileController@report');
+    Route::get('/excel-report/download', 'FileController@excelReport');
 
 });

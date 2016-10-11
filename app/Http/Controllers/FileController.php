@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
 use stdClass;
+use Excel;
 
 class FileController extends Controller
 {
@@ -130,7 +131,7 @@ class FileController extends Controller
 
     public function report($year)
     {
-        // dd($year);
+
         $months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
         $results = [];
@@ -147,6 +148,22 @@ class FileController extends Controller
         }
 
         return response()->json($results);
+    }
+
+    public function excelReport()
+    {
+
+        Excel::create('File Report', function($excel) {
+
+            $excel->sheet('Report', function($sheet) {
+
+                $files = File::with('user','category','department')->get();
+
+                $sheet->loadView('reports.file')->with(compact('files'));
+
+            });
+
+        })->download('xls');
     }
 
     private function validateFile($file)
