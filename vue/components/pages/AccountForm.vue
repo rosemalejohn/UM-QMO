@@ -115,7 +115,6 @@
 </template>
 
 <script>
-	import filepicker from 'filepicker-js'
 	import User from './../../api/user'
 	import toastr from 'toastr'
 	import Department from './../../api/department'
@@ -150,7 +149,6 @@
 			},
 
 			uploadPhoto() {
-				filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
 				filepicker.pick(blob => {
 					this.user.photo_url = blob.url;
 				});

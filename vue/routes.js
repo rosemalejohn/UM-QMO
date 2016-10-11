@@ -1,6 +1,7 @@
 import Dashboard from './components/pages/Dashboard.vue'
 import AccountForm from './components/pages/AccountForm.vue'
 import Files from './components/pages/Files.vue'
+import DepartmentFiles from './components/pages/DepartmentFiles.vue'
 import Accounts from './components/pages/Users.vue'
 import ViewAccount from './components/pages/ViewAccount.vue'
 import Departments from './components/pages/Departments.vue'
@@ -22,6 +23,7 @@ export default {
 		{ path: '/departments', name: 'Departments', component: Departments },
 		{ path: '/departments/new', name: 'Add new department', component: DepartmentForm },
 		{ path: '/departments/:departmentId', name: 'Show department', component: Departments },
+		{ path: '/departments/:departmentId/files', name: 'Department files', component: DepartmentFiles },
 		{ path: '*', 'name': 'Page not found', component: Error404 }
 	]
 	

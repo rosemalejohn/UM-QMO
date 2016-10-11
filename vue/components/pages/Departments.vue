@@ -40,6 +40,7 @@
 							<th>
 								Date added
 							</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -51,13 +52,16 @@
 								{{ department.name }}
 							</td>
 							<td>
-								{{ department.files_count }}
+								<router-link :to="{ name: 'Department files', params: { departmentId: department.id }}">{{ department.files_count }}</router-link>
 							</td>
 							<td>
 								{{ department.users_count }}
 							</td>
 							<td class="center">
 								{{ department.created_at }}
+							</td>
+							<td>
+								<router-link class="btn btn-xs btn-success" :to="{ name: 'Department files', params: { departmentId: department.id }}"><i class="fa fa-file"></i></router-link>
 							</td>
 						</tr>
 					</tbody>

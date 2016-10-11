@@ -81,25 +81,21 @@
 
 	export default {
 
-		created() {
-			this.getUser();
-		},
-
 		data() {
 			return {
 				user: {}
 			}
 		},
 
-		methods: {
-			getUser() {
-				let { userId } = this.$route.params;
-				User.Get(userId).then(response => {
-					this.user = response.data;
-				}).catch(err => {
-					toastr.error('User not fetched!');
+		beforeRouteEnter(to, from, next) {
+			User.Get(to.params.userId).then(response => {
+				next(vm => {
+					vm.user = response.data;
 				})
-			}
+			}).catch(err => {
+				toastr.error('User cant be displayed!');
+				next(false);
+			})
 		}
 
 	}

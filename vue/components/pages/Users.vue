@@ -53,7 +53,7 @@
 							<td>
 								<input v-model="checked" type="checkbox" class="checkboxes" :value="user.id"/>
 							</td>
-							<td><img class="user-pic" :src="user.photo_url" /></td>
+							<td><img class="user-pic" :src="user.photo_url || '/img/default-photo.jpg'" /></td>
 							<td>
 								<router-link :to="{ name: 'Show account', params: { userId: user.id }}">{{ user.name }}</router-link>
 							</td>

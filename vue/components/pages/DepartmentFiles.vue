@@ -74,6 +74,7 @@
     import toastr from 'toastr'
     import _ from 'lodash'
     import User from './../../api/user'
+    import Department from './../../api/department'
     import Cookie from 'js-cookie'
 
     export default {
@@ -84,13 +85,13 @@
 
         created() {
             
-            this.getFiles();
             this.getCategories();
             
         },
 
         data() {
             return {
+                departmentId: null,
                 files: [],
                 categories: [],
                 searchText: ''
@@ -105,20 +106,24 @@
 
         },
 
+        beforeRouteEnter(to, from, next) {
+            Department.GetFiles(to.params.departmentId).then(response => {
+                next(vm => {
+                    vm.departmentId = to.params.departmentId;
+                    vm.files = response.data.files;
+                })
+            }).catch(err => {
+                toastr.error('Cannot fetch files.')
+                next(false);
+            })
+        },
+
         methods: {
             search: _.debounce(() => {
                 FileService.Search(this.searchText).then(response => {
                     this.files = response.data;
                 })
             }, 1000),
-
-            getFiles() {
-                FileService.GetAll().then(response => {
-                    this.files = response.data;
-                }).catch(err => {
-                    toastr.error('Cannot fetch files.')
-                })
-            },
 
             getCategories() {
                 Category.GetAll().then(response => {
@@ -133,6 +138,7 @@
                     fileArray = _.map(fileArray, (file) => {
                         file['user_id'] = Cookie.get('auth_user_id');
                         file['description'] = 'Test description';
+                        file['department_id'] = this.departmentId;
                         delete file['client'];
                         delete file['isWriteable'];
                         delete file['id'];
@@ -152,13 +158,6 @@
                 this.$nextTick(() => {
                     $('.mix-grid').mixitup();
                 });
-            },
-
-        },
-
-        events: {
-            fileDeleted(file) {
-                this.files.$remove(file);
             }
         }
 

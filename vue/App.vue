@@ -28,6 +28,6 @@
 	export default {
 		components: {
 			AppHeader, AppSidebar, AppContent, AppFooter
-		},
+		}
 	}
 </script>

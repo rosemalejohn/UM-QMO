@@ -7,6 +7,8 @@ import routes from './routes'
 import App from './App.vue'
 
 import _ from 'lodash'
+import filepicker from 'filepicker-js'
+
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
@@ -15,6 +17,8 @@ Vue.http.options.root = '/api';
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
 Vue.component('app', App)
+
+filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
 
 const router = new VueRouter(routes)																																																																																																																																																																																																																																																																																																						
 
