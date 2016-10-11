@@ -37,8 +37,8 @@
 		<td>{{$file->filename}}</td>
 		<td>{{$file->description}}</td>
 		<td>{{$file->size}} kb</td>
-		<td>{{$file->category->name}}</td>
-		<td>{{$file->department->name}}</td>
+		<td>{{$file->category ? $file->category->name : ''}}</td>
+		<td>{{$file->department ? $file->department->name : ''}}</td>
 		<td>{{$file->user->name}}</td>
 		<td>{{$file->created_at}}</td>
 	</tr>

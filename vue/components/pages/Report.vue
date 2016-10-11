@@ -8,13 +8,14 @@
 						<span class="caption-subject bold uppercase font-green-haze">File uploads</span>
 					</div>
 					<div class="tools">
-						<a href="javascript:;" class="fullscreen">
+						<a href="/api/files/excel-report/download">
+							<i class="fa fa-download"></i> Export graph
 						</a>
+						<a href="javascript:;" class="fullscreen"></a>
 					</div>
 				</div>
 				<div class="portlet-body">
-					<div id="fileUploadGraph" class="chart" style="height: 500px;">
-					</div>
+					<div id="fileUploadGraph" class="chart" style="height: 500px;"></div>
 				</div>
 			</div>
 		</div>

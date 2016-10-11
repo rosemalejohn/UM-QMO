@@ -107,6 +107,7 @@
 				Department.GetUsers(to.params.departmentId).then(response => {
 					next(vm => {
 						vm.users = response.data.users
+						this.$route.name = response.data.name;
 					})
 				})
 			} else {
