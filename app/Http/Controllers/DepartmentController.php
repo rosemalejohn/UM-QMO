@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use App\Models\Department;
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
@@ -16,24 +13,23 @@ class DepartmentController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index()
     {
         $departments = Department::all();
 
         return response()->json($departments);
     }
-    
 
     public function store(Request $request)
     {
+        $this->authorize('admin');
+
         $this->validateDepartment($request);
-        
+
         $newDepartment = Department::create($request->all());
 
-        return response()->json($newDepartment,201);
+        return response()->json($newDepartment, 201);
     }
-
 
     public function showFiles($id)
     {
@@ -49,9 +45,17 @@ class DepartmentController extends Controller
         return response()->json($departmentWithUsers);
     }
 
+    public function departmentsCount()
+    {
+        $count = Department::all()->count();
+
+        return response()->json($count);
+    }
 
     public function update(Request $request, $id)
     {
+        $this->authorize('admin');
+
         $department = Department::findOrFail($id);
 
         $this->validateDepartment($request);
@@ -61,29 +65,51 @@ class DepartmentController extends Controller
         return response()->json($department);
     }
 
-
     public function destroy($id)
     {
+        $this->authorize('admin');
+
         Department::destroy($id);
     }
 
     public function destroyMultiple(Request $request)
     {
+        $this->authorize('admin');
+
         Department::destroy($request->departments);
+    }
+
+    public function trashed()
+    {
+        $departments = Department::onlyTrashed()->get();
+
+        return response()->json($departments);
     }
 
     public function restore($id)
     {
+        $this->authorize('admin');
+
         $department = Department::onlyTrashed()->findOrFail($id);
         $department->restore();
 
         return response()->json($department);
     }
 
+    public function remove($id)
+    {
+        $this->authorize('admin');
 
-    private function validateDepartment(Request $request){
+        $department = Department::onlyTrashed()->findOrFail($id);
+        $department->forceDelete();
 
-         $this->validate($request, [
+        return response()->json($department);
+    }
+
+    private function validateDepartment(Request $request)
+    {
+
+        $this->validate($request, [
             'name' => 'required|min:2|max:50',
             'code' => 'required|min:2|max:50',
         ]);
@@ -91,4 +117,3 @@ class DepartmentController extends Controller
     }
 
 }
-

@@ -42,7 +42,7 @@
                                 </li>
                             </ul>
                             <div class="row mix-grid">
-                                <div v-for="(file, index) in files" class="col-md-3 col-sm-4 mix category_1">
+                                <div v-for="file in files" class="col-md-3 col-sm-4 mix category_1">
                                     <file v-on:remove="files.splice(index, 1)" :file="file"></file>
                                 </div>
                             </div>
@@ -74,6 +74,7 @@
     import toastr from 'toastr'
     import _ from 'lodash'
     import User from './../../api/user'
+    import Department from './../../api/department'
     import Cookie from 'js-cookie'
 
     export default {
@@ -83,13 +84,14 @@
         },
 
         created() {
-        
+            
             this.getCategories();
             
         },
 
         data() {
             return {
+                departmentId: null,
                 files: [],
                 categories: [],
                 searchText: ''
@@ -105,12 +107,14 @@
         },
 
         beforeRouteEnter(to, from, next) {
-            FileService.GetAll().then(response => {
+            Department.GetFiles(to.params.departmentId).then(response => {
                 next(vm => {
-                    vm.files = response.data;
+                    vm.departmentId = to.params.departmentId;
+                    vm.files = response.data.files;
                 })
             }).catch(err => {
                 toastr.error('Cannot fetch files.')
+                next(false);
             })
         },
 
@@ -130,10 +134,11 @@
             },
 
             uploadFiles() {
-                filepicker.pickMultiple(fileArray => { 
+                filepicker.pickMultiple(fileArray => {
                     fileArray = _.map(fileArray, (file) => {
                         file['user_id'] = Cookie.get('auth_user_id');
                         file['description'] = 'Test description';
+                        file['department_id'] = this.departmentId;
                         delete file['client'];
                         delete file['isWriteable'];
                         delete file['id'];
@@ -147,7 +152,7 @@
                         toastr.error('Files not uploaded!');
                     }).bind(this);
                 })
-            },
+            }
         },
 
         watch: {
@@ -155,13 +160,6 @@
                 this.$nextTick(() => {
                     $('.mix-grid').mixitup();
                 });
-            },
-
-        },
-
-        events: {
-            fileDeleted(file) {
-                this.files.$remove(file);
             }
         }
 

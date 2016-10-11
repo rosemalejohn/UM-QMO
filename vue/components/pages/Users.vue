@@ -8,12 +8,9 @@
 						<a href="#/accounts/new" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-plus"></i>Add
 						</a>
-						<router-link 
-							class="btn btn-circle btn-default btn-sm" 
-							v-if="checked.length == 1" 
-							:to="{name: 'Edit account', params: {userId: user}}">
-							<i class="fa fa-edit"></i>Edit
-						</router-link>
+						<button v-if="checked.length == 1" @click="editAccount()" class="btn btn-circle btn-sm btn-default">
+							<i class="fa fa-edit"></i>Update
+						</button>
 
 						<button v-if="checked.length > 0" @click="removeAccounts()" class="btn btn-circle btn-sm red-sunglo">
 							<i class="fa fa-remove"></i>Delete
@@ -53,7 +50,7 @@
 							<td>
 								<input v-model="checked" type="checkbox" class="checkboxes" :value="user.id"/>
 							</td>
-							<td><img class="user-pic" :src="user.photo_url" /></td>
+							<td><img class="user-pic" :src="user.photo_url || '/img/default-photo.jpg'" /></td>
 							<td>
 								<router-link :to="{ name: 'Show account', params: { userId: user.id }}">{{ user.name }}</router-link>
 							</td>
@@ -95,6 +92,7 @@
 	import swal from 'sweetalert'
 	import User from './../../api/user'
 	import toastr from 'toastr'
+	import swal from 'sweetalert'
 
 	export default {
 
@@ -134,6 +132,11 @@
 				})
 			},
 
+			editAccount() {
+				var user = _.find(this.users, (user) => { return user.id == this.user });
+				router.push({ name: 'Edit account', params: { userId: this.user, isUpdate: true, user } })
+			},
+
 			removeAccounts() {
 				swal({   
                     title: "Are you sure?",   
@@ -146,8 +149,9 @@
                     showLoaderOnConfirm: true 
                 }, () => {
                     User.DeleteMultiple(this.checked).then(response => {
+                    	swal("Deleted!", "Users deleted!.", "success");
                     	this.users = _.reject(this.users, user => {
-                    		return _.contains(this.checked, user.id.toString());
+                    		return this.checked.indexOf(user.id) > -1;
                     	})
                     	this.checked = [];
                     	toastr.success('Users deleted!')

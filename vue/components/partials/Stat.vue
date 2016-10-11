@@ -30,7 +30,7 @@
 				required: true
 			},
 			stat: {
-				type: String,
+				type: Number,
 				required: true
 			},
 			icon: {

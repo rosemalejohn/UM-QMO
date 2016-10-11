@@ -14,6 +14,10 @@ export default {
 		return Vue.http.get('/api/users');
 	},
 
+	Get(user_id) {
+		return Vue.http.get(`/api/users/${user_id}`);
+	},
+
 	AddUser(user) {
 		return Vue.http.post('/api/users', user);
 	},
@@ -27,7 +31,7 @@ export default {
 	},
 
 	DeleteMultiple(users) {
-		return Vue.http.delete('/api/users/delete-multiple', users);
+		return Vue.http.post('/api/users/delete-multiple', {users});
 	},
 
 	UpdatePassword(user_id, data) {

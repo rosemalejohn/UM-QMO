@@ -16,6 +16,10 @@ export default {
 
 	GetTotalFilesUploadedByDate(date) {
 		return Vue.http.get(`/api/files/count/${date}/by-date`);
+	},
+
+	GetTotalFilesUploadedByMonth(year) {
+		return Vue.http.get(`/api/files/graph-uploaded-yearly/${year}`);
 	}
 
 }

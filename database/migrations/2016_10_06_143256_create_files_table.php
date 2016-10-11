@@ -22,8 +22,8 @@ class CreateFilesTable extends Migration
             $table->string('description');
             $table->string('mimetype');
             $table->integer('size');
-            $table->integer('category_id')->unsigned();
-            $table->integer('department_id')->unsigned();
+            $table->integer('category_id')->unsigned()->nullable();
+            $table->integer('department_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->timestamps();

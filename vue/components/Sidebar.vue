@@ -65,11 +65,15 @@
 </template>
 
 <script>
+	import Department from './../api/department'
+
 	export default {
 
 
 		created() {
-			// fetch departments
+			Department.GetAll().then(response => {
+				this.departments = response.data;
+			})
 		},
 
 		data() {

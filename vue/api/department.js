@@ -6,8 +6,8 @@ export default {
 		return Vue.http.get('/api/departments');
 	},
 
-	GetFiles(department) {
-		return Vue.http.get(`/api/departments/${department.id}/files`);
+	GetFiles(department_id) {
+		return Vue.http.get(`/api/departments/${department_id}/files`);
 	},
 
 	GetUsers(department) {
@@ -27,7 +27,7 @@ export default {
 	},
 
 	DeleteMultiple(departments) {
-		return Vue.http.delete(`/api/departments/delete-multiple`, departments);
+		return Vue.http.post(`/api/departments/delete-multiple`, {departments});
 	}
 
 }

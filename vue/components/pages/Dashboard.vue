@@ -23,15 +23,15 @@
 
 		created() {
 			StatService.GetTotalFilesUploaded().then(response => {
-				this.files = response.data.toString();
+				this.files = response.data;
 			})
 
 			StatService.GetTotalUsers().then(response => {
-				this.users = response.data.toString();
+				this.users = response.data;
 			})
 
 			StatService.GetTotalDepartments().then(response => {
-				this.departments = response.data.toString();
+				this.departments = response.data;
 			})
 		},
 

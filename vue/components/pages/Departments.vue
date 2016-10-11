@@ -3,7 +3,7 @@
 		<div class="col-md-12" v-if="showDepartmentForm">
 			<portlet>
 				<span slot="title">Add department</span>
-				<department-form :isUpdate="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
+				<department-form :is-update="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
 			</portlet>
 		</div>
 		<div class="col-md-12">
@@ -40,6 +40,7 @@
 							<th>
 								Date added
 							</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -51,13 +52,16 @@
 								{{ department.name }}
 							</td>
 							<td>
-								{{ department.files_count }}
+								<router-link :to="{ name: 'Department files', params: { departmentId: department.id }}">{{ department.files_count }}</router-link>
 							</td>
 							<td>
 								{{ department.users_count }}
 							</td>
 							<td class="center">
 								{{ department.created_at }}
+							</td>
+							<td>
+								<router-link class="btn btn-xs btn-success" :to="{ name: 'Department files', params: { departmentId: department.id }}"><i class="fa fa-file"></i></router-link>
 							</td>
 						</tr>
 					</tbody>
@@ -75,6 +79,7 @@
 	import Department from './../../api/department'
 	import toastr from 'toastr'
 	import DepartmentForm from './DepartmentForm.vue'
+	import swal from 'sweetalert'
 
 	export default {
 		
@@ -118,8 +123,9 @@
                     showLoaderOnConfirm: true 
                 }, () => {
                     Department.DeleteMultiple(this.checked).then(response => {
+                    	swal("Deleted!", "Department deleted!.", "success");
                     	this.departments = _.reject(this.departments, department => {
-                    		return _.contains(this.checked, department.id.toString());
+                    		return this.checked.indexOf(department.id) > -1;
                     	})
                     	this.checked = [];
                     	toastr.success('Departments deleted!')
