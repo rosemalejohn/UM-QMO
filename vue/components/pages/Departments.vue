@@ -3,7 +3,7 @@
 		<div class="col-md-12" v-if="showDepartmentForm">
 			<portlet>
 				<span slot="title">Add department</span>
-				<department-form :is-update="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
+				<department-form @cancel="showDepartmentForm = false" :is-update="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
 			</portlet>
 		</div>
 		<div class="col-md-12">
@@ -11,7 +11,7 @@
 				<span slot="title">Departments</span>
 				<div slot="tools" class="tools">
 					<div class="actions">
-						<a @click="showDepartmentForm = true" class="btn btn-circle btn-default btn-sm">
+						<a @click="add()" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-plus"></i>Add
 						</a>
 						<button @click="editDepartment()" v-if="checked.length == 1" class="btn btn-circle btn-sm">
@@ -94,6 +94,11 @@
 		},
 
 		methods: {
+
+			add() {
+				this.showDepartmentForm = true;
+				this.department = {}
+			},
 
 			fetchDepartments() {
 				Department.GetAll().then(response => {
