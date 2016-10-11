@@ -16,7 +16,7 @@
 			<div class="row">
 				<div class="col-md-offset-3 col-md-9">
 					<button type="submit" class="btn red"><i class="fa fa-check"></i> Submit</button>
-					<button @click="cancel()" type="button" class="btn default">Cancel</button>
+					<button @click="cancel" type="button" class="btn default">Cancel</button>
 				</div>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 		methods: {
 
 			cancel() {
-				this.show = false;
+				this.$emit('cancel');
 			},
 
 			submit() {

@@ -44,7 +44,7 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        $this->validateUser($request, $id);
+        $this->validateUpdateUser($request, $id);
 
         $user->update($request->all());
 
@@ -109,9 +109,23 @@ class UserController extends Controller
             'position' => 'required|min:2|max:50',
             'department_id' => 'required|exists:departments,id',
             'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'required|min:8',
+            'password' => 'required|min:8|confirmed',
             'type' => 'required|in:admin,faculty,staff,standard',
         ]);
 
+    }
+
+    private function validateUpdateUser(Request $request, $id = null)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:2|max:50',
+            'id_number' => 'required|min:2|max:50|unique:users,id_number,' . $id,
+            'gender' => 'required|in:male,female',
+            'position' => 'required|min:2|max:50',
+            'department_id' => 'required|exists:departments,id',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'type' => 'required|in:admin,faculty,staff,standard',
+            'password' => 'required_with:current_password|confirmed',
+        ]);
     }
 }

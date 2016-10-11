@@ -10,8 +10,8 @@ export default {
 		return Vue.http.get(`/api/departments/${department_id}/files`);
 	},
 
-	GetUsers(department) {
-		return Vue.http.get(`/api/departments/${department.id}/users`);
+	GetUsers(department_id) {
+		return Vue.http.get(`/api/departments/${department_id}/users`);
 	},
 
 	Add(department) {

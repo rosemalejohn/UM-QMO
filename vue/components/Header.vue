@@ -18,7 +18,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="#/profile">
+                                    <a @click="viewProfile()">
                                         <i class="icon-user"></i> My Profile 
                                     </a>
                                 </li>
@@ -49,6 +49,7 @@
 
             User.GetAuthenticatedUser().then(response => {
                 this.authUser = response.data;
+                window.AuthUser = response.data;
                 Cookie.set('auth_user_id', response.data.id);
             })
         },
@@ -77,6 +78,10 @@
                         window.location.reload()
                     })
                 });
+            },
+
+            viewProfile() {
+                router.push({ name: 'Profile', params: { userId: this.authUser.id } });
             }
         }
 

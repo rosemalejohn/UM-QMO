@@ -45,25 +45,36 @@
 										<div class="tab-pane active" id="personal-info">
 											<div class="form-group">
 												<label class="control-label">Name</label>
-												<input v-model="user.name" type="text" placeholder="John" class="form-control" required />
+												<input v-model="user.name" type="text" placeholder="John" class="form-control" />
+												<span v-for="error in errors['name']" class="error">
+													{{ error }}
+												</span>
 											</div>
 											<div class="form-group">
 												<label class="control-label">ID No.</label>
 												<input v-model="user.id_number" type="text" class="form-control" required />
+												<span v-for="error in errors['id_number']" class="error">
+													{{ error }}
+												</span>
 											</div>
 											<div class="form-group">
 												<label class="control-label">Gender</label>
 												<div class="radio-list">
 													<label class="radio-inline">
-													<input v-model="user.gender" type="radio" name="optionsRadios" value="male" required> Male</label>
+													<input :selected="user.gender == 'male'" v-model="user.gender" type="radio" name="optionsRadios" value="male" required> Male</label>
 													<label class="radio-inline">
-													<input v-model="user.gender" type="radio" name="optionsRadios" value="female" required> Female </label>
+													<input :selected="user.gender == 'female'" v-model="user.gender" type="radio" name="optionsRadios" value="female" required> Female </label>
 												</div>
-
+												<span v-for="error in errors['gender']" class="error">
+													{{ error }}
+												</span>
 											</div>
 											<div class="form-group">
 												<label class="control-label">Position</label>
 												<input v-model="user.position" type="text" placeholder="Web Developer" class="form-control" required/>
+												<span v-for="error in errors['position']" class="error">
+													{{ error }}
+												</span>
 											</div>
 											<div class="form-group">
 												<label class="control-label">Department</label>
@@ -76,10 +87,13 @@
 												<label class="control-label">Account type</label>
 												<select v-model="user.type" class="form-control" required>
 													<option>Select account type</option>
-													<option value="faculty">Faculty</option>
-													<option value="staff">Staff</option>
-													<option value="standard">Standard</option>
+													<option :selected="user.type == 'admin'" value="admin">Admin</option>
+													<option :selected="user.type == 'faculty'" value="faculty">Faculty</option>
+													<option :selected="user.type == 'staff'" value="staff">Staff</option>
 												</select>
+												<span v-for="error in errors['type']" class="error">
+													{{ error }}
+												</span>
 											</div>
 										</div>
 
@@ -87,14 +101,20 @@
 											<div class="form-group">
 												<label class="control-label">Email</label>
 												<input v-model="user.email" type="email" class="form-control" required/>
+												<span v-for="error in errors['email']" class="error">
+													{{ error }}
+												</span>
 											</div>
-											<div class="form-group">
+											<div v-if="isUpdate" class="form-group">
 												<label class="control-label">Current Password</label>
 												<input v-model="user.current_password" type="password" class="form-control"/>
 											</div>
 											<div class="form-group">
 												<label class="control-label">New Password</label>
 												<input v-model="user.password" type="password" class="form-control"/>
+												<span v-for="error in errors['password']" class="error">
+													{{ error }}
+												</span>
 											</div>
 											<div class="form-group">
 												<label class="control-label">Re-type New Password</label>
@@ -113,6 +133,12 @@
 		</div>
 	</form>
 </template>
+
+<style lang="sass">
+	.error {
+		color: red;
+	}
+</style>
 
 <script>
 	import User from './../../api/user'
@@ -135,24 +161,26 @@
 		},
 
 		beforeRouteEnter(to, from, next) {
-            var user = to.params.user;
-            // this.isUpdate = to.params ? to.params.isUpdate : false;
-            if (user) {
+			let { params: { userId } } = to;
+            if (userId) {
             	next(vm => {
-            		vm.user = user;
             		vm.isUpdate = true;
+            		User.Get(userId).then(response => {
+            			vm.user = response.data;
+            		})
             	})
             }
             next(vm => {
-            	wm.user = {};
+            	vm.user = {};
             });
         },
 
 		methods: {
 
 			submit() {
-				if (this.isUpdate) {
+				if (!this.isUpdate) {
 					User.AddUser(this.user).then(response => {
+						this.user = {};
 						toastr.success('User added!');
 					}).catch(err => {
 						this.errors = err.data;
@@ -161,6 +189,9 @@
 				} else {
 					User.UpdateUser(this.user).then(response => {
 						toastr.success('User updated!');
+					}).catch(err => {
+						this.errors = err.data;
+						toastr.error('Cannot update user.');
 					})
 				}
 			},

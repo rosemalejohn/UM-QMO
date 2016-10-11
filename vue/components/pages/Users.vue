@@ -74,7 +74,7 @@
 					</tbody>
 				</table>
 				<div v-else class="note note-info note-bordered">
-	                <p>No users on this site. Click <strong>upload</strong> above.</p>
+	                <p>No users on this site. Click <strong>add</strong> above.</p>
 	            </div>
 			</portlet>
 		</div>
@@ -93,6 +93,7 @@
 	import User from './../../api/user'
 	import toastr from 'toastr'
 	import swal from 'sweetalert'
+	import Department from './../../api/department'
 
 	export default {
 
@@ -100,11 +101,25 @@
 			Portlet
 		},
 
-		created() {
-
-			this.fetchUsers();
-
-		},
+		beforeRouteEnter(to, from, next) {
+			let { params: {departmentId} } = to;
+			if (departmentId) {
+				Department.GetUsers(to.params.departmentId).then(response => {
+					next(vm => {
+						vm.users = response.data.users
+						this.$route.name = response.data.name;
+					})
+				})
+			} else {
+				User.GetAll().then(response => {
+					next(vm => {
+	                    vm.users = response.data;
+	                })
+				}).catch(err => {
+					toastr.error('Cannot fetch users.');
+				})
+			}
+        },
 
 		data() {
 			return {
@@ -123,14 +138,6 @@
 		},
 
 		methods: {
-
-			fetchUsers() {
-				User.GetAll().then(response => {
-					this.users = response.data;
-				}).catch(err => {
-					toastr.error('Cannot fetch users.');
-				})
-			},
 
 			editAccount() {
 				var user = _.find(this.users, (user) => { return user.id == this.user });
