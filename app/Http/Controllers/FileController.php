@@ -6,11 +6,8 @@ use App\Models\File;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use stdClass;
-<<<<<<< HEAD
 use Excel;
-=======
 use Validator;
->>>>>>> 14623fcc55c5a85dd3dd368deddf77e75cc0fc42
 
 class FileController extends Controller
 {
@@ -134,12 +131,8 @@ class FileController extends Controller
 
     public function report($year)
     {
-<<<<<<< HEAD
 
-        $months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-=======
         $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
->>>>>>> 14623fcc55c5a85dd3dd368deddf77e75cc0fc42
 
         $results = [];
 
