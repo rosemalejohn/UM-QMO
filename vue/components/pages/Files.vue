@@ -83,8 +83,7 @@
         },
 
         created() {
-            
-            this.getFiles();
+        
             this.getCategories();
             
         },
@@ -105,20 +104,22 @@
 
         },
 
+        beforeRouteEnter(to, from, next) {
+            FileService.GetAll().then(response => {
+                next(vm => {
+                    vm.files = response.data;
+                })
+            }).catch(err => {
+                toastr.error('Cannot fetch files.')
+            })
+        },
+
         methods: {
             search: _.debounce(() => {
                 FileService.Search(this.searchText).then(response => {
                     this.files = response.data;
                 })
             }, 1000),
-
-            getFiles() {
-                FileService.GetAll().then(response => {
-                    this.files = response.data;
-                }).catch(err => {
-                    toastr.error('Cannot fetch files.')
-                })
-            },
 
             getCategories() {
                 Category.GetAll().then(response => {
@@ -129,13 +130,15 @@
             },
 
             uploadFiles() {
-                filepicker.pickMultiple(fileArray => {
+                filepicker.pickMultiple(fileArray => { 
                     fileArray = _.map(fileArray, (file) => {
                         file['user_id'] = Cookie.get('auth_user_id');
                         file['description'] = 'Test description';
                         delete file['client'];
                         delete file['isWriteable'];
                         delete file['id'];
+                        delete file['container'];
+                        delete file['key'];
                         return file;
                     });
                     FileService.AddFiles(fileArray).then(response => {

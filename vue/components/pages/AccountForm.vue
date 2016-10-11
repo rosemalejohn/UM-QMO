@@ -104,7 +104,7 @@
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-success">Save account</button>
+							<button type="submit" class="btn btn-success">{{ isUpdate ? 'Update account' : 'Save account' }}</button>
 							<button type="button" class="btn btn-default">Cancel</button>
 						</div>
 					</div>
@@ -123,13 +123,10 @@
 
 		data() {
 			return {
-				user: {
-					photo_url: '',
-					name: '',
-					position: ''
-				},
+				user: {},
 				departments: [],
-				errors: []
+				errors: [],
+				isUpdate: false
 			}
 		},
 
@@ -137,15 +134,35 @@
 			this.fetchDepartments();
 		},
 
+		beforeRouteEnter(to, from, next) {
+            var user = to.params.user;
+            // this.isUpdate = to.params ? to.params.isUpdate : false;
+            if (user) {
+            	next(vm => {
+            		vm.user = user;
+            		vm.isUpdate = true;
+            	})
+            }
+            next(vm => {
+            	wm.user = {};
+            });
+        },
+
 		methods: {
 
 			submit() {
-				User.AddUser(this.user).then(response => {
-					toastr.success('User added!');
-				}).catch(err => {
-					this.errors = err.data;
-					toastr.error('User not added!');
-				})
+				if (this.isUpdate) {
+					User.AddUser(this.user).then(response => {
+						toastr.success('User added!');
+					}).catch(err => {
+						this.errors = err.data;
+						toastr.error('User not added!');
+					})
+				} else {
+					User.UpdateUser(this.user).then(response => {
+						toastr.success('User updated!');
+					})
+				}
 			},
 
 			uploadPhoto() {

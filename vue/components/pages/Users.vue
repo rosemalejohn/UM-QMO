@@ -8,12 +8,9 @@
 						<a href="#/accounts/new" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-plus"></i>Add
 						</a>
-						<router-link 
-							class="btn btn-circle btn-default btn-sm" 
-							v-if="checked.length == 1" 
-							:to="{name: 'Edit account', params: {userId: user}}">
-							<i class="fa fa-edit"></i>Edit
-						</router-link>
+						<button v-if="checked.length == 1" @click="editAccount()" class="btn btn-circle btn-sm btn-default">
+							<i class="fa fa-edit"></i>Update
+						</button>
 
 						<button v-if="checked.length > 0" @click="removeAccounts()" class="btn btn-circle btn-sm red-sunglo">
 							<i class="fa fa-remove"></i>Delete
@@ -133,6 +130,11 @@
 				}).catch(err => {
 					toastr.error('Cannot fetch users.');
 				})
+			},
+
+			editAccount() {
+				var user = _.find(this.users, (user) => { return user.id == this.user });
+				router.push({ name: 'Edit account', params: { userId: this.user, isUpdate: true, user } })
 			},
 
 			removeAccounts() {

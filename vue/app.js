@@ -18,9 +18,9 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
 Vue.component('app', App)
 
-filepicker.setKey('ABS0djxh1RMqDHluoiy0Kz');
+filepicker.setKey('Ac9vyh2qlRFyU6Puvy687z');
 
-const router = new VueRouter(routes)																																																																																																																																																																																																																																																																																																						
+window.router = new VueRouter(routes)																																																																																																																																																																																																																																																																																																						
 
 const app = new Vue({
   router

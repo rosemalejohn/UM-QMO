@@ -142,6 +142,8 @@
                         delete file['client'];
                         delete file['isWriteable'];
                         delete file['id'];
+                        delete file['container'];
+                        delete file['key'];
                         return file;
                     });
                     FileService.AddFiles(fileArray).then(response => {
