@@ -23,12 +23,70 @@
 
 <script>
 	import jQuery from 'jquery'
+	import Stat from './../../api/stat'
 
 	export default {
+
+		data() {
+			return {
+				dataProvider: [{
+	                "month": 'Jan',
+	                "files": 23.5,
+	                "deleted": 18.1
+	            }, {
+	                "month": 'Feb',
+	                "files": 26.2,
+	                "deleted": 18.1
+	            }, {
+	                "month": 'Mar',
+	                "files": 30.1,
+	                "deleted": 18.1
+	            }, {
+	                "month": 'Apr',
+	                "files": 29.5,
+	                "deleted": 18.1
+	            }, {
+	                "month": 'May',
+	                "files": 30.6,
+	                "deleted": 18.1
+	            }, {
+	                "month": 'Jun',
+	                "files": 34.1,
+	                "deleted": 18.1
+	            }, {
+	                "month": 'Jul',
+	                "files": 34.1,
+	                "deleted": 18.1
+	            }, {
+	                "month": 'Aug',
+	                "files": 34.1,
+	                "deleted": 23
+	            }, {
+	                "month": 'Sep',
+	                "files": 34.1,
+	                "deleted": 43
+	            }, {
+	                "month": 'Oct',
+	                "files": 34.1,
+	                "deleted": 11
+	            }, {
+	                "month": 'Nov',
+	                "files": 34.1,
+	                "deleted": 18.1
+	            }, {
+	                "month": 'Dec',
+	                "files": 34.1,
+	                "deleted": 18.1
+	            }]
+			}
+		},
 
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
 				vm.drawGraph();
+				Stat.GetTotalFilesUploadedByMonth('2016').then(response => {
+					this.dataProvider = response.data;
+				})
 			})
 			
 		},
@@ -47,35 +105,7 @@
 		            "fontFamily": 'Open Sans',            
 		            "color":    '#888',
 		            
-		            "dataProvider": [{
-		                "year": 2009,
-		                "income": 23.5,
-		                "expenses": 18.1
-		            }, {
-		                "year": 2010,
-		                "income": 26.2,
-		                "expenses": 22.8
-		            }, {
-		                "year": 2011,
-		                "income": 30.1,
-		                "expenses": 23.9
-		            }, {
-		                "year": 2012,
-		                "income": 29.5,
-		                "expenses": 25.1
-		            }, {
-		                "year": 2013,
-		                "income": 30.6,
-		                "expenses": 27.2,
-		                "dashLengthLine": 5
-		            }, {
-		                "year": 2014,
-		                "income": 34.1,
-		                "expenses": 29.9,
-		                "dashLengthColumn": 5,
-		                "alpha": 0.2,
-		                "additional": "(projection)"
-		            }],
+		            "dataProvider": this.dataProvider,
 		            "valueAxes": [{
 		                "axisAlpha": 0,
 		                "position": "left"
@@ -86,9 +116,9 @@
 		                "balloonText": "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>",
 		                "dashLengthField": "dashLengthColumn",
 		                "fillAlphas": 1,
-		                "title": "Income",
+		                "title": "Files uploaded",
 		                "type": "column",
-		                "valueField": "income"
+		                "valueField": "files"
 		            }, {
 		                "balloonText": "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>",
 		                "bullet": "round",
@@ -101,10 +131,10 @@
 		                "bulletBorderThickness": 3,
 		                "fillAlphas": 0,
 		                "lineAlpha": 1,
-		                "title": "Expenses",
-		                "valueField": "expenses"
+		                "title": "Files Deleted",
+		                "valueField": "deleted"
 		            }],
-		            "categoryField": "year",
+		            "categoryField": "month",
 		            "categoryAxis": {
 		                "gridPosition": "start",
 		                "axisAlpha": 0,
