@@ -100,11 +100,15 @@
 			Portlet
 		},
 
-		created() {
-
-			this.fetchUsers();
-
-		},
+		beforeRouteEnter(to, from, next) {
+            User.GetAll().then(response => {
+				next(vm => {
+                    vm.users = response.data;
+                })
+			}).catch(err => {
+				toastr.error('Cannot fetch users.');
+			})
+        },
 
 		data() {
 			return {
@@ -123,14 +127,6 @@
 		},
 
 		methods: {
-
-			fetchUsers() {
-				User.GetAll().then(response => {
-					this.users = response.data;
-				}).catch(err => {
-					toastr.error('Cannot fetch users.');
-				})
-			},
 
 			editAccount() {
 				var user = _.find(this.users, (user) => { return user.id == this.user });

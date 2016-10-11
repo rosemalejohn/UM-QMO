@@ -24,6 +24,7 @@
 <script>
 	import jQuery from 'jquery'
 	import Stat from './../../api/stat'
+	import toastr from 'toastr'
 
 	export default {
 
@@ -86,6 +87,8 @@
 				vm.drawGraph();
 				Stat.GetTotalFilesUploadedByMonth('2016').then(response => {
 					this.dataProvider = response.data;
+				}).catch(err => {
+					toastr.error('Cannot fetch analytics.')
 				})
 			})
 			
