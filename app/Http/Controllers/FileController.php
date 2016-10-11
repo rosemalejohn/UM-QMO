@@ -138,8 +138,8 @@ class FileController extends Controller
 
             $stat = new stdClass;
             $stat->month    = $mon;
-            $stat->files    = File::whereYear('created_at',$year)->whereMonth('created_at',$key+1)->count();
-            $stat->deleted  = File::onlyTrashed()->whereYear('created_at',$year)->whereMonth('created_at',$key+1)->count();
+            $stat->files    = File::whereYear('created_at',$year)->whereMonth('created_at',$key+1)->get()->count();
+            $stat->deleted  = File::onlyTrashed()->whereYear('created_at',$year)->whereMonth('created_at',$key+1)->get()->count();
             
             array_push($results,$stat);
 
