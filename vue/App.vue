@@ -38,12 +38,12 @@
 			}
 		},
 
-		beforeRouteEnter(to, from, next) {
-            if (Boolean(localStorage.getItem('is_admin') == 'true')) {
-            	next(true)
-            }
-            next(false);
-        },
+		// beforeRouteEnter(to, from, next) {
+  //           if (Boolean(localStorage.getItem('is_admin') == 'true')) {
+  //           	next(true)
+  //           }
+  //           next(false);
+  //       },
 
 		mounted() {
 			var self = this;
