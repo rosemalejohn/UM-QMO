@@ -22,6 +22,11 @@
                                         <i class="icon-user"></i> My Profile 
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="#/change-password">
+                                        <i class="icon-settings"></i> Change password
+                                    </a>
+                                </li>
                                 <li class="divider">
                                 </li>
                                 <li>
@@ -41,16 +46,14 @@
 <script>
     import swal from 'sweetalert'
     import User from './../api/user'
-    import Cookie from 'js-cookie'
 
     export default {
 
         created() {
-
+            console.log(this.$root);
             User.GetAuthenticatedUser().then(response => {
                 this.authUser = response.data;
-                window.AuthUser = response.data;
-                Cookie.set('auth_user_id', response.data.id);
+                cookie.set('auth_user_id', response.data.id);
             })
         },
 

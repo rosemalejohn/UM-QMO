@@ -8,6 +8,8 @@ import Profile from './components/pages/ViewAccount.vue'
 import Departments from './components/pages/Departments.vue'
 import DepartmentForm from './components/pages/DepartmentForm.vue'
 import Report from './components/pages/Report.vue'
+import RequestForm from './components/pages/RequestForm.vue'
+import ChangePasswordForm from './components/pages/ChangePasswordForm.vue'
 import Error404 from './components/errors/404.vue'
 
 export default {
@@ -30,6 +32,10 @@ export default {
 		{ path: '/departments/:departmentId/files', name: 'Department files', component: DepartmentFiles },
 
 		{ path: '/reports', name: 'Reports', component: Report },
+
+		{ path: '/request', name: 'Request', component: RequestForm },
+
+		{ path: '/change-password', name: 'Change password', component: ChangePasswordForm },
 
 		{ path: '*', 'name': 'Page not found', component: Error404 }
 

@@ -5,7 +5,7 @@
 
             <breadcrumbs></breadcrumbs>
 
-            <transition>
+            <transition name="rotateIn">
                 <keep-alive>
             	   <router-view></router-view>
                 </keep-alive>

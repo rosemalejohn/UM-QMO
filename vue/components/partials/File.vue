@@ -26,11 +26,7 @@
 				required: true
 			}
 		},
-
-        mounted() {
-            
-        },
-
+        
         methods: {
             remove() {
                 swal({
