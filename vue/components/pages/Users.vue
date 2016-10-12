@@ -125,7 +125,7 @@
 			return {
 				checked: [],
 				users: [],
-				loading: false
+				loading: false,
 			}
 		},
 

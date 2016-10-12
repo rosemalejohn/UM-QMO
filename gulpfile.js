@@ -19,6 +19,8 @@ elixir(mix => {
     mix
         .webpack('app.js', null, 'vue')
 
+        .copy('resources/assets/css/animate.css', 'public/css/animate.css')
+
         .scripts([
             'metronic.js',
             'layout.js',

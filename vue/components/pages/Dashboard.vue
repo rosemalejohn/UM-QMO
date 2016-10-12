@@ -1,5 +1,5 @@
 <template>
-	<div class="row">
+	<div class="row" v-if="is_admin">
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
 			<stat color="blue-madison" icon="fa fa-briefcase" description="Files uploaded" :stat="files" url="#/files"></stat>
 		</div>
@@ -35,11 +35,26 @@
 			})
 		},
 
+		beforeRouteEnter(to, from, next) {
+			next(vm => {
+				if (vm.is_admin) {
+					next(true);
+				}
+				router.push('request');
+			})
+		},
+
 		data() {
 			return {
 				files: 0,
 				users: 0,
 				departments: 0
+			}
+		},
+
+		computed: {
+			is_admin() {
+				return Boolean(localStorage.getItem('is_admin') == 'true')
 			}
 		}
 	}

@@ -32,6 +32,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/toastr/2.1.3/toastr.min.css">
 
+    <link rel="stylesheet" type="text/css" href="/css/animate.css">
+
     <link rel="stylesheet" href="/css/app.css">
 
     <link rel="shortcut icon" href="favicon.ico" />

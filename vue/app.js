@@ -5,6 +5,7 @@ import App from './App.vue'
 import routes from './routes'
 import _ from 'lodash'
 import filepicker from 'filepicker-js'
+import Cookie from 'js-cookie'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
@@ -16,8 +17,9 @@ Vue.component('app', App)
 
 filepicker.setKey('Ac9vyh2qlRFyU6Puvy687z');
 
-window.router = new VueRouter(routes)																																																																																																																																																																																																																																																																																																						
+window.router = new VueRouter(routes)
+window.cookie = Cookie;																																																																																																																																																																																																																																																																																																					
 
 const app = new Vue({
-  router
+	router
 }).$mount('#app')
