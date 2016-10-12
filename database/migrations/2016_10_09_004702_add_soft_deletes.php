@@ -1,0 +1,56 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class AddSoftDeletes extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('users', function ($table) {
+            $table->softDeletes();
+        });
+
+        Schema::table('categories', function ($table) {
+            $table->softDeletes();
+        });
+
+        Schema::table('departments', function ($table) {
+            $table->softDeletes();
+        });
+
+        Schema::table('files', function ($table) {
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function ($table) {
+            $table->dropColumn("deleted_at");
+        });
+
+        Schema::table('categories', function ($table) {
+            $table->dropColumn("deleted_at");
+        });
+
+        Schema::table('departments', function ($table) {
+            $table->dropColumn("deleted_at");
+        });
+
+        Schema::table('files', function ($table) {
+            $table->dropColumn("deleted_at");
+        });
+    }
+}
