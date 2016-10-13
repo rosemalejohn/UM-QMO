@@ -13,6 +13,16 @@
     </div>
 </template>
 
+<style lang="sass">
+    .mix-details {
+        h4 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            height: 19px;
+        }
+    }
+</style>
+
 <script>
     import File from './../../api/file'
     import toastr from 'toastr'
