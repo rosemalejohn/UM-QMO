@@ -42,7 +42,7 @@
 		                </li>
 		            </ul>
 		        </li>
-		        <li>
+		        <li v-if="is_admin">
 		            <a href="#/departments">
 		                <i class="icon-organization"></i>
 		                <span class="title">Departments</span>
@@ -58,6 +58,13 @@
 		                    	>{{ department.name }}</router-link>
 		                </li>
 		            </ul>
+		        </li>
+			    <li>
+		            <a href="#/">
+		                <i class="icon-folder"></i>
+		                <span class="title">Request</span>
+		                <span class="arrow "></span>
+		            </a>
 		        </li>
 		    </ul>
 		</div>
@@ -78,7 +85,13 @@
 
 		data() {
 			return {
-				departments: []
+				departments: [],
+			}
+		},
+
+		computed: {
+			is_admin() {
+				return Boolean(localStorage.getItem('is_admin') == 'true')
 			}
 		}
 

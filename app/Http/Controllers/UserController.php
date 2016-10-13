@@ -26,7 +26,11 @@ class UserController extends Controller
 
         $this->validateUser($request);
 
-        $newUser = User::create($request->all());
+        $data = $request->all();
+
+        $data['password'] = bcrypt($data['password']);
+
+        $newUser = User::create($data);
 
         return response()->json($newUser, 201);
     }
@@ -45,6 +49,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $this->validateUpdateUser($request, $id);
+
+        if (isset($request->password)) {
+            $request->password = bcrypt($request->password);
+        }
 
         $user->update($request->all());
 
