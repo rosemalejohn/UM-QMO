@@ -60,7 +60,7 @@
 		            </ul>
 		        </li>
 			    <li>
-		            <a href="#/">
+		            <a href="#/request">
 		                <i class="icon-folder"></i>
 		                <span class="title">Request</span>
 		                <span class="arrow "></span>
