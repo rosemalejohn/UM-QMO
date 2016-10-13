@@ -35,14 +35,14 @@
 			})
 		},
 
-		beforeRouteEnter(to, from, next) {
-			next(vm => {
-				if (vm.is_admin) {
-					next(true);
-				}
-				router.push('request');
-			})
-		},
+		// beforeRouteEnter(to, from, next) {
+		// 	next(vm => {
+		// 		if (vm.is_admin) {
+		// 			next(true);
+		// 		}
+		// 		router.push('request');
+		// 	})
+		// },
 
 		data() {
 			return {
