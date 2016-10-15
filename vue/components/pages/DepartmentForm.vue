@@ -64,7 +64,7 @@
 					})
 				} else {
 					Department.Add(this.department).then(response => {
-						this.$dispatch('departmentCreated', response.data);
+						this.$emit('submit', response.data);
 						toastr.success('Department added!');
 					}).catch(err => {
 						toastr.error('You`ve got an error!');

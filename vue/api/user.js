@@ -36,6 +36,10 @@ export default {
 
 	UpdatePassword(user_id, data) {
 		return Vue.http.put(`/api/users/${user_id}`, data);
+	},
+
+	GetFiles(user_id) {
+		return Vue.http.get(`/api/users/${user_id}/files`);
 	}
 
 }
