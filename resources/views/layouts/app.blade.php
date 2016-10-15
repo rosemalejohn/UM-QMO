@@ -48,7 +48,22 @@
 <body class="page-md page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed">
 
     <div id="app">
-        <app></app>
+        <app-header></app-header>
+
+        <div class="clearfix"></div>
+
+        <div class="container">
+
+            <div class="page-container">
+
+                <app-sidebar></app-sidebar>
+
+                <app-content></app-content>
+
+            </div>
+
+            <app-footer></app-footer>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
