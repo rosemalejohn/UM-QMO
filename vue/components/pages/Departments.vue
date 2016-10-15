@@ -3,7 +3,7 @@
 		<div class="col-md-12" v-if="showDepartmentForm">
 			<portlet>
 				<span slot="title">Add department</span>
-				<department-form @cancel="showDepartmentForm = false" :is-update="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
+				<department-form @submit="newDepartment" @cancel="showDepartmentForm = false" :is-update="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
 			</portlet>
 		</div>
 		<div class="col-md-12">
@@ -138,6 +138,10 @@
                     });
                 });
 			},
+
+			newDepartment(department) {
+				this.departments.push(department);
+			}
 			
 		},
 
