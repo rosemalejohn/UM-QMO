@@ -76,8 +76,7 @@
 
 	export default {
 
-
-		created() {
+		mounted() {
 			Department.GetAll().then(response => {
 				this.departments = response.data;
 			})
