@@ -89,7 +89,7 @@
 			'department-form': DepartmentForm
 		},
 
-		created() {
+		mounted() {
 
 			this.fetchDepartments();
 

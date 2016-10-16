@@ -21,7 +21,7 @@
 			'stat': Stat
 		},
 
-		created() {
+		mounted() {
 			StatService.GetTotalFilesUploaded().then(response => {
 				this.files = response.data;
 			})
