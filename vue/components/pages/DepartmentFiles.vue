@@ -83,7 +83,7 @@
             'file': File
         },
 
-        created() {
+        mounted() {
             
             this.getCategories();
             

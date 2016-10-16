@@ -156,7 +156,7 @@
 			}
 		},
 
-		created() {
+		mounted() {
 			this.fetchDepartments();
 		},
 
