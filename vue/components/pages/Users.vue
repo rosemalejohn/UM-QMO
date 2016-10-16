@@ -98,7 +98,7 @@
 	export default {
 
 		components: {
-			Portlet
+			'portlet': Portlet
 		},
 
 		beforeRouteEnter(to, from, next) {

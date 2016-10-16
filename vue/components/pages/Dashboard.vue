@@ -18,7 +18,7 @@
 
 	export default {
 		components: {
-			Stat
+			'stat': Stat
 		},
 
 		created() {
