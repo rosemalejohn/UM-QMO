@@ -41,7 +41,7 @@
 
 	export default {
 		components: {
-			Breadcrumbs
+			'breadcrumbs': Breadcrumbs
 		},
 	}
 </script> 

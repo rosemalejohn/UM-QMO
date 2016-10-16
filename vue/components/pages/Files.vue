@@ -79,7 +79,7 @@
     export default {
 
         components: {
-            File
+            'file': File
         },
 
         created() {

@@ -85,7 +85,8 @@
 	export default {
 		
 		components: {
-			Portlet, DepartmentForm
+			'portlet': Portlet, 
+			'department-form': DepartmentForm
 		},
 
 		created() {
