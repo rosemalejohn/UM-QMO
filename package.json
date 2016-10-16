@@ -3,7 +3,7 @@
   "scripts": {
     "prod": "gulp --production",
     "dev": "gulp watch",
-    "postinstall": "gulp --production"
+    "postinstall": "gulp"
   },
   "dependencies": {
     "filepicker-js": "^2.4.18",
