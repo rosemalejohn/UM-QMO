@@ -50,7 +50,6 @@
     export default {
 
         created() {
-            console.log(this.$root);
             User.GetAuthenticatedUser().then(response => {
                 this.authUser = response.data;
                 cookie.set('auth_user_id', response.data.id);
