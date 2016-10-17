@@ -78,6 +78,8 @@
 
     export default {
 
+        name: 'files',
+
         components: {
             'file': File
         },

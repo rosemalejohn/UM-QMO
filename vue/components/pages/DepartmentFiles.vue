@@ -79,6 +79,8 @@
 
     export default {
 
+        name: 'department-files',
+
         components: {
             'file': File
         },

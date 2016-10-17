@@ -91,6 +91,8 @@
 
 	export default {
 
+		name: 'view-account',
+
 		data() {
 			return {
 				user: {},

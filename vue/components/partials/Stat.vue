@@ -20,6 +20,9 @@
 
 <script>
 	export default {
+
+		name: 'stat',
+
 		props: {
 			url: {
 				type: String,

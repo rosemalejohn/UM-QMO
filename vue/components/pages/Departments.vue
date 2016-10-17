@@ -83,6 +83,8 @@
 	import swal from 'sweetalert'
 
 	export default {
+
+		name: 'departments',
 		
 		components: {
 			'portlet': Portlet, 

@@ -147,6 +147,8 @@
 
 	export default {
 
+		name: 'account-form',
+
 		data() {
 			return {
 				user: {},
