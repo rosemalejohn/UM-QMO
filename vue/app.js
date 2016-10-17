@@ -22,7 +22,7 @@ Vue.component('app-sidebar', Sidebar)
 Vue.component('app-content', Content)
 Vue.component('app-footer', Footer)
 
-filepicker.setKey('Ac9vyh2qlRFyU6Puvy687z');
+filepicker.setKey('AHkVcDwF6Q3yYcIB8JNDiz');
 
 window.router = new VueRouter(routes)
 window.cookie = Cookie;																																																																																																																																																																																																																																																																																																			

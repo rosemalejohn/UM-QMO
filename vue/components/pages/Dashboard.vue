@@ -24,28 +24,21 @@
 			'stat': Stat
 		},
 
-		mounted() {
-			StatService.GetTotalFilesUploaded().then(response => {
-				this.files = response.data;
-			})
+		beforeRouteEnter(to, from, next) {
+			next(vm => {
+				StatService.GetTotalFilesUploaded().then(response => {
+					vm.files = response.data;
+				})
 
-			StatService.GetTotalUsers().then(response => {
-				this.users = response.data;
-			})
+				StatService.GetTotalUsers().then(response => {
+					vm.users = response.data;
+				})
 
-			StatService.GetTotalDepartments().then(response => {
-				this.departments = response.data;
+				StatService.GetTotalDepartments().then(response => {
+					vm.departments = response.data;
+				})
 			})
 		},
-
-		// beforeRouteEnter(to, from, next) {
-		// 	next(vm => {
-		// 		if (vm.is_admin) {
-		// 			next(true);
-		// 		}
-		// 		router.push('request');
-		// 	})
-		// },
 
 		data() {
 			return {
