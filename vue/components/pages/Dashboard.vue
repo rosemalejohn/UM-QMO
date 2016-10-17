@@ -1,5 +1,5 @@
 <template>
-	<div class="row" v-if="is_admin">
+	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
 			<stat color="blue-madison" icon="fa fa-briefcase" description="Files uploaded" :stat="files" url="#/files"></stat>
 		</div>
