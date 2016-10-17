@@ -42,22 +42,12 @@
 		                </li>
 		            </ul>
 		        </li>
-		        <li v-if="is_admin">
+		        <li>
 		            <a href="#/departments">
 		                <i class="icon-organization"></i>
 		                <span class="title">Departments</span>
 		                <span class="arrow"></span>
 		            </a>
-		            <ul class="sub-menu">
-		            	<li>
-		                    <a href="">Add department</a>
-		                </li>
-		                <li v-for="department in departments">
-		                    <router-link 
-		                    	:to="{name: 'Show department', params: {departmentId: department.id}}"
-		                    	>{{ department.name }}</router-link>
-		                </li>
-		            </ul>
 		        </li>
 			    <li>
 		            <a href="#/request">
