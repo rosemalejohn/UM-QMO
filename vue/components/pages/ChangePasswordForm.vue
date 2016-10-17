@@ -36,6 +36,9 @@
 	import toastr from 'toastr'
 
 	export default {
+
+		name: 'change-password-form',
+		
 		data() {
 			return {
 				user: {},

@@ -97,6 +97,8 @@
 
 	export default {
 
+		name: 'users',
+
 		components: {
 			'portlet': Portlet
 		},

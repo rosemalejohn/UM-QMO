@@ -76,6 +76,8 @@
 
 	export default {
 
+		name: 'app-sidebar',
+
 		mounted() {
 			Department.GetAll().then(response => {
 				this.departments = response.data;

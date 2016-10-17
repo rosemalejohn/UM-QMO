@@ -5,7 +5,7 @@
 
             <breadcrumbs></breadcrumbs>
 
-            <transition name="fade" mode="out-in">
+            <transition>
                 <keep-alive>
             	   <router-view></router-view>
                 </keep-alive>
@@ -40,6 +40,9 @@
 	import Breadcrumbs from './Breadcrumbs.vue'
 
 	export default {
+
+    name: 'app-content',
+
 		components: {
 			'breadcrumbs': Breadcrumbs
 		},

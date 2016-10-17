@@ -29,6 +29,8 @@
 
 	export default {
 
+		name: 'department-form',
+
 		props: {
 			show: {
 				type: Boolean,

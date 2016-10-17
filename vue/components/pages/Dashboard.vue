@@ -17,6 +17,9 @@
 	import StatService from './../../api/stat'
 
 	export default {
+
+		name: 'dashboard',
+
 		components: {
 			'stat': Stat
 		},

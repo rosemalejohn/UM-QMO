@@ -30,6 +30,8 @@
 
 	export default {
 
+        name: 'file',
+
 		props: {
 			file: {
 				type: Object,
