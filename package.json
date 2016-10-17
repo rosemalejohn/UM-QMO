@@ -1,5 +1,8 @@
 {
   "private": true,
+  "engines": {
+    "node": "4.6.0"
+  },
   "scripts": {
     "prod": "gulp --production",
     "dev": "gulp watch",
