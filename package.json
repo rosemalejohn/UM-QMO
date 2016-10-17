@@ -1,7 +1,8 @@
 {
   "private": true,
   "engines": {
-    "node": "4.6.0"
+    "node": "4.6.0",
+    "npm": "3.10.6"
   },
   "scripts": {
     "prod": "gulp --production",
