@@ -61,6 +61,9 @@
 	                                                    <td>{{ file.filename }}</td>
 	                                                    <td>{{ file.size }}</td>
 	                                                    <td>{{ file.created_at }}</td>
+	                                                    <td>
+	                                                    	<a :href="file.url" download>Download</a>
+	                                                    </td>
 	                                                </tr>
 	                                            </tbody>
 	                                        </table>

@@ -3,13 +3,6 @@
 		<div class="col-md-6">
 			<form @submit.prevent="changePassword()">
 				<div class="form-group">
-					<label class="control-label">Email</label>
-					<input v-model="user.email" type="email" class="form-control" required/>
-					<span v-for="error in errors['email']" class="error">
-						{{ error }}
-					</span>
-				</div>
-				<div class="form-group">
 					<label class="control-label">Current Password</label>
 					<input v-model="user.current_password" type="password" class="form-control"/>
 				</div>
@@ -48,7 +41,7 @@
 
 		methods: {
 			changePassword() {
-				User.UpdatePassword(1, this.user).then(response => {
+				User.UpdatePassword(this.user).then(response => {
 					toastr.success('Password updated!');
 				}).catch(err => {
 					toastr.error('Password not updated!');

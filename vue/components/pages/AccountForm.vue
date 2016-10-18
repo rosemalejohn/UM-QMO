@@ -35,7 +35,7 @@
 										<li class="active">
 											<a href="#personal-info" data-toggle="tab">Personal Info</a>
 										</li>
-										<li>
+										<li v-if="!isUpdate">
 											<a href="#account-info" data-toggle="tab">Account Info</a>
 										</li>
 									</ul>

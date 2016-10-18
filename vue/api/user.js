@@ -34,7 +34,7 @@ export default {
 		return Vue.http.post('/api/users/delete-multiple', {users});
 	},
 
-	UpdatePassword(user_id, data) {
+	UpdatePassword(data) {
 		return Vue.http.put(`/api/users/update-password`, data);
 	},
 

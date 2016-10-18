@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\File;
 
 class UserController extends Controller
 {
@@ -46,7 +46,7 @@ class UserController extends Controller
 
     public function showFiles($id)
     {
-        $files = File::where('user_id',$id)->get();
+        $files = File::where('user_id', $id)->get();
 
         return response()->json($files);
     }
@@ -68,7 +68,6 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    
     public function updatePassword(Request $request)
     {
         $this->validate($request, [
@@ -79,7 +78,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
 
-        return response()->json($user,201);
+        return response()->json($user, 201);
     }
 
     public function destroy($id)
