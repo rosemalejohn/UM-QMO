@@ -133,7 +133,6 @@
             },
 
             uploadFiles() {
-                console.log();
                 filepicker.pickMultiple(fileArray => { 
                     fileArray = _.map(fileArray, (file) => {
                         var currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
