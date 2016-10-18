@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 use \App\User;
 
 class File extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ["user_id","url","filename","description","mimetype","size","category_id","department_id"];
+    protected $fillable = ["user_id", "url", "filename", "description", "mimetype", "size", "category_id", "department_id"];
 
-    protected $dates = ['deleted_at']; 
+    protected $dates = ['deleted_at'];
 
     public function user()
     {
