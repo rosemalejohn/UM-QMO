@@ -143,6 +143,7 @@
 			},
 
 			newDepartment(department) {
+				this.department = {};
 				this.departments.push(department);
 			}
 			

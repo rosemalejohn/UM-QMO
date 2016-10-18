@@ -53,14 +53,14 @@
 	                                                        <i class="fa fa-question"></i> Size (kb)</th>
 	                                                    <th>
 	                                                        <i class="fa fa-calendar"></i> Date uploaded </th>
-	                                                    <th> </th>
+	                                                    <th></th>
 	                                                </tr>
 	                                            </thead>
 	                                            <tbody>
 	                                                <tr v-for="file in files">
 	                                                    <td>{{ file.filename }}</td>
 	                                                    <td>{{ file.size }}</td>
-	                                                    <td>{{ file.created_at }}</td>
+	                                                    <td>{{ file.updated_at }}</td>
 	                                                    <td>
 	                                                    	<a :href="file.url" download>Download</a>
 	                                                    </td>
