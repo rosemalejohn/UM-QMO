@@ -13,6 +13,8 @@ class RequestFormController extends Controller
 
     public function index()
     {
+        $this->authorize('admin');
+
         $requestForms = RequestForm::all();
 
         return response()->json($requestForms);
@@ -39,6 +41,8 @@ class RequestFormController extends Controller
 
     public function showDone()
     {
+        $this->authorize('admin');
+
         $requestForms = RequestForm::where('is_done',1)->get();
 
         return response()->json($requestForms);
@@ -46,6 +50,8 @@ class RequestFormController extends Controller
 
     public function showUndone()
     {
+        $this->authorize('admin');
+
         $requestForms = RequestForm::where('is_done',0)->get();
 
         return response()->json($requestForms);
@@ -53,6 +59,8 @@ class RequestFormController extends Controller
 
     public function done($id)
     {
+        $this->authorize('admin');
+
         $requestForm = RequestForm::findOrFail($id);
         $requestForm->is_done = 1;
         $requestForm->save();
@@ -62,6 +70,8 @@ class RequestFormController extends Controller
 
     public function undone($id)
     {
+        $this->authorize('admin');
+
         $requestForm = RequestForm::findOrFail($id);
         $requestForm->is_done = 0;
         $requestForm->save();
@@ -84,11 +94,14 @@ class RequestFormController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('admin');
+
         RequestForm::destroy($id);
     }
 
     public function restore($id)
     {
+        $this->authorize('admin');
 
         $requestForm = RequestForm::onlyTrashed()->findOrFail($id);
         $requestForm->restore();
@@ -98,7 +111,8 @@ class RequestFormController extends Controller
 
     public function remove($id)
     {
-
+        $this->authorize('admin');
+        
         $requestForm = RequestForm::onlyTrashed()->findOrFail($id);
         $requestForm->forceDelete();
 
