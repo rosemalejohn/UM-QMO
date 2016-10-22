@@ -14,7 +14,7 @@
                 </h1>
             </div>
             <div class="panel-footer">
-                <a href=" {{url('request-form')}} ">Submit another request.</a>
+                <a href=" {{url('request-form')}} ">Submit another request</a> or <a href="/login">go to login page.</a>
             </div>
         </div>
     </div>
