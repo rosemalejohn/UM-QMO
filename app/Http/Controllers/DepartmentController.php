@@ -37,7 +37,7 @@ class DepartmentController extends Controller
     {
         $departmentWithFiles = Department::with('files')->findOrFail($id);
 
-        $this->authorize('view', $departmentWithFiles);
+        $this->authorize('canViewFiles', $departmentWithFiles);
 
         return response()->json($departmentWithFiles);
     }
@@ -46,7 +46,7 @@ class DepartmentController extends Controller
     {
         $departmentWithUsers = Department::with('users.department')->findOrFail($id);
 
-        $this->authorize('view', $departmentWithUsers);
+        $this->authorize('canViewFiles', $departmentWithUsers);
 
         return response()->json($departmentWithUsers);
     }
