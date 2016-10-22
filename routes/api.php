@@ -82,18 +82,22 @@ Route::group(['prefix' => 'files'], function () {
 
 });
 
-
 Route::group(['prefix' => 'requests'], function () {
 
     Route::get('/', 'RequestFormController@index');
     Route::get('/done', 'RequestFormController@showDone');
     Route::get('/undone', 'RequestFormController@showUndone');
     Route::get('/{id}', 'RequestFormController@show');
+<<<<<<< HEAD
     Route::put('/{id}', 'RequestFormController@update');    
+=======
+    Route::post('/', 'RequestFormController@store');
+    Route::put('/{id}', 'RequestFormController@update');
+>>>>>>> 8218296de77d8ce82635f28e081577d02e163e6e
     Route::patch('/{id}/done', 'RequestFormController@done');
     Route::patch('/{id}/undone', 'RequestFormController@undone');
     Route::delete('/{id}', 'RequestFormController@destroy');
     Route::delete('/{id}/restore', 'RequestFormController@restore');
     Route::delete('/{id}/remove', 'RequestFormController@remove');
-
+    Route::post('/approve-multiple', 'RequestFormController@approveMultiple');
 });

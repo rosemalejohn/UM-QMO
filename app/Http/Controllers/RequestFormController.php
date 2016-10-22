@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\RequestForm;
-
-use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class RequestFormController extends Controller
 {
@@ -20,10 +17,12 @@ class RequestFormController extends Controller
         return response()->json($requestForms);
     }
 
+
     public function create()
     {
         return view('request.requestForm');
     }
+
 
     public function store(Request $request)
     {
@@ -33,7 +32,6 @@ class RequestFormController extends Controller
 
         return view('request.requestFormSuccess');
     }
-
 
     public function show($id)
     {
@@ -46,7 +44,7 @@ class RequestFormController extends Controller
     {
         $this->authorize('admin');
 
-        $requestForms = RequestForm::where('is_done',1)->get();
+        $requestForms = RequestForm::where('is_done', 1)->get();
 
         return response()->json($requestForms);
     }
@@ -55,7 +53,7 @@ class RequestFormController extends Controller
     {
         $this->authorize('admin');
 
-        $requestForms = RequestForm::where('is_done',0)->get();
+        $requestForms = RequestForm::where('is_done', 0)->get();
 
         return response()->json($requestForms);
     }
@@ -82,7 +80,6 @@ class RequestFormController extends Controller
         return response()->json($requestForm);
     }
 
- 
     public function update(Request $request, $id)
     {
         $requestForm = RequestForm::findOrFail($id);
@@ -93,7 +90,6 @@ class RequestFormController extends Controller
 
         return response()->json($requestForm);
     }
-
 
     public function destroy($id)
     {
@@ -115,15 +111,25 @@ class RequestFormController extends Controller
     public function remove($id)
     {
         $this->authorize('admin');
-        
+
         $requestForm = RequestForm::onlyTrashed()->findOrFail($id);
         $requestForm->forceDelete();
 
         return response()->json($requestForm);
     }
 
+    public function approveMultiple(Request $request)
+    {
+        $this->authorize('admin');
 
-
+        foreach ($request->requests as $requestID) {
+            $requestForm = RequestForm::find($requestID);
+            $requestForm->is_done = true;
+            $requestForm->save();
+            // send text message to contact number
+            // Hi {name}, this is to inform you that your request for {request_for} is already approved. Please go to the office and process.
+        }
+    }
 
     private function validateRequestForm(Request $request)
     {
