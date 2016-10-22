@@ -126,8 +126,6 @@ class RequestFormController extends Controller
             $requestForm = RequestForm::find($requestID);
             $requestForm->is_done = true;
             $requestForm->save();
-            // send text message to contact number
-            // Hi {name}, this is to inform you that your request for {request_for} is already approved. Please go to the office and process.
         }
     }
 

@@ -13,8 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
-        Department::class => ViewPolicy::class,
+        'App\Model' => 'App\Policies\ModelPolicy'
     ];
 
     /**
@@ -27,7 +26,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('admin', function ($user) {
-            return $user->is_admin;
+            return $user->isAdmin();
+        });
+
+        Gate::define('canViewFiles', function ($user,$department) {
+            return $user->isAdmin() || $user->department_id === $department->id;
         });
 
     }
