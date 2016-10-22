@@ -39,7 +39,9 @@
 							<td>{{ request.email }}</td>
 							<td>{{ request.contact_number }}</td>
 							<td>{{ request.request_for }}</td>
-							<td>{{ request.is_done }}</td>
+							<td>
+								<span class="label label-info">{{ request.is_done ? 'Done' : 'In process' }}</span>
+							</td>
 						</tr>
 					</tbody>
 				</table>
