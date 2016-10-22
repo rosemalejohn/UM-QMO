@@ -89,7 +89,6 @@ Route::group(['prefix' => 'requests'], function () {
     Route::get('/done', 'RequestFormController@showDone');
     Route::get('/undone', 'RequestFormController@showUndone');
     Route::get('/{id}', 'RequestFormController@show');
-    Route::post('/', 'RequestFormController@store');    
     Route::put('/{id}', 'RequestFormController@update');    
     Route::patch('/{id}/done', 'RequestFormController@done');
     Route::patch('/{id}/undone', 'RequestFormController@undone');

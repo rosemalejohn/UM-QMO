@@ -26,6 +26,9 @@
         <p>
             <a href="/password/reset" class="uppercase">Forgot Password</a>
         </p>
+        <p>
+            <a href="/request-form" class="uppercase">Request Form</a>
+        </p>
     </div>
 </form>
 @endsection
