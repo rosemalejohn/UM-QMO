@@ -17,13 +17,20 @@ class RequestFormController extends Controller
         return response()->json($requestForms);
     }
 
+
+    public function create()
+    {
+        return view('request.requestForm');
+    }
+
+
     public function store(Request $request)
     {
         $this->validateRequestForm($request);
 
         $newRequestForm = RequestForm::create($request->all());
 
-        return response()->json($newRequestForm, 201);
+        return view('request.requestFormSuccess');
     }
 
     public function show($id)
@@ -128,12 +135,12 @@ class RequestFormController extends Controller
     {
 
         $this->validate($request, [
-            'name' => 'required|min:2|max:50',
-            'college' => 'required|min:2|max:255',
-            'school_year' => 'required|min:4|max:4',
-            'email' => 'email',
-            'contact_number' => 'required|min:11|max:12',
-            'request_for' => 'required|min:2|max:255',
+            'name'          => 'required|min:2|max:50',
+            'college'       => 'required|min:2|max:255',
+            'school_year'   => 'required|date_format:"Y"',
+            'email'         => 'email',
+            'contact_number'=> 'required|min:11|max:12',
+            'request_for'   => 'required|min:2|max:255'
         ]);
 
     }

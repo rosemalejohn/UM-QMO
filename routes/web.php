@@ -20,3 +20,10 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Auth::routes();
+
+Route::group(['prefix' => 'request-form'], function () {
+
+	Route::get('/','RequestFormController@create');
+	Route::post('/', 'RequestFormController@store');    
+	
+});
