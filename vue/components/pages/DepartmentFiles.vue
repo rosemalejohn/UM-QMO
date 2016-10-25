@@ -137,7 +137,9 @@
             },
 
             uploadFiles() {
-                filepicker.pickMultiple(fileArray => {
+                filepicker.pickMultiple({
+                    imageQuality: 80
+                }, fileArray => {
                     fileArray = _.map(fileArray, (file) => {
                         var currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
                         file['user_id'] = Cookie.get('auth_user_id');

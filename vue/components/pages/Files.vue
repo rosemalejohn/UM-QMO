@@ -133,7 +133,9 @@
             },
 
             uploadFiles() {
-                filepicker.pickMultiple(fileArray => { 
+                filepicker.pickMultiple({
+                    imageQuality: 80
+                }, fileArray => { 
                     fileArray = _.map(fileArray, (file) => {
                         var currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
                         file['user_id'] = Cookie.get('auth_user_id');
@@ -147,6 +149,7 @@
                         delete file['key'];
                         return file;
                     });
+
                     FileService.AddFiles(fileArray).then(response => {
                         this.files = _.concat(this.files, fileArray);
                     }).catch(err => {
