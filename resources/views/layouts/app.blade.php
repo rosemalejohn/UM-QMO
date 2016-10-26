@@ -32,6 +32,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/toastr/2.1.3/toastr.min.css">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="/css/animate.css">
 
     <link rel="stylesheet" href="/css/app.css">
@@ -92,6 +94,8 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/amcharts/3.13.0/serial.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="/js/app-theme.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="/js/app.js"></script>
@@ -100,6 +104,8 @@
         jQuery(document).ready(function() {
             Metronic.init();
             Layout.init();
+
+            jQuery('a.attachment').fancybox();
         });
     </script>
 </body>
