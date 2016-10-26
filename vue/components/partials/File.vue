@@ -4,7 +4,10 @@
         <div class="mix-details">
             <h4>{{ file.filename }}</h4>
             <a class="mix-link" :href="file.url" download>
-            	<i class="fa fa-download"></i>
+                <i class="fa fa-download"></i>
+            </a>
+            <a v-on:click="view(file)" class="mix-link">
+            	<i class="fa fa-search"></i>
             </a>
             <a v-on:click="remove" class="mix-preview fancybox-button" title="Project Name" data-rel="fancybox-button">
             	<i class="fa fa-trash"></i>
@@ -56,6 +59,18 @@
                         this.$emit('remove', this.file);
                     })
                 }); 
+            },
+
+            view(file) {
+                router.push({name: 'File viewer', params: { file }})
+            }
+        },
+
+        watch: {
+            file() {
+                this.$nextTick(() => {
+                    $('a.attachment').fancybox();
+                })
             }
         }
 

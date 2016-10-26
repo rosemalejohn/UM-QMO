@@ -11,6 +11,7 @@ import Report from './components/pages/Report.vue'
 import Requests from './components/pages/Requests.vue'
 import ChangePasswordForm from './components/pages/ChangePasswordForm.vue'
 import Error404 from './components/errors/404.vue'
+import ViewFile from './components/pages/ViewFile.vue'
 
 export default {
 
@@ -18,6 +19,7 @@ export default {
 		{ path: '/', name: 'Dashboard', component: Dashboard },
 		
 		{ path: '/files', name: 'Files', component: Files },
+		{ path: '/files/view', name: 'File viewer', component: ViewFile },
 
 		{ path: '/profile', name: 'Profile', component: Profile },
 
