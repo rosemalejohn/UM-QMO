@@ -47,6 +47,8 @@
 				<div v-else class="note note-info note-bordered">
 	                <p>No memos added yet.</p>
 	            </div>
+
+	            <infinite-scroll :paginator.sync="paginator" @fetched="pulledMemo"></infinite-scroll>
 			</portlet>
 		</div>
 	</div>
@@ -66,6 +68,7 @@
 	import Memo from './../../api/memo'
 	import toastr from 'toastr'
 	import swal from 'sweetalert'
+	import InfiniteScroll from './../partials/InfiniteScroll.vue'
 
 	export default {
 
@@ -73,14 +76,16 @@
 
 		components: {
 			'portlet': Portlet,
-			'memo-form': MemoForm
+			'memo-form': MemoForm,
+			'infinite-scroll': InfiniteScroll
 		},
 
 		beforeRouteEnter(to, from, next) {
 
 			Memo.GetAll().then(response => {
 				next(vm => {
-					vm.memos = response.data;
+					vm.paginator = response.data;
+					vm.memos = vm.paginator.data;
 				})
 			}).catch(err => {
 				toastr.error('Cannot fetch memos.');
@@ -90,6 +95,7 @@
 
 		data() {
 			return {
+				paginator: {},
 				memos: [],
 				memo:{},
 				authenticated_user_id:  cookie.get('auth_user_id'),
@@ -157,8 +163,14 @@
 				this.memo = {};
 				this.showMemoForm = false;
 
-			}
+			},
 
+			pulledMemo(paginator) {
+				this.paginator = paginator
+				paginator.data.forEach(memo => {
+					this.memos.push(memo)
+				})
+			}
 			
 		}
 

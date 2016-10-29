@@ -1,7 +1,7 @@
 <template>
 	<div class="dashboard-stat" :class="color">
 		<div class="visual">
-			<i class="fa fa-dashboard" :class="icon"></i>
+			<i :class="icon"></i>
 		</div>
 		<div class="details">
 			<div class="number">

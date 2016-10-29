@@ -20,6 +20,10 @@ export default {
 
 	GetTotalFilesUploadedByMonth(year) {
 		return Vue.http.get(`/api/files/graph-uploaded-yearly/${year}`);
+	},
+
+	GetTotalMemos() {
+		return Vue.http.get('/api/memos/count');
 	}
 
 }

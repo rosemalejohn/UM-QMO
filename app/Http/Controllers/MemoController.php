@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use App\Models\Memo;
+use Illuminate\Http\Request;
 
 class MemoController extends Controller
 {
@@ -18,7 +15,7 @@ class MemoController extends Controller
 
     public function index()
     {
-        $memos = Memo::with('user')->latest()->get();
+        $memos = Memo::with('user')->latest()->paginate(10);
 
         return response()->json($memos);
     }
@@ -43,11 +40,10 @@ class MemoController extends Controller
 
     public function showByUser($id)
     {
-        $memo = Memo::with('user')->where('user_id',$id)->get();
+        $memo = Memo::with('user')->where('user_id', $id)->get();
 
         return response()->json($memo);
     }
-
 
     public function update(Request $request, $id)
     {
@@ -93,12 +89,17 @@ class MemoController extends Controller
         return response()->json($memo);
     }
 
+    public function memosCount()
+    {
+        return response()->json(Memo::all()->count(), 200);
+    }
+
     private function validateMemo(Request $request)
     {
 
         $this->validate($request, [
             'title' => 'required|min:2|max:255',
-            'body'  => 'required|min:2',
+            'body' => 'required|min:2',
         ]);
 
     }

@@ -87,8 +87,8 @@ Route::group(['prefix' => 'requests'], function () {
     Route::get('/', 'RequestFormController@index');
     Route::get('/done', 'RequestFormController@showDone');
     Route::get('/undone', 'RequestFormController@showUndone');
-    Route::get('/{id}', 'RequestFormController@show'); 
-    Route::put('/{id}', 'RequestFormController@update');    
+    Route::get('/{id}', 'RequestFormController@show');
+    Route::put('/{id}', 'RequestFormController@update');
     Route::patch('/{id}/done', 'RequestFormController@done');
     Route::patch('/{id}/undone', 'RequestFormController@undone');
     Route::delete('/{id}', 'RequestFormController@destroy');
@@ -97,14 +97,14 @@ Route::group(['prefix' => 'requests'], function () {
     Route::post('/approve-multiple', 'RequestFormController@approveMultiple');
 });
 
-
 Route::group(['prefix' => 'memos'], function () {
 
     Route::get('/', 'MemoController@index');
+    Route::get('/count', 'MemoController@memosCount');
     Route::get('/{id}', 'MemoController@show');
     Route::get('/user/{id}', 'MemoController@showByUser');
-    Route::post('/', 'MemoController@store');   
-    Route::put('/{id}', 'MemoController@update');    
+    Route::post('/', 'MemoController@store');
+    Route::put('/{id}', 'MemoController@update');
     Route::delete('/{id}', 'MemoController@destroy');
     Route::delete('/delete-multiple', 'MemoController@destroyMultiple');
     Route::delete('/{id}/restore', 'MemoController@restore');
