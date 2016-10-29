@@ -21,7 +21,7 @@
                     <div class="col-md-12">
 						<div class="todo-tasklist">
 							<div class="todo-tasklist-item todo-tasklist-item-border-green" v-for="(memo,index) in memos">
-								<div class="todo-tasklist-item-controls" v-if="owns(memo.user_id)">
+								<div class="todo-tasklist-item-controls" v-if="owns(memo.user)">
 									<button class="btn btn-xs btn-circle" @click="updateMemo(memo)">
 										<i class="fa fa-pencil"></i>
 									</button>
@@ -107,8 +107,8 @@
 
 		methods: {
 			
-			owns(user_id) {
-				return user_id == this.authenticated_user_id
+			owns(user) {
+				return user.id == this.authenticated_user_id && this.is_admin
 			},
 
 			add(){
