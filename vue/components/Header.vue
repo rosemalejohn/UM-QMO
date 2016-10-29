@@ -43,6 +43,12 @@
     </div>
 </template>
 
+<style lang="sass">
+    .img-circle {
+        width: 39px !important;
+    }
+</style>
+
 <script>
     import swal from 'sweetalert'
     import User from './../api/user'
