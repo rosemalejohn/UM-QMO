@@ -27,18 +27,16 @@
                     <div class="tab-pane active" id="files">
                         <div class="margin-top-10">
                             <ul class="mix-filter">
+                                <li @click="uploadResources()">
+                                    <i class="fa fa-file"></i>
+                                    Upload resources
+                                </li>
                                 <li @click="uploadFiles()">
                                     <i class="fa fa-plus"></i>
                                     Upload files
                                 </li>
                                 <li class="filter" data-filter="all">
                                      All
-                                </li>
-                                <li 
-                                    v-for="category in categories" 
-                                    class="filter" 
-                                    :data-filter="category.id">
-                                    {{ category.name }}
                                 </li>
                             </ul>
                             <div class="row mix-grid">
@@ -162,6 +160,10 @@
                         toastr.error('Files not uploaded!');
                     }).bind(this);
                 })
+            },
+
+            uploadResources() {
+                router.push({ name: 'Upload resources' })
             },
 
             pulledFiles(paginator) {
