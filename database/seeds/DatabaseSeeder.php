@@ -36,13 +36,13 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'email' => 'user@fake.com',
-            'password' => bcrypt('user'),,
+            'password' => bcrypt('staffuser'),
             'id_number' => '103956',
             'name' => 'Julie Pantano',
             'department_id' => null,
             'type' => 'staff',
             'position' => 'Staff',
-            'gender' => 'female'
+            'gender' => 'female',
         ]);
     }
 }
