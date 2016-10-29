@@ -20,6 +20,10 @@ export default {
 
 	Delete(category_id) {
 		return Vue.http.delete(`/api/categories/${category_id}`);
-	}
+	},
+
+	AddFiles(category_id, fileArray) {
+		return Vue.http.post(`/api/categories/${category_id}/files`, { fileArray });
+	} 
 
 }

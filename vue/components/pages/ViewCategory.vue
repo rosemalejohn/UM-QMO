@@ -150,8 +150,8 @@
                         return file;
                     });
 
-                    FileService.AddFiles(fileArray).then(response => {
-                        this.files = _.concat(this.files, fileArray);
+                    Category.AddFiles(this.category.id, fileArray).then(response => {
+                        this.files = response.data.files;
                     }).catch(err => {
                         toastr.error('Files not uploaded!');
                     }).bind(this);
