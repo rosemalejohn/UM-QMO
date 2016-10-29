@@ -48,6 +48,8 @@
 				<div v-else class="note note-info note-bordered">
                     <p>No request. You are done for today.</p>
                 </div>
+
+                <infinite-scroll :paginator="paginator" @fetched="requestsPulled"></infinite-scroll>
 			</portlet>
 		</div>
 	</div>
@@ -58,6 +60,7 @@
 	import Request from './../../api/request'
 	import toastr from 'toastr'
 	import swal from 'sweetalert'
+	import InfiniteScroll from './../partials/InfiniteScroll.vue'
 
 	export default {
 
@@ -65,6 +68,7 @@
 		
 		components: {
 			'portlet': Portlet,
+			'infinite-scroll': InfiniteScroll
 		},
 
 		beforeRouteEnter(to, from, next) {
@@ -92,11 +96,19 @@
 					toastr.error('Cannot approve! Something went wrong.');
 				})
 			},
+
+			requestsPulled(paginator) {
+				this.paginator = paginator
+				paginator.data.forEach(request => {
+					this.requests.push(request)
+				})
+			}
 			
 		},
 
 		data() {
 			return {
+				paginator: {},
 				checked: [],
 				requests: []
 			}
