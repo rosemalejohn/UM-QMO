@@ -37,6 +37,18 @@ class CategoryController extends Controller
         return response()->json($newCategory, 201);
     }
 
+    public function storeFiles(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+
+        foreach ($request->fileArray as $file) {
+            $file = File::create($file);
+            $category->files()->attach($file->id);
+        }
+
+        return response()->json($category->files, 200);
+    }
+
     public function showFiles($id)
     {
         $categoryWithFiles = Category::with('files')->findOrFail($id);

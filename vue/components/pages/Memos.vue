@@ -29,7 +29,7 @@
 										<i class="fa fa-trash"></i>
 									</button>
 								</div>
-								<img class="todo-userpic pull-left" :src="memo.user.photo_url ? memo.user.photo_url : '/img/default-photo.jpg'" width="27px" height="27px">
+								<img class="todo-userpic pull-left" :src="memo.user.photo_url || '/img/default-photo.jpg'" width="27px" height="27px">
 								<div class="todo-tasklist-item-title">
 									{{memo.user.name}}
 								</div>
@@ -38,7 +38,7 @@
 									{{memo.body}}
 								</div>
 								<div class="todo-tasklist-controls pull-left">
-									<span class="todo-tasklist-date"><i class="fa fa-calendar"></i> {{memo.updated_at}} </span>
+									<span class="todo-tasklist-date"><i class="fa fa-calendar"></i> {{memo.updated_at | date('MMMM Do YYYY, h:mm:ss a') }} </span>
 								</div>
 							</div>
 						</div>

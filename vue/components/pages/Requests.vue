@@ -8,9 +8,6 @@
 						<a @click="approve()" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-check"></i>Mark done
 						</a>
-						<!-- <button @click="reject()" class="btn btn-circle btn-sm red-sunglo">
-							<i class="fa fa-remove"></i>Reject
-						</button> -->
 					</div>
 				</div>
 				<table v-if="requests.length" class="table table-striped table-bordered table-hover">

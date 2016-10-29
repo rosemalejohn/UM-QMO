@@ -58,7 +58,7 @@
 								{{ department.users_count }}
 							</td>
 							<td class="center">
-								{{ department.created_at }}
+								{{ department.created_at | date('MMMM Do YYYY, h:mm:ss a') }}
 							</td>
 							<td>
 								<router-link class="btn btn-xs btn-success" :to="{ name: 'Department files', params: { departmentId: department.id }}"><i class="fa fa-file"></i></router-link>
