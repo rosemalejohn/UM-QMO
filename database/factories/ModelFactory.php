@@ -59,8 +59,8 @@ $factory->define(App\Models\RequestForm::class, function (Faker\Generator $faker
 $factory->define(App\Models\Memo::class, function (Faker\Generator $faker) {
 
     return [
-        'title' => $faker->text,
-        'body' => $faker->paragraph,
+        'title' => $faker->text(50),
+        'body' => $faker->paragraph(5),
         'user_id' => rand(1,2)
     ];
 });

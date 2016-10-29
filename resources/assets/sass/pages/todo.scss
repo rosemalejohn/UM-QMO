@@ -2,8 +2,8 @@
 TODO Page
 ***/
 
-@import '../../global/_variables'; // global variables.
-@import '../../global/components/_mixins'; // global mixings.
+@import '../global/_variables'; // global variables.
+@import '../global/components/_mixins'; // global mixings.
 
 .todo-ui {
 	margin-top: 20px;
@@ -123,10 +123,16 @@ TODO Page
 		margin-bottom: 0;
 	}
 }
-
+.todo-tasklist-item-controls{
+	display:none;
+	float: right;
+}
 div .todo-tasklist-item:hover {
-	cursor: pointer;
+	// cursor: pointer;
 	background-color: #edf7f9;
+	.todo-tasklist-item-controls{
+		display: block;
+	}
 }
 
 .todo-tasklist-item img {
@@ -142,9 +148,12 @@ div .todo-tasklist-item:hover {
 }
 
 .todo-tasklist-item-text {
-	font-size: 13px;
+	font-size: 14px;
 	color: #577688;
 	padding-bottom: 5px;
+	h4{
+		font-weight: 700;
+	}
 }
 
 .todo-tasklist-item ul {

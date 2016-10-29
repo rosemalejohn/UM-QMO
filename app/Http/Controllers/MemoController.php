@@ -13,24 +13,25 @@ class MemoController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->authorize('admin');
 
     }
 
     public function index()
     {
-        $memos = Memo::with('user')->get();
+        $memos = Memo::with('user')->latest()->get();
 
         return response()->json($memos);
     }
 
     public function store(Request $request)
     {
+        $this->authorize('admin');
+
         $this->validateMemo($request);
 
         $newMemo = Memo::create($request->all());
 
-        return response()->json($newMemo, 201);
+        return response()->json($newMemo->load('user'), 201);
     }
 
     public function show($id)
@@ -56,7 +57,7 @@ class MemoController extends Controller
 
         $memo->update($request->all());
 
-        return response()->json($memo);
+        return response()->json($memo->load('user'));
     }
 
     public function destroy($id)
