@@ -43,6 +43,12 @@
     </div>
 </template>
 
+<style lang="sass">
+    .img-circle {
+        width: 39px !important;
+    }
+</style>
+
 <script>
     import swal from 'sweetalert'
     import User from './../api/user'
@@ -55,6 +61,7 @@
             User.GetAuthenticatedUser().then(response => {
                 this.authUser = response.data;
                 cookie.set('auth_user_id', response.data.id);
+                localStorage.setItem('is_admin', this.authUser.is_admin);
             })
         },
 

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Department;
 use App\Models\File;
+use App\Models\Memo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,6 +49,11 @@ class User extends Authenticatable
     public function getIsAdminAttribute()
     {
         return $this->type === 'admin';
+    }
+
+    public function memos()
+    {
+        return $this->hasMany(Memo::class);
     }
 
     public function isAdmin()

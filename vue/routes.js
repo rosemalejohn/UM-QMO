@@ -12,6 +12,7 @@ import Requests from './components/pages/Requests.vue'
 import ChangePasswordForm from './components/pages/ChangePasswordForm.vue'
 import Error404 from './components/errors/404.vue'
 import ViewFile from './components/pages/ViewFile.vue'
+import Memos from './components/pages/Memos.vue'
 
 export default {
 
@@ -39,7 +40,10 @@ export default {
 
 		{ path: '/change-password', name: 'Change password', component: ChangePasswordForm },
 
+		{ path: '/memos', name: 'Memos', component: Memos },
+
 		{ path: '*', 'name': 'Page not found', component: Error404 }
+
 
 	]
 	

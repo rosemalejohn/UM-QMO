@@ -56,6 +56,13 @@
 		                <span class="arrow "></span>
 		            </a>
 		        </li>
+				<li>
+		            <a href="#/memos">
+		                <i class="icon-note"></i>
+		                <span class="title">Memo</span>
+		                <span class="arrow "></span>
+		            </a>
+		        </li>
 		    </ul>
 		</div>
 	</div>

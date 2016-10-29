@@ -42,6 +42,7 @@ $factory->define(App\Department::class, function (Faker\Generator $faker) {
     ];
 });
 
+
 $factory->define(App\Models\RequestForm::class, function (Faker\Generator $faker) {
 
     return [
@@ -52,5 +53,14 @@ $factory->define(App\Models\RequestForm::class, function (Faker\Generator $faker
         'contact_number' => $faker->e164PhoneNumber,
         'request_for' => $faker->text,
         'is_done' => rand(0,1)
+    ];
+});
+
+$factory->define(App\Models\Memo::class, function (Faker\Generator $faker) {
+
+    return [
+        'title' => $faker->text(50),
+        'body' => $faker->paragraph(5),
+        'user_id' => rand(1,2)
     ];
 });
