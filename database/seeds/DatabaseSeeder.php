@@ -44,5 +44,9 @@ class DatabaseSeeder extends Seeder
             'position' => 'Staff',
             'gender' => 'female',
         ]);
+
+        $this->call(DepartmentsTableSeeder::class);
+        $this->call(MemosTableSeeder::class);
+        $this->call(RequestFormTableSeeder::class);
     }
 }

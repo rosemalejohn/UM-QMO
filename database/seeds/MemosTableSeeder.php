@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Memo;
 use Illuminate\Database\Seeder;
 
 class MemosTableSeeder extends Seeder
@@ -11,6 +12,6 @@ class MemosTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Memo::class, 10)->create();
+        factory(Memo::class, 10000)->create();
     }
 }

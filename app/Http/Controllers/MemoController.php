@@ -15,7 +15,7 @@ class MemoController extends Controller
 
     public function index()
     {
-        $memos = Memo::with('user')->latest()->get();
+        $memos = Memo::with('user')->latest()->paginate(10);
 
         return response()->json($memos);
     }
