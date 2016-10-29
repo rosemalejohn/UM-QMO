@@ -16,7 +16,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withCount('files')->paginate(10);
 
         return response()->json($categories);
     }

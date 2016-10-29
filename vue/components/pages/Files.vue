@@ -29,26 +29,24 @@
                             <ul class="mix-filter">
                                 <li @click="uploadResources()">
                                     <i class="fa fa-file"></i>
-                                    Upload resources
-                                </li>
-                                <li @click="uploadFiles()">
-                                    <i class="fa fa-plus"></i>
-                                    Upload files
+                                    Add resources
                                 </li>
                                 <li class="filter" data-filter="all">
                                      All
                                 </li>
                             </ul>
                             <div class="row mix-grid">
-                                <div v-for="(file, index) in files" class="col-md-3 col-sm-4 mix category_1">
-                                    <file v-on:remove="files.splice(index, 1)" :file="file"></file>
+                                <div class="col-md-12">
+                                    <div class="tiles">
+                                        <folder v-for="folder in categories" :folder="folder"></folder>
+                                    </div>
                                 </div>
                             </div>
                             <div v-if="noFiles" class="note note-info note-bordered">
-                                <p>No files uploaded yet. Click <strong>upload</strong> above.</p>
+                                <p>No files uploaded yet. Click <strong>add</strong> above.</p>
                             </div>
 
-                            <infinite-scroll :paginator="paginator" @fetched="pulledFiles"></infinite-scroll>
+                            <infinite-scroll :paginator="paginator" @fetched="pulledCategories"></infinite-scroll>
                         </div>
                     </div>
                 </div>
@@ -68,7 +66,7 @@
 </style>
 
 <script>
-    import File from './../partials/File.vue'
+    import Folder from './../partials/Folder.vue'
     import InfiniteScroll from './../partials/InfiniteScroll.vue'
     import Category from './../../api/category'
     import FileService from './../../api/file'
@@ -83,20 +81,13 @@
         name: 'files',
 
         components: {
-            'file': File,
+            'folder': Folder,
             'infinite-scroll': InfiniteScroll
-        },
-
-        mounted() {
-        
-            this.getCategories();
-            
         },
 
         data() {
             return {
                 paginator: {},
-                files: [],
                 categories: [],
                 searchText: ''
             }
@@ -105,16 +96,16 @@
         computed: {
 
             noFiles() {
-                return this.files.length < 1;
+                return this.categories.length < 1;
             }
 
         },
 
         beforeRouteEnter(to, from, next) {
-            FileService.GetAll().then(response => {
+            Category.GetAll().then(response => {
                 next(vm => {
                     vm.paginator = response.data
-                    vm.files = vm.paginator.data
+                    vm.categories = vm.paginator.data
                 })
             }).catch(err => {
                 toastr.error('Cannot fetch files.')
@@ -128,66 +119,17 @@
                 })
             },
 
-            getCategories() {
-                Category.GetAll().then(response => {
-                    this.categories = response.data;
-                }).catch(err => {
-                    toastr.error('Cannot fetch categories.')
-                })
-            },
-
-            uploadFiles() {
-                filepicker.pickMultiple({
-                    imageQuality: 80
-                }, fileArray => { 
-                    fileArray = _.map(fileArray, (file) => {
-                        var currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-                        file['user_id'] = Cookie.get('auth_user_id');
-                        file['description'] = 'Test description';
-                        file['created_at'] = currentDateTime;
-                        file['updated_at'] = currentDateTime;
-                        delete file['client'];
-                        delete file['isWriteable'];
-                        delete file['id'];
-                        delete file['container'];
-                        delete file['key'];
-                        return file;
-                    });
-
-                    FileService.AddFiles(fileArray).then(response => {
-                        this.files = _.concat(this.files, fileArray);
-                    }).catch(err => {
-                        toastr.error('Files not uploaded!');
-                    }).bind(this);
-                })
-            },
-
             uploadResources() {
                 router.push({ name: 'Upload resources' })
             },
 
-            pulledFiles(paginator) {
+            pulledCategories(paginator) {
                 this.paginator = paginator
-                paginator.data.forEach(file => {
-                    this.files.push(file)
+                paginator.data.forEach(category => {
+                    this.categories.push(category)
                 })
             }
         },
-
-        watch: {
-            files() {
-                this.$nextTick(() => {
-                    $('.mix-grid').mixitup();
-                });
-            },
-
-        },
-
-        events: {
-            fileDeleted(file) {
-                this.files.$remove(file);
-            }
-        }
 
     }
 </script>

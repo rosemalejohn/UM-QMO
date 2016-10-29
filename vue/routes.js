@@ -14,6 +14,7 @@ import Error404 from './components/errors/404.vue'
 import ViewFile from './components/pages/ViewFile.vue'
 import Memos from './components/pages/Memos.vue'
 import UploadResources from './components/forms/FilesUpload.vue'
+import ViewCategory from './components/pages/ViewCategory.vue'
 
 export default {
 
@@ -23,6 +24,8 @@ export default {
 		{ path: '/files', name: 'Files', component: Files },
 		{ path: '/files/view', name: 'File viewer', component: ViewFile },
 		{ path: '/files/resources', name: 'Upload resources', component: UploadResources },
+
+		{ path: '/categories/:categoryId', name: 'Show category', component: ViewCategory},
 
 		{ path: '/profile', name: 'Profile', component: Profile },
 
