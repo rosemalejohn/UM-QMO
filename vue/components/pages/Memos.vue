@@ -38,7 +38,7 @@
 									{{memo.body}}
 								</div>
 								<div class="todo-tasklist-controls pull-left">
-									<span class="todo-tasklist-date"><i class="fa fa-calendar"></i> {{memo.updated_at}} </span>
+									<span class="todo-tasklist-date"><i class="fa fa-calendar"></i> {{memo.updated_at | date('MMMM Do YYYY, h:mm:ss a') }} </span>
 								</div>
 							</div>
 						</div>

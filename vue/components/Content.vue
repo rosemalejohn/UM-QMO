@@ -38,6 +38,8 @@
 
 <script>
 	import Breadcrumbs from './Breadcrumbs.vue'
+  import moment from 'moment'
+  import Vue from 'vue'
 
 	export default {
 
@@ -45,6 +47,10 @@
 
 		components: {
 			'breadcrumbs': Breadcrumbs
-		},
+		}
 	}
+
+  Vue.filter('date', (value, format) => {
+    return moment(value).format(format)
+  })
 </script> 
