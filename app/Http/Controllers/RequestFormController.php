@@ -12,17 +12,15 @@ class RequestFormController extends Controller
     {
         $this->authorize('admin');
 
-        $requestForms = RequestForm::all();
+        $requestForms = RequestForm::paginate(10);
 
         return response()->json($requestForms);
     }
-
 
     public function create()
     {
         return view('request.requestForm');
     }
-
 
     public function store(Request $request)
     {
@@ -133,12 +131,12 @@ class RequestFormController extends Controller
     {
 
         $this->validate($request, [
-            'name'          => 'required|min:2|max:50',
-            'college'       => 'required|min:2|max:255',
-            'school_year'   => 'required|date_format:"Y"',
-            'email'         => 'email',
-            'contact_number'=> 'required|min:11|max:12',
-            'request_for'   => 'required|min:2|max:255'
+            'name' => 'required|min:2|max:50',
+            'college' => 'required|min:2|max:255',
+            'school_year' => 'required|date_format:"Y"',
+            'email' => 'email',
+            'contact_number' => 'required|min:11|max:12',
+            'request_for' => 'required|min:2|max:255',
         ]);
 
     }
