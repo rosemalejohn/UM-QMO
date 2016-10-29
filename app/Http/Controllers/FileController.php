@@ -19,7 +19,7 @@ class FileController extends Controller
 
     public function index()
     {
-        $files = File::all();
+        $files = File::paginate(10);
 
         return response()->json($files);
     }

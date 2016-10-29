@@ -49,6 +49,8 @@
                             <div v-if="noFiles" class="note note-info note-bordered">
                                 <p>No files uploaded yet. Click <strong>upload</strong> above.</p>
                             </div>
+
+                            <infinite-scroll :paginator="paginator" @fetched="pulledFiles"></infinite-scroll>
                         </div>
                     </div>
                 </div>
@@ -69,6 +71,7 @@
 
 <script>
     import File from './../partials/File.vue'
+    import InfiniteScroll from './../partials/InfiniteScroll.vue'
     import Category from './../../api/category'
     import FileService from './../../api/file'
     import toastr from 'toastr'
@@ -82,7 +85,8 @@
         name: 'files',
 
         components: {
-            'file': File
+            'file': File,
+            'infinite-scroll': InfiniteScroll
         },
 
         mounted() {
@@ -93,6 +97,7 @@
 
         data() {
             return {
+                paginator: {},
                 files: [],
                 categories: [],
                 searchText: ''
@@ -110,7 +115,8 @@
         beforeRouteEnter(to, from, next) {
             FileService.GetAll().then(response => {
                 next(vm => {
-                    vm.files = response.data;
+                    vm.paginator = response.data
+                    vm.files = vm.paginator.data
                 })
             }).catch(err => {
                 toastr.error('Cannot fetch files.')
@@ -157,6 +163,13 @@
                     }).bind(this);
                 })
             },
+
+            pulledFiles(paginator) {
+                this.paginator = paginator
+                paginator.data.forEach(file => {
+                    this.files.push(file)
+                })
+            }
         },
 
         watch: {
