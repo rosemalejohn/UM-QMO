@@ -55,6 +55,7 @@
             User.GetAuthenticatedUser().then(response => {
                 this.authUser = response.data;
                 cookie.set('auth_user_id', response.data.id);
+                localStorage.setItem('is_admin', this.authUser.is_admin);
             })
         },
 
