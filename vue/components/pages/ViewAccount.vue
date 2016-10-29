@@ -50,7 +50,7 @@
 	                                                    <th>
 	                                                        <i class="fa fa-file"></i> Filename </th>
 	                                                    <th class="hidden-xs">
-	                                                        <i class="fa fa-question"></i> Size (kb)</th>
+	                                                        <i class="fa fa-question"></i> Size (bytes)</th>
 	                                                    <th>
 	                                                        <i class="fa fa-calendar"></i> Date uploaded </th>
 	                                                    <th></th>
@@ -60,7 +60,7 @@
 	                                                <tr v-for="file in files">
 	                                                    <td>{{ file.filename }}</td>
 	                                                    <td>{{ file.size }}</td>
-	                                                    <td>{{ file.updated_at }}</td>
+	                                                    <td>{{ file.updated_at | date('MMMM Do YYYY, h:mm:ss a') }}</td>
 	                                                    <td>
 	                                                    	<a :href="file.url" download>Download</a>
 	                                                    </td>

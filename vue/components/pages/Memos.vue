@@ -29,7 +29,7 @@
 										<i class="fa fa-trash"></i>
 									</button>
 								</div>
-								<img class="todo-userpic pull-left" :src="memo.user.photo_url ? memo.user.photo_url : '/img/default-photo.jpg'" width="27px" height="27px">
+								<img class="todo-userpic pull-left" :src="memo.user.photo_url || '/img/default-photo.jpg'" width="27px" height="27px">
 								<div class="todo-tasklist-item-title">
 									{{memo.user.name}}
 								</div>
