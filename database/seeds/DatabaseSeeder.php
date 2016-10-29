@@ -33,5 +33,16 @@ class DatabaseSeeder extends Seeder
             'position' => 'Super admin',
             'gender' => 'male',
         ]);
+
+        User::create([
+            'email' => 'user@fake.com',
+            'password' => bcrypt('user'),,
+            'id_number' => '103956',
+            'name' => 'Julie Pantano',
+            'department_id' => null,
+            'type' => 'staff',
+            'position' => 'Staff',
+            'gender' => 'female'
+        ]);
     }
 }
