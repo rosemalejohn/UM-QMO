@@ -46,7 +46,7 @@ class CategoryController extends Controller
             $category->files()->attach($file->id);
         }
 
-        return response()->json($category, 200);
+        return response()->json($category->files, 200);
     }
 
     public function showFiles($id)

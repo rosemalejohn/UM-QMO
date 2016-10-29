@@ -1,7 +1,7 @@
 <template>
-	<div @click="open()" class="tile bg-blue-steel">
+	<div @click="open()" class="tile" :class="color">
 		<div class="tile-body">
-			<i class="fa fa-folder-open-o"></i>
+			<i class="fa fa-folder-o"></i>
 		</div>
 		<div class="tile-object">
 			<div class="name">
@@ -14,12 +14,23 @@
 	</div>
 </template>
 
+<style lang="sass">
+	.tile:hover i:before {
+		content: "\f115"
+	}
+</style>
+
 <script>
 	export default {
 		props: {
 			folder: {
 				type: Object,
 				required: true
+			},
+			color: {
+				type: String,
+				required: false,
+				default: 'bg-blue-steel'
 			}
 		},
 

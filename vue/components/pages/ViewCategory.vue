@@ -121,15 +121,13 @@
                     vm.category = response.data
                 })
             }).catch(err => {
-                toastr.error('Cannot fetch files.')
+                toastr.error('Cannot fetch category files.')
             })
         },
 
         methods: {
             search() {
-                FileService.Search(this.searchText).then(response => {
-                    this.files = response.data;
-                })
+
             },
 
             uploadFiles() {
@@ -151,7 +149,7 @@
                     });
 
                     Category.AddFiles(this.category.id, fileArray).then(response => {
-                        this.files = response.data.files;
+                        this.category.files = response.data;
                     }).catch(err => {
                         toastr.error('Files not uploaded!');
                     }).bind(this);
