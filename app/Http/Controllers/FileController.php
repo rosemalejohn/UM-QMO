@@ -157,7 +157,7 @@ class FileController extends Controller
 
             $excel->sheet('Report', function ($sheet) {
 
-                $files = File::with('user', 'category', 'department')->get();
+                $files = File::with('user', 'department')->get();
 
                 $sheet->loadView('reports.file')->with(compact('files'));
 

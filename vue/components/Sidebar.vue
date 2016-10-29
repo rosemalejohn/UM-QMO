@@ -17,6 +17,13 @@
 		            </a>
 		        </li>
 		        <li>
+		            <a href="#/memos">
+		                <i class="icon-note"></i>
+		                <span class="title">Memo</span>
+		                <span class="arrow "></span>
+		            </a>
+		        </li>
+		        <li>
 		            <a href="#/files">
 		                <i class="icon-folder-alt"></i>
 		                <span class="title">Files</span>
@@ -53,13 +60,6 @@
 		            <a href="#/request">
 		                <i class="icon-folder"></i>
 		                <span class="title">Request</span>
-		                <span class="arrow "></span>
-		            </a>
-		        </li>
-				<li>
-		            <a href="#/memos">
-		                <i class="icon-note"></i>
-		                <span class="title">Memo</span>
 		                <span class="arrow "></span>
 		            </a>
 		        </li>
