@@ -53,6 +53,7 @@
 </template>
 
 <script>
+	import Authorize from './../../services/authorize'
 	import Portlet from './../partials/Portlet.vue'
 	import Request from './../../api/request'
 	import toastr from 'toastr'
@@ -69,6 +70,9 @@
 		},
 
 		beforeRouteEnter(to, from, next) {
+			if (!Authorize.isAdmin()) {
+				next('/403')
+			}
             Request.GetAll().then(response => {
             	next(vm => {
             		vm.requests = response.data;

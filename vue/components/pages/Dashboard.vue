@@ -16,6 +16,7 @@
 </template>
 
 <script>
+	import Authorize from './../../services/authorize'
 	import Stat from './../partials/Stat.vue'
 	import StatService from './../../api/stat'
 
@@ -28,6 +29,9 @@
 		},
 
 		beforeRouteEnter(to, from, next) {
+			if (!Authorize.isAdmin()) {
+				next('/memos')
+			}
 			next(vm => {
 				StatService.GetTotalFilesUploaded().then(response => {
 					vm.files = response.data;

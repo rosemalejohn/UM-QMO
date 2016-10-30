@@ -88,6 +88,7 @@
 </style>
 
 <script>
+	import Authorize from './../../services/authorize'
 	import Portlet from './../partials/Portlet.vue'
 	import swal from 'sweetalert'
 	import User from './../../api/user'
@@ -104,6 +105,10 @@
 		},
 
 		beforeRouteEnter(to, from, next) {
+			if (!Authorize.isAdmin()) {
+				next('/403')
+			}
+
 			let { params: {departmentId} } = to;
 			if (departmentId) {
 				Department.GetUsers(to.params.departmentId).then(response => {

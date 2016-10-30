@@ -76,6 +76,7 @@
 </template>
 
 <script>
+	import Authorize from './../../services/authorize'
 	import Portlet from './../partials/Portlet.vue'
 	import Department from './../../api/department'
 	import toastr from 'toastr'
@@ -91,10 +92,28 @@
 			'department-form': DepartmentForm
 		},
 
-		mounted() {
+		data() {
+			return {
+				checked: [],
+				departments: [],
+				department: {},
+				showDepartmentForm: false,
+				isUpdate: false 
+			}
+		},
 
-			this.fetchDepartments();
-
+		beforeRouteEnter(to, from, next) {
+			if (!Authorize.isAdmin()) {
+				next('/403')
+			}
+			next(vm => {
+				Department.GetAll().then(response => {
+					vm.departments = response.data;
+				}).catch(err => {
+					toastr.error('Cannot fetch departments.');
+				})
+			})
+			
 		},
 
 		methods: {
@@ -102,14 +121,6 @@
 			add() {
 				this.showDepartmentForm = true;
 				this.department = {}
-			},
-
-			fetchDepartments() {
-				Department.GetAll().then(response => {
-					this.departments = response.data;
-				}).catch(err => {
-					toastr.error('Cannot fetch departments.');
-				})
 			},
 
 			editDepartment() {
@@ -147,16 +158,6 @@
 				this.departments.push(department);
 			}
 			
-		},
-
-		data() {
-			return {
-				checked: [],
-				departments: [],
-				department: {},
-				showDepartmentForm: false,
-				isUpdate: false 
-			}
 		},
 
 		events: {

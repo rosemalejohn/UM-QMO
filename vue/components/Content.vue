@@ -40,6 +40,7 @@
 	import Breadcrumbs from './Breadcrumbs.vue'
   import moment from 'moment'
   import Vue from 'vue'
+  import User from './../api/user'
 
 	export default {
 
@@ -47,7 +48,13 @@
 
 		components: {
 			'breadcrumbs': Breadcrumbs
-		}
+		},
+
+    beforeMount() {
+      User.GetAuthenticatedUser().then(response => {
+          cookie.set('auth', response.data);
+      })
+    }
 	}
 
   Vue.filter('date', (value, format) => {
