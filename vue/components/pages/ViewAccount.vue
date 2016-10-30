@@ -58,7 +58,7 @@
 	                                            </thead>
 	                                            <tbody>
 	                                                <tr v-for="file in files">
-	                                                    <td>{{ file.filename }}</td>
+	                                                    <td><a @click="viewFile(file)">{{ file.filename }}</a></td>
 	                                                    <td>{{ file.size }}</td>
 	                                                    <td>{{ file.updated_at | date('MMMM Do YYYY, h:mm:ss a') }}</td>
 	                                                    <td>
@@ -116,6 +116,12 @@
 				toastr.error('User cant be displayed!');
 				next(false);
 			})
+		},
+
+		methods: {
+			viewFile(file) {
+                router.push({name: 'File viewer', params: { file }})
+            }
 		}
 
 	}

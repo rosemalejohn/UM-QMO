@@ -1,8 +1,12 @@
 export default {
 
 	isAdmin() {
-		var auth = JSON.parse(cookie.get('auth'))
-		return auth.is_admin
+		var cookieAuth = cookie.get('auth')
+		if (cookieAuth) {
+			return JSON.parse(cookieAuth).is_admin;
+		} else {
+			window.location.reload();
+		}
 	}
 
 }
