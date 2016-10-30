@@ -25,7 +25,7 @@ Vue.component('app-footer', Footer)
 filepicker.setKey('AHkVcDwF6Q3yYcIB8JNDiz');
 
 window.router = new VueRouter(routes)
-window.cookie = Cookie;																																																																																																																																																																																																																																																																																																			
+window.cookie = Cookie;																																																																																																																																																																																																																																																																																														
 
 const app = new Vue({
 	router

@@ -2,7 +2,7 @@
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 		    <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-		        <li class="">
+		        <li v-if="is_admin" class="">
 		            <router-link :to="{ path: '/' }">
 						<i class="icon-home"></i>
 		                <span class="title">Dashboard</span>
@@ -30,21 +30,21 @@
 		                <span class="arrow "></span>
 		            </router-link>
 		        </li>
-		        <li>
+		        <li v-if="is_admin">
 		            <router-link :to="{ path: '/accounts' }">
 		                <i class="icon-people"></i>
 		                <span class="title">Accounts</span>
 		                <span class="arrow "></span>
 		            </router-link>
 		        </li>
-		        <li>
+		        <li v-if="is_admin">
 		            <router-link :to="{ path: '/departments' }">
 		                <i class="icon-organization"></i>
 		                <span class="title">Departments</span>
 		                <span class="arrow"></span>
 		            </router-link>
 		        </li>
-			    <li>
+			    <li v-if="is_admin">
 		            <router-link :to="{ path: '/request' }">
 		                <i class="icon-folder"></i>
 		                <span class="title">Request</span>
@@ -77,7 +77,8 @@
 
 		computed: {
 			is_admin() {
-				return Boolean(localStorage.getItem('is_admin') == 'true')
+				var auth = JSON.parse(cookie.get('auth'))
+				return auth.is_admin;
 			}
 		}
 

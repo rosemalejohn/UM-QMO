@@ -11,6 +11,7 @@ import Report from './components/pages/Report.vue'
 import Requests from './components/pages/Requests.vue'
 import ChangePasswordForm from './components/pages/ChangePasswordForm.vue'
 import Error404 from './components/errors/404.vue'
+import Error403 from './components/errors/403.vue'
 import ViewFile from './components/pages/ViewFile.vue'
 import Memos from './components/pages/Memos.vue'
 import UploadResources from './components/forms/FilesUpload.vue'
@@ -49,8 +50,8 @@ export default {
 
 		{ path: '/memos', name: 'Memos', component: Memos },
 
+		{ path: '/403', name: 'Unauthorized access', component: Error403 },
 		{ path: '*', 'name': 'Page not found', component: Error404 }
-
 
 	]
 	
