@@ -5,9 +5,9 @@
 				<span slot="title">Accounts</span>
 				<div slot="tools" class="tools">
 					<div class="actions">
-						<a href="#/accounts/new" class="btn btn-circle btn-default btn-sm">
+						<router-link :to="{ path: '/accounts/new' }" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-plus"></i>Add
-						</a>
+						</router-link>
 						<button v-if="checked.length == 1" @click="editAccount()" class="btn btn-circle btn-sm btn-default">
 							<i class="fa fa-edit"></i>Update
 						</button>
