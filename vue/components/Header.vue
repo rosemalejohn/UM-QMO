@@ -2,7 +2,8 @@
 	<div class="page-header md-shadow-z-1-i navbar navbar-fixed-top">
         <div class="page-header-inner container">
             <div class="page-logo">
-                <a href="#/"></a>
+                <router-link :to="{ path: '/' }">
+                </router-link>
                 <div class="menu-toggler sidebar-toggler"></div>
             </div>
             <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
@@ -23,9 +24,9 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#/change-password">
+                                    <router-link :to="{ path: 'change-password' }">
                                         <i class="icon-settings"></i> Change password
-                                    </a>
+                                    </router-link>
                                 </li>
                                 <li class="divider">
                                 </li>

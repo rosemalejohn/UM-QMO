@@ -11,10 +11,10 @@
 				{{ description }}
 			</div>
 		</div>
-		<a class="more" :href="url">
+		<router-link class="more" :to="{ path: url }">
 			View more 
 			<i class="m-icon-swapright m-icon-white"></i>
-		</a>
+		</router-link>
 	</div>
 </template>
 
