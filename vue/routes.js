@@ -18,6 +18,8 @@ import ViewCategory from './components/pages/ViewCategory.vue'
 
 export default {
 
+	mode: 'history',
+
 	routes: [
 		{ path: '/', name: 'Dashboard', component: Dashboard },
 		

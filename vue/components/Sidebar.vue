@@ -3,65 +3,53 @@
 		<div class="page-sidebar navbar-collapse collapse">
 		    <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 		        <li class="">
-		            <a href="#/">
-		                <i class="icon-home"></i>
+		            <router-link :to="{ path: '/' }">
+						<i class="icon-home"></i>
 		                <span class="title">Dashboard</span>
 		                <span class="selected"></span>
-		            </a>
+		            </router-link>
 		        </li> 
 		        <li>
-		            <a href="#/reports">
+		            <router-link :to="{ path: '/reports' }">
 		                <i class="icon-chart"></i>
 		                <span class="title">Reports</span>
 		                <span class="selected"></span>
-		            </a>
+		            </router-link>
 		        </li>
 		        <li>
-		            <a href="#/memos">
+		            <router-link :to="{ path: '/memos' }">
 		                <i class="icon-note"></i>
 		                <span class="title">Memo</span>
 		                <span class="arrow "></span>
-		            </a>
+		            </router-link>
 		        </li>
 		        <li>
-		            <a href="#/files">
+		            <router-link :to="{ path: '/files' }">
 		                <i class="icon-folder-alt"></i>
 		                <span class="title">Files</span>
 		                <span class="arrow "></span>
-		            </a>
-		            <ul class="sub-menu">
-		                <li>
-		                    <a href="ecommerce_index.html">
-		                        <i class="icon-home"></i> Dashboard
-		                    </a>
-		                </li>
-		            </ul>
+		            </router-link>
 		        </li>
 		        <li>
-		            <a href="#/accounts">
+		            <router-link :to="{ path: '/accounts' }">
 		                <i class="icon-people"></i>
 		                <span class="title">Accounts</span>
 		                <span class="arrow "></span>
-		            </a>
-		            <ul class="sub-menu">
-		                <li>
-		                    <a href="#/account/new">Add new</a>
-		                </li>
-		            </ul>
+		            </router-link>
 		        </li>
 		        <li>
-		            <a href="#/departments">
+		            <router-link :to="{ path: '/departments' }">
 		                <i class="icon-organization"></i>
 		                <span class="title">Departments</span>
 		                <span class="arrow"></span>
-		            </a>
+		            </router-link>
 		        </li>
 			    <li>
-		            <a href="#/request">
+		            <router-link :to="{ path: '/request' }">
 		                <i class="icon-folder"></i>
 		                <span class="title">Request</span>
 		                <span class="arrow "></span>
-		            </a>
+		            </router-link>
 		        </li>
 		    </ul>
 		</div>
