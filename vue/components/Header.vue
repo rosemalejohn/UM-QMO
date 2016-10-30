@@ -31,7 +31,7 @@
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a @click="logout()" href="#">
+                                    <a @click="logout()">
                                         <i class="icon-key"></i> Log Out
                                     </a>
                                 </li>
