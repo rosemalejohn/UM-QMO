@@ -63,18 +63,6 @@
 
 		name: 'app-sidebar',
 
-		mounted() {
-			Department.GetAll().then(response => {
-				this.departments = response.data;
-			})
-		},
-
-		data() {
-			return {
-				departments: [],
-			}
-		},
-
 		computed: {
 			is_admin() {
 				var auth = JSON.parse(cookie.get('auth'))
