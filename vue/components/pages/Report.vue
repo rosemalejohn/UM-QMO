@@ -29,6 +29,8 @@
 
 	export default {
 
+		name: 'report',
+
 		data() {
 			return {
 				dataProvider: []

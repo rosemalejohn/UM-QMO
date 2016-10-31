@@ -41,6 +41,7 @@ elixir(mix => {
             'pages/profile.scss',
             'pages/portfolio.scss',
             'pages/error.scss',
+            'pages/todo.scss',
         ], 'public/css/app.css')
 
         .sass([

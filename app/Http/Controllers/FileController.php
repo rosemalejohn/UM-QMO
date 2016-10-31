@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Carbon\Carbon;
+use Excel;
 use Illuminate\Http\Request;
 use stdClass;
-use Excel;
 use Validator;
 
 class FileController extends Controller
@@ -19,7 +19,7 @@ class FileController extends Controller
 
     public function index()
     {
-        $files = File::all();
+        $files = File::paginate(10);
 
         return response()->json($files);
     }
@@ -153,11 +153,11 @@ class FileController extends Controller
     public function excelReport()
     {
 
-        Excel::create('File Report', function($excel) {
+        Excel::create('File Report', function ($excel) {
 
-            $excel->sheet('Report', function($sheet) {
+            $excel->sheet('Report', function ($sheet) {
 
-                $files = File::with('user','category','department')->get();
+                $files = File::with('user', 'department')->get();
 
                 $sheet->loadView('reports.file')->with(compact('files'));
 

@@ -1,7 +1,7 @@
 <template>
 	<div class="dashboard-stat" :class="color">
 		<div class="visual">
-			<i class="fa fa-dashboard" :class="icon"></i>
+			<i :class="icon"></i>
 		</div>
 		<div class="details">
 			<div class="number">
@@ -11,15 +11,18 @@
 				{{ description }}
 			</div>
 		</div>
-		<a class="more" :href="url">
+		<router-link class="more" :to="{ path: url }">
 			View more 
 			<i class="m-icon-swapright m-icon-white"></i>
-		</a>
+		</router-link>
 	</div>
 </template>
 
 <script>
 	export default {
+
+		name: 'stat',
+
 		props: {
 			url: {
 				type: String,

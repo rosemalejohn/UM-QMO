@@ -23,6 +23,8 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/', 'UserController@store');
     Route::get('/count', 'UserController@usersCount');
     Route::get('/{id}', 'UserController@show');
+    Route::get('/{id}/files', 'UserController@showFiles');
+    Route::put('/update-password', 'UserController@updatePassword');
     Route::put('/{id}', 'UserController@update');
     Route::post('/delete-multiple', 'UserController@destroyMultiple');
     // Route::delete('/{id}', 'UserController@destroy');
@@ -36,6 +38,7 @@ Route::group(['prefix' => 'categories'], function () {
 
     Route::get('/', 'CategoryController@index');
     Route::get('/{id}/files', 'CategoryController@showFiles');
+    Route::post('/{id}/files', 'CategoryController@storeFiles');
     Route::post('/', 'CategoryController@store');
     Route::put('/{id}', 'CategoryController@update');
     Route::delete('/{id}', 'CategoryController@destroy');
@@ -78,4 +81,33 @@ Route::group(['prefix' => 'files'], function () {
     Route::get('/graph-uploaded-yearly/{year}', 'FileController@report');
     Route::get('/excel-report/download', 'FileController@excelReport');
 
+});
+
+Route::group(['prefix' => 'requests'], function () {
+
+    Route::get('/', 'RequestFormController@index');
+    Route::get('/done', 'RequestFormController@showDone');
+    Route::get('/undone', 'RequestFormController@showUndone');
+    Route::get('/{id}', 'RequestFormController@show');
+    Route::put('/{id}', 'RequestFormController@update');
+    Route::patch('/{id}/done', 'RequestFormController@done');
+    Route::patch('/{id}/undone', 'RequestFormController@undone');
+    Route::delete('/{id}', 'RequestFormController@destroy');
+    Route::delete('/{id}/restore', 'RequestFormController@restore');
+    Route::delete('/{id}/remove', 'RequestFormController@remove');
+    Route::post('/approve-multiple', 'RequestFormController@approveMultiple');
+});
+
+Route::group(['prefix' => 'memos'], function () {
+
+    Route::get('/', 'MemoController@index');
+    Route::get('/count', 'MemoController@memosCount');
+    Route::get('/{id}', 'MemoController@show');
+    Route::get('/user/{id}', 'MemoController@showByUser');
+    Route::post('/', 'MemoController@store');
+    Route::put('/{id}', 'MemoController@update');
+    Route::delete('/{id}', 'MemoController@destroy');
+    Route::delete('/delete-multiple', 'MemoController@destroyMultiple');
+    Route::delete('/{id}/restore', 'MemoController@restore');
+    Route::delete('/{id}/remove', 'MemoController@remove');
 });

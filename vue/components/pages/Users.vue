@@ -5,9 +5,9 @@
 				<span slot="title">Accounts</span>
 				<div slot="tools" class="tools">
 					<div class="actions">
-						<a href="#/accounts/new" class="btn btn-circle btn-default btn-sm">
+						<router-link :to="{ path: '/accounts/new' }" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-plus"></i>Add
-						</a>
+						</router-link>
 						<button v-if="checked.length == 1" @click="editAccount()" class="btn btn-circle btn-sm btn-default">
 							<i class="fa fa-edit"></i>Update
 						</button>
@@ -88,6 +88,7 @@
 </style>
 
 <script>
+	import Authorize from './../../services/authorize'
 	import Portlet from './../partials/Portlet.vue'
 	import swal from 'sweetalert'
 	import User from './../../api/user'
@@ -97,11 +98,17 @@
 
 	export default {
 
+		name: 'users',
+
 		components: {
-			Portlet
+			'portlet': Portlet
 		},
 
 		beforeRouteEnter(to, from, next) {
+			if (!Authorize.isAdmin()) {
+				next('/403')
+			}
+
 			let { params: {departmentId} } = to;
 			if (departmentId) {
 				Department.GetUsers(to.params.departmentId).then(response => {

@@ -9,13 +9,12 @@ class Category extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ["name"]; 
+    protected $fillable = ["name", "description"];
 
     protected $dates = ['deleted_at'];
 
-
     public function files()
     {
-        return $this->hasMany(File::class);
+        return $this->belongsToMany(File::class, 'category_files');
     }
 }

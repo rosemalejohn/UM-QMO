@@ -15,6 +15,8 @@ class DepartmentController extends Controller
 
     public function index()
     {
+        $this->authorize('admin');
+
         $departments = Department::all();
 
         return response()->json($departments);
@@ -35,6 +37,8 @@ class DepartmentController extends Controller
     {
         $departmentWithFiles = Department::with('files')->findOrFail($id);
 
+        $this->authorize('canViewFiles', $departmentWithFiles);
+
         return response()->json($departmentWithFiles);
     }
 
@@ -42,11 +46,14 @@ class DepartmentController extends Controller
     {
         $departmentWithUsers = Department::with('users.department')->findOrFail($id);
 
+        $this->authorize('canViewFiles', $departmentWithUsers);
+
         return response()->json($departmentWithUsers);
     }
 
     public function departmentsCount()
     {
+        
         $count = Department::all()->count();
 
         return response()->json($count);

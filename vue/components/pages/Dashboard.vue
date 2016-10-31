@@ -1,46 +1,53 @@
 <template>
-	<div class="row" v-if="is_admin">
-		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
-			<stat color="blue-madison" icon="fa fa-briefcase" description="Files uploaded" :stat="files" url="#/files"></stat>
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 margin-bottom-10">
+			<stat color="blue-madison" icon="fa fa-briefcase" description="Files uploaded" :stat="files" url="files"></stat>
 		</div>
-		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-			<stat color="red-intense" icon="fa fa-users" description="User registered" :stat="users" url="#/accounts"></stat>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			<stat color="red-intense" icon="fa fa-users" description="User registered" :stat="users" url="accounts"></stat>
 		</div>
-		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-			<stat color="green-haze" icon="fa fa-dashboard" description="Departments" :stat="departments" url="#/departments"></stat>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			<stat color="green-haze" icon="fa fa-dashboard" description="Departments" :stat="departments" url="departments"></stat>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			<stat color="purple-soft" icon="fa fa-sticky-note-o" description="Memos" :stat="memos" url="memos"></stat>
 		</div>
 	</div>
 </template>
 
 <script>
+	import Authorize from './../../services/authorize'
 	import Stat from './../partials/Stat.vue'
 	import StatService from './../../api/stat'
 
 	export default {
+
+		name: 'dashboard',
+
 		components: {
-			Stat
-		},
-
-		created() {
-			StatService.GetTotalFilesUploaded().then(response => {
-				this.files = response.data;
-			})
-
-			StatService.GetTotalUsers().then(response => {
-				this.users = response.data;
-			})
-
-			StatService.GetTotalDepartments().then(response => {
-				this.departments = response.data;
-			})
+			'stat': Stat
 		},
 
 		beforeRouteEnter(to, from, next) {
+			if (!Authorize.isAdmin()) {
+				next('/memos')
+			}
 			next(vm => {
-				if (vm.is_admin) {
-					next(true);
-				}
-				router.push('request');
+				StatService.GetTotalFilesUploaded().then(response => {
+					vm.files = response.data;
+				})
+
+				StatService.GetTotalUsers().then(response => {
+					vm.users = response.data;
+				})
+
+				StatService.GetTotalDepartments().then(response => {
+					vm.departments = response.data;
+				})
+
+				StatService.GetTotalMemos().then(response => {
+					vm.memos = response.data;
+				})
 			})
 		},
 
@@ -48,7 +55,8 @@
 			return {
 				files: 0,
 				users: 0,
-				departments: 0
+				departments: 0,
+				memos: 0
 			}
 		},
 

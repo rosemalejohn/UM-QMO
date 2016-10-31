@@ -15,6 +15,8 @@
 <script>
 	export default {
 
+		name: 'portlet',
+
 		props: {
 			color: {
 				type: String,

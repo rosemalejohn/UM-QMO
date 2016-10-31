@@ -25,7 +25,7 @@
 		<th></th>
 		<th>Filename</th>
 		<th>Description</th>
-		<th>size</th>
+		<th>Size</th>
 		<th>Category</th>
 		<th>Department</th>
 		<th>Uploaded by</th>

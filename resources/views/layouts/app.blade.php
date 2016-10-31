@@ -12,7 +12,7 @@
     <meta content="{{ config('meta.description') }}" name="description" />
     <meta content="{{ config('meta.author') }}" name="author" />
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
@@ -32,6 +32,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/toastr/2.1.3/toastr.min.css">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="/css/animate.css">
 
     <link rel="stylesheet" href="/css/app.css">
@@ -48,7 +50,22 @@
 <body class="page-md page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed">
 
     <div id="app">
-        <app></app>
+        <app-header></app-header>
+
+        <div class="clearfix"></div>
+
+        <div class="container">
+
+            <div class="page-container">
+
+                <app-sidebar></app-sidebar>
+
+                <app-content></app-content>
+
+            </div>
+
+            <app-footer></app-footer>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -77,6 +94,8 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/amcharts/3.13.0/serial.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="/js/app-theme.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="/js/app.js"></script>
@@ -85,6 +104,8 @@
         jQuery(document).ready(function() {
             Metronic.init();
             Layout.init();
+
+            jQuery('a.attachment').fancybox();
         });
     </script>
 </body>

@@ -6,8 +6,8 @@ export default {
 		return Vue.http.get('/api/categories');
 	},
 
-	GetFiles(category) {
-		return Vue.http.get(`/api/categories/${category.id}/files`);
+	GetFiles(category_id) {
+		return Vue.http.get(`/api/categories/${category_id}/files`);
 	},
 
 	Add(category) {
@@ -18,8 +18,12 @@ export default {
 		return Vue.http.put(`/api/categories/${category.id}`, category);
 	},
 
-	Delete(category) {
-		return Vue.http.delete(`/api/categories/${category.id}`);
-	}
+	Delete(category_id) {
+		return Vue.http.delete(`/api/categories/${category_id}`);
+	},
+
+	AddFiles(category_id, fileArray) {
+		return Vue.http.post(`/api/categories/${category_id}/files`, { fileArray });
+	} 
 
 }

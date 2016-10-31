@@ -2,7 +2,8 @@
 	<div class="page-header md-shadow-z-1-i navbar navbar-fixed-top">
         <div class="page-header-inner container">
             <div class="page-logo">
-                <a href="#/"></a>
+                <router-link :to="{ path: '/' }">
+                </router-link>
                 <div class="menu-toggler sidebar-toggler"></div>
             </div>
             <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
@@ -23,14 +24,14 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#/change-password">
+                                    <router-link :to="{ path: 'change-password' }">
                                         <i class="icon-settings"></i> Change password
-                                    </a>
+                                    </router-link>
                                 </li>
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a @click="logout()" href="#">
+                                    <a @click="logout()">
                                         <i class="icon-key"></i> Log Out
                                     </a>
                                 </li>
@@ -43,18 +44,22 @@
     </div>
 </template>
 
+<style lang="sass">
+    .img-circle {
+        width: 39px !important;
+    }
+</style>
+
 <script>
     import swal from 'sweetalert'
     import User from './../api/user'
 
     export default {
 
-        created() {
-            console.log(this.$root);
-            User.GetAuthenticatedUser().then(response => {
-                this.authUser = response.data;
-                cookie.set('auth_user_id', response.data.id);
-            })
+        name: 'app-header',
+
+        mounted() {
+            this.authUser = JSON.parse(cookie.get('auth'))
         },
 
         data() {
@@ -75,6 +80,7 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true 
                 }, () => {
+                    cookie.remove('auth')
                     User.Logout().then(response => {
                         window.location.reload()
                     }).catch(err => {

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -42,6 +44,13 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function showFiles($id)
+    {
+        $files = File::where('user_id', $id)->get();
+
+        return response()->json($files);
+    }
+
     public function update(Request $request, $id)
     {
         $this->authorize('admin');
@@ -57,6 +66,19 @@ class UserController extends Controller
         $user->update($request->all());
 
         return response()->json($user);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required_with:current_password|confirmed',
+        ]);
+
+        $user = Auth::user();
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return response()->json($user, 201);
     }
 
     public function destroy($id)

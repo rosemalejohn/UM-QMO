@@ -3,7 +3,7 @@
 		<div class="col-md-12" v-if="showDepartmentForm">
 			<portlet>
 				<span slot="title">Add department</span>
-				<department-form @cancel="showDepartmentForm = false" :is-update="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
+				<department-form @submit="newDepartment" @cancel="showDepartmentForm = false" :is-update="isUpdate" :show.sync="showDepartmentForm" :department.sync="department"></department-form>
 			</portlet>
 		</div>
 		<div class="col-md-12">
@@ -58,7 +58,7 @@
 								{{ department.users_count }}
 							</td>
 							<td class="center">
-								{{ department.created_at }}
+								{{ department.created_at | date('MMMM Do YYYY, h:mm:ss a') }}
 							</td>
 							<td>
 								<router-link class="btn btn-xs btn-success" :to="{ name: 'Department files', params: { departmentId: department.id }}"><i class="fa fa-file"></i></router-link>
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+	import Authorize from './../../services/authorize'
 	import Portlet from './../partials/Portlet.vue'
 	import Department from './../../api/department'
 	import toastr from 'toastr'
@@ -83,15 +84,36 @@
 	import swal from 'sweetalert'
 
 	export default {
+
+		name: 'departments',
 		
 		components: {
-			Portlet, DepartmentForm
+			'portlet': Portlet, 
+			'department-form': DepartmentForm
 		},
 
-		created() {
+		data() {
+			return {
+				checked: [],
+				departments: [],
+				department: {},
+				showDepartmentForm: false,
+				isUpdate: false 
+			}
+		},
 
-			this.fetchDepartments();
-
+		beforeRouteEnter(to, from, next) {
+			if (!Authorize.isAdmin()) {
+				next('/403')
+			}
+			next(vm => {
+				Department.GetAll().then(response => {
+					vm.departments = response.data;
+				}).catch(err => {
+					toastr.error('Cannot fetch departments.');
+				})
+			})
+			
 		},
 
 		methods: {
@@ -99,14 +121,6 @@
 			add() {
 				this.showDepartmentForm = true;
 				this.department = {}
-			},
-
-			fetchDepartments() {
-				Department.GetAll().then(response => {
-					this.departments = response.data;
-				}).catch(err => {
-					toastr.error('Cannot fetch departments.');
-				})
 			},
 
 			editDepartment() {
@@ -138,17 +152,12 @@
                     });
                 });
 			},
-			
-		},
 
-		data() {
-			return {
-				checked: [],
-				departments: [],
-				department: {},
-				showDepartmentForm: false,
-				isUpdate: false 
+			newDepartment(department) {
+				this.department = {};
+				this.departments.push(department);
 			}
+			
 		},
 
 		events: {

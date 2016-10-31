@@ -2,69 +2,54 @@
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 		    <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-		        <li class="">
-		            <a href="#/">
-		                <i class="icon-home"></i>
+		        <li v-if="is_admin" class="">
+		            <router-link :to="{ path: '/' }">
+						<i class="icon-home"></i>
 		                <span class="title">Dashboard</span>
 		                <span class="selected"></span>
-		            </a>
+		            </router-link>
 		        </li> 
 		        <li>
-		            <a href="#/reports">
+		            <router-link :to="{ path: '/reports' }">
 		                <i class="icon-chart"></i>
 		                <span class="title">Reports</span>
 		                <span class="selected"></span>
-		            </a>
+		            </router-link>
 		        </li>
 		        <li>
-		            <a href="#/files">
+		            <router-link :to="{ path: '/memos' }">
+		                <i class="icon-note"></i>
+		                <span class="title">Memo</span>
+		                <span class="arrow "></span>
+		            </router-link>
+		        </li>
+		        <li>
+		            <router-link :to="{ path: '/files' }">
 		                <i class="icon-folder-alt"></i>
 		                <span class="title">Files</span>
 		                <span class="arrow "></span>
-		            </a>
-		            <ul class="sub-menu">
-		                <li>
-		                    <a href="ecommerce_index.html">
-		                        <i class="icon-home"></i> Dashboard
-		                    </a>
-		                </li>
-		            </ul>
+		            </router-link>
 		        </li>
-		        <li>
-		            <a href="#/accounts">
+		        <li v-if="is_admin">
+		            <router-link :to="{ path: '/accounts' }">
 		                <i class="icon-people"></i>
 		                <span class="title">Accounts</span>
 		                <span class="arrow "></span>
-		            </a>
-		            <ul class="sub-menu">
-		                <li>
-		                    <a href="#/account/new">Add new</a>
-		                </li>
-		            </ul>
+		            </router-link>
 		        </li>
 		        <li v-if="is_admin">
-		            <a href="#/departments">
+		            <router-link :to="{ path: '/departments' }">
 		                <i class="icon-organization"></i>
 		                <span class="title">Departments</span>
 		                <span class="arrow"></span>
-		            </a>
-		            <ul class="sub-menu">
-		            	<li>
-		                    <a href="">Add department</a>
-		                </li>
-		                <li v-for="department in departments">
-		                    <router-link 
-		                    	:to="{name: 'Show department', params: {departmentId: department.id}}"
-		                    	>{{ department.name }}</router-link>
-		                </li>
-		            </ul>
+		            </router-link>
 		        </li>
-			    <li>
-		            <a href="#/">
+			    <li v-if="is_admin">
+		            <router-link :to="{ path: '/request' }">
 		                <i class="icon-folder"></i>
 		                <span class="title">Request</span>
 		                <span class="arrow "></span>
-		            </a>
+		            </router-link>
 		        </li>
 		    </ul>
 		</div>
@@ -76,22 +61,12 @@
 
 	export default {
 
-
-		created() {
-			Department.GetAll().then(response => {
-				this.departments = response.data;
-			})
-		},
-
-		data() {
-			return {
-				departments: [],
-			}
-		},
+		name: 'app-sidebar',
 
 		computed: {
 			is_admin() {
-				return Boolean(localStorage.getItem('is_admin') == 'true')
+				var auth = JSON.parse(cookie.get('auth'))
+				return auth.is_admin;
 			}
 		}
 

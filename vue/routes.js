@@ -8,16 +8,27 @@ import Profile from './components/pages/ViewAccount.vue'
 import Departments from './components/pages/Departments.vue'
 import DepartmentForm from './components/pages/DepartmentForm.vue'
 import Report from './components/pages/Report.vue'
-import RequestForm from './components/pages/RequestForm.vue'
+import Requests from './components/pages/Requests.vue'
 import ChangePasswordForm from './components/pages/ChangePasswordForm.vue'
 import Error404 from './components/errors/404.vue'
+import Error403 from './components/errors/403.vue'
+import ViewFile from './components/pages/ViewFile.vue'
+import Memos from './components/pages/Memos.vue'
+import UploadResources from './components/forms/FilesUpload.vue'
+import ViewCategory from './components/pages/ViewCategory.vue'
 
 export default {
+
+	mode: 'history',
 
 	routes: [
 		{ path: '/', name: 'Dashboard', component: Dashboard },
 		
 		{ path: '/files', name: 'Files', component: Files },
+		{ path: '/files/view', name: 'File viewer', component: ViewFile },
+		{ path: '/files/resources', name: 'Upload resources', component: UploadResources },
+
+		{ path: '/categories/:categoryId', name: 'Show category', component: ViewCategory},
 
 		{ path: '/profile', name: 'Profile', component: Profile },
 
@@ -33,10 +44,13 @@ export default {
 
 		{ path: '/reports', name: 'Reports', component: Report },
 
-		{ path: '/request', name: 'Request', component: RequestForm },
+		{ path: '/request', name: 'Request', component: Requests },
 
 		{ path: '/change-password', name: 'Change password', component: ChangePasswordForm },
 
+		{ path: '/memos', name: 'Memos', component: Memos },
+
+		{ path: '/403', name: 'Unauthorized access', component: Error403 },
 		{ path: '*', 'name': 'Page not found', component: Error404 }
 
 	]

@@ -96,8 +96,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'school_year' => [
+            'date_format' => 'The school year must be a valid year.',
         ],
     ],
 

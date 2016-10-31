@@ -11,12 +11,19 @@
 |
  */
 
-Route::group(['middleware' => 'auth'], function () {
+Auth::routes();
 
-    Route::get('/', function () {
-        return view('layouts.app');
-    });
+Route::group(['prefix' => 'request-form'], function () {
+
+    Route::get('/', 'RequestFormController@create');
+    Route::post('/', 'RequestFormController@store');
 
 });
 
-Auth::routes();
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/{vue_capture?}', function () {
+        return view('layouts.app');
+    })->where('vue_capture', '[\/\w\.-]*');
+
+});
