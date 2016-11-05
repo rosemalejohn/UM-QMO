@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\User;
 
 class Memo extends Model
 {
@@ -17,5 +18,10 @@ class Memo extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeTwoDaysOld($query)
+    {
+        return $query->where('created_at', '>=', Carbon::now()->subDays(2));
     }
 }

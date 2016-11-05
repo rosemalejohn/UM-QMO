@@ -15,7 +15,7 @@ class MemoController extends Controller
 
     public function index()
     {
-        $memos = Memo::with('user')->latest()->paginate(10);
+        $memos = Memo::with('user')->twoDaysOld()->latest()->paginate(10);
 
         return response()->json($memos);
     }
@@ -26,7 +26,7 @@ class MemoController extends Controller
 
         $this->validateMemo($request);
 
-        $newMemo = Memo::create($request->all());
+        $newMemo = auth()->user()->memos()->create($request->all());
 
         return response()->json($newMemo->load('user'), 201);
     }

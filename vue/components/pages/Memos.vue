@@ -98,7 +98,7 @@
 				paginator: {},
 				memos: [],
 				memo:{},
-				authenticated_user_id:  cookie.get('auth_user_id'),
+				authenticated_user_id:  JSON.parse(cookie.get('auth')).id,
 				showMemoForm:false,
 				isUpdate:false,
 				loading: false
@@ -107,7 +107,7 @@
 
 		computed: {
 			is_admin() {
-				return Boolean(localStorage.getItem('is_admin') == 'true')
+				return Boolean(JSON.parse(cookie.get('auth')).is_admin)
 			}
 		},
 
