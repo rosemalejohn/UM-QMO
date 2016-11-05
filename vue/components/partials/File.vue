@@ -3,13 +3,10 @@
         <img class="img-responsive" :src="file.url || '/img/default-photo.jpg'" :alt="file.filename">
         <div class="mix-details">
             <h4>{{ file.filename }}</h4>
-            <a class="mix-link" :href="file.url" download>
-                <i class="fa fa-download"></i>
-            </a>
             <a v-on:click="view(file)" class="mix-link">
             	<i class="fa fa-search"></i>
             </a>
-            <a v-on:click="remove" class="mix-preview fancybox-button" title="Project Name" data-rel="fancybox-button">
+            <a v-if="authorized" v-on:click="remove" class="mix-preview fancybox-button" title="Project Name" data-rel="fancybox-button">
             	<i class="fa fa-trash"></i>
             </a>
         </div>
@@ -63,6 +60,16 @@
 
             view(file) {
                 router.push({name: 'File viewer', params: { file }})
+            }
+        },
+
+        computed: {
+            authorized() {
+                let user = JSON.parse(cookie.get('auth'))
+                if (user && (this.file.user_id == user.id || user.is_admin)) {
+                    return true;
+                }
+                return false;
             }
         },
 

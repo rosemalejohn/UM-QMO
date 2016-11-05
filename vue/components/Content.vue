@@ -5,7 +5,7 @@
 
             <breadcrumbs></breadcrumbs>
 
-            <transition name="fade">
+            <transition>
                 <keep-alive>
             	   <router-view></router-view>
                 </keep-alive>

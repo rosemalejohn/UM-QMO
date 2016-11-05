@@ -23,14 +23,14 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('admin');
+        $this->authorize('canUploadFiles');
 
         $this->validateCategory($request);
 
         $newCategory = Category::create($request->all());
 
         foreach ($request->fileArray as $file) {
-            $file = File::create($file);
+            $file = auth()->user()->files()->create($file);
             $newCategory->files()->attach($file->id);
         }
 

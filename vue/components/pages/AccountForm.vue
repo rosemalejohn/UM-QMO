@@ -125,7 +125,7 @@
 								</div>
 							</div>
 							<button type="submit" class="btn btn-success">{{ isUpdate ? 'Update account' : 'Save account' }}</button>
-							<button type="button" class="btn btn-default">Cancel</button>
+							<button @click="cancel" type="button" class="btn btn-default">Cancel</button>
 						</div>
 					</div>
 				</div>
@@ -208,6 +208,10 @@
 				Department.GetAll().then(response => {
 					this.departments = response.data;
 				})
+			},
+
+			cancel() {
+				window.history.back()
 			}
 
 		}

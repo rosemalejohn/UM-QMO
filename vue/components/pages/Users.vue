@@ -76,7 +76,7 @@
 									
 									<button type="button" class="btn btn-default btn-xs"
 										:class="{'btn-primary':user.can_upload_files}"
-										v-on:click="toggleCanUploadFiles(user,$index)">
+										@click="toggleCanUploadFiles(user)">
 									 	<i class="icon-ban"></i>
 									 	<span v-if="user.can_upload_files">Authorize</span>
 									 	<span v-else>Unauthorize</span>
@@ -186,11 +186,11 @@
                 });
 			},
 
-			toggleCanUploadFiles(user,$index){
+			toggleCanUploadFiles(user){
 				User.ToggleCanUploadFiles(user.id)
 					.then(response => {
+						user.can_upload_files = !user.can_upload_files;
 						toastr.success('User authorization toggled!');
-						this.users[$index] = response.data;
 					})
 					.catch( () => {
 						toastr.error('Opss... Something went wrong!');
