@@ -43,10 +43,11 @@
 								Department
 							</th>
 							<th>Account type</th>
+							<th>Can Upload Files</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="odd gradeX" v-for="user in users">
+						<tr class="odd gradeX" v-for="(user,$index) in users">
 							<td>
 								<input v-model="checked" type="checkbox" class="checkboxes" :value="user.id"/>
 							</td>
@@ -70,6 +71,18 @@
 								{{ user.department ? user.department.name : ''  }}
 							</td>
 							<td>{{ user.type }}</td>
+							<td>
+								<div v-if="user.type != 'admin'">
+									
+									<button type="button" class="btn btn-default btn-xs"
+										:class="{'btn-primary':user.can_upload_files}"
+										v-on:click="toggleCanUploadFiles(user,$index)">
+									 	<i class="icon-ban"></i>
+									 	<span v-if="user.can_upload_files">Authorize</span>
+									 	<span v-else>Unauthorize</span>
+									</button>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -171,6 +184,17 @@
                     	toastr.success('Users deleted!')
                     });
                 });
+			},
+
+			toggleCanUploadFiles(user,$index){
+				User.ToggleCanUploadFiles(user.id)
+					.then(response => {
+						toastr.success('User authorization toggled!');
+						this.users[$index] = response.data;
+					})
+					.catch( () => {
+						toastr.error('Opss... Something went wrong!');
+					});
 			}
 		}
 

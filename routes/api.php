@@ -31,6 +31,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::delete('/{id}/restore', 'UserController@restore');
     Route::delete('/{id}/remove', 'UserController@remove');
     Route::get('/trashed', 'UserController@trashed');
+    Route::patch('/{id}/toggle-can-upload-files','UserController@toggleCanUploadFiles');
 
 });
 

@@ -40,6 +40,10 @@ export default {
 
 	GetFiles(user_id) {
 		return Vue.http.get(`/api/users/${user_id}/files`);
+	},
+
+	ToggleCanUploadFiles(user_id){
+		return Vue.http.patch(`/api/users/${user_id}/toggle-can-upload-files`);
 	}
 
 }
