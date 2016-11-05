@@ -52,7 +52,6 @@
 
     created() {
       User.GetAuthenticatedUser().then(response => {
-          console.log('User fetched!')
           cookie.set('auth', response.data);
       })
     }

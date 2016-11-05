@@ -36,7 +36,6 @@
 					vm.file = to.params.file
 				})
 			}
-			
 			next(false)
 		},
 
