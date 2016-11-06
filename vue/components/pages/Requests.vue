@@ -75,7 +75,7 @@
 			}
             Request.GetAll().then(response => {
             	next(vm => {
-            		vm.requests = response.data;
+            		vm.paginator = response.data;
             	});
             }).catch(err => {
             	toastr.error('Cannot load requests!');
