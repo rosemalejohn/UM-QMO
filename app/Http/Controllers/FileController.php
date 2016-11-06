@@ -30,7 +30,7 @@ class FileController extends Controller
 
         $this->validateFile($request->all());
 
-        $newFile = File::create($request->all());
+        $newFile = auth()->user()->files()->create($request->all());
 
         return response()->json($newFile, 201);
     }
@@ -45,7 +45,7 @@ class FileController extends Controller
 
         }
 
-        $newFiles = File::insert($request->fileArray);
+        $newFiles = auth()->user()->files()->insert($request->fileArray);
 
         return response()->json($newFiles, 201);
     }
@@ -61,10 +61,10 @@ class FileController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
         $file = File::findOrFail($id);
 
-        $this->authorize('canUpdateFiles',$file);
+        $this->authorize('canUpdateFiles', $file);
 
         $this->validateFile($request->all());
 
