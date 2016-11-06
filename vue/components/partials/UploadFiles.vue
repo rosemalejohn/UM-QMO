@@ -32,7 +32,7 @@
                 }, fileArray => { 
                     fileArray = _.map(fileArray, (file) => {
                         var currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-                        file['user_id'] = parseInt(Cookie.get('auth_user_id'));
+                        file['user_id'] = JSON.parse(cookie.get('auth')).id;
                         file['description'] = 'Test description';
                         file['created_at'] = currentDateTime;
                         file['updated_at'] = currentDateTime;
