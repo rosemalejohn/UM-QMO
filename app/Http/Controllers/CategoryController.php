@@ -51,7 +51,7 @@ class CategoryController extends Controller
 
     public function showFiles($id)
     {
-        $categoryWithFiles = Category::with('files')->findOrFail($id);
+        $categoryWithFiles = Category::with('files')->orderBy('created_at')->findOrFail($id);
 
         return response()->json($categoryWithFiles);
     }
