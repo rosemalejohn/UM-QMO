@@ -46,7 +46,7 @@
                     <p>No request. You are done for today.</p>
                 </div>
 
-                <infinite-scroll :paginator="paginator" @fetched="requestsPulled"></infinite-scroll>
+                <infinite-scroll :paginator.sync="paginator" @fetched="requestsPulled"></infinite-scroll>
 			</portlet>
 		</div>
 	</div>
@@ -75,7 +75,8 @@
 			}
             Request.GetAll().then(response => {
             	next(vm => {
-            		vm.requests = response.data;
+            		vm.paginator = response.data;
+            		vm.requests = response.data.data;
             	});
             }).catch(err => {
             	toastr.error('Cannot load requests!');
