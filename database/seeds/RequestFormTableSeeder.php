@@ -11,6 +11,6 @@ class RequestFormTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\RequestForm::class, 100)->create();
+        factory(App\Models\RequestForm::class, 20)->create();
     }
 }
