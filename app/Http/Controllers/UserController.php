@@ -129,6 +129,17 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function toggleCanUploadFiles($user_id)
+    {
+        $this->authorize('admin');
+        
+        $user = User::findOrFail($user_id);
+        $user->can_upload_files = !$user->can_upload_files;
+        $user->save();
+
+        return response()->json($user); 
+    }
+
     private function validateUser(Request $request, $id = null)
     {
 

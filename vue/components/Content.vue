@@ -5,7 +5,7 @@
 
             <breadcrumbs></breadcrumbs>
 
-            <transition name="fade">
+            <transition>
                 <keep-alive>
             	   <router-view></router-view>
                 </keep-alive>
@@ -52,7 +52,6 @@
 
     created() {
       User.GetAuthenticatedUser().then(response => {
-          console.log('User fetched!')
           cookie.set('auth', response.data);
       })
     }

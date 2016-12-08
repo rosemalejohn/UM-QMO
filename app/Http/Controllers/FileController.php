@@ -26,18 +26,18 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('admin');
+        $this->authorize('canUploadFiles');
 
         $this->validateFile($request->all());
 
-        $newFile = File::create($request->all());
+        $newFile = auth()->user()->files()->create($request->all());
 
         return response()->json($newFile, 201);
     }
 
     public function storeMultiple(Request $request)
     {
-        $this->authorize('admin');
+        $this->authorize('canUploadFiles');
 
         foreach ($request->fileArray as $key => $file) {
 
@@ -45,7 +45,7 @@ class FileController extends Controller
 
         }
 
-        $newFiles = File::insert($request->fileArray);
+        $newFiles = auth()->user()->files()->insert($request->fileArray);
 
         return response()->json($newFiles, 201);
     }
@@ -61,9 +61,10 @@ class FileController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->authorize('admin');
 
         $file = File::findOrFail($id);
+
+        $this->authorize('canUpdateFiles', $file);
 
         $this->validateFile($request->all());
 

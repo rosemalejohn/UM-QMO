@@ -45,6 +45,17 @@ class DatabaseSeeder extends Seeder
             'gender' => 'female',
         ]);
 
+        User::create([
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
+            'id_number' => '138193',
+            'name' => 'Admin',
+            'department_id' => null,
+            'type' => 'admin',
+            'position' => 'Admin',
+            'gender' => 'female',
+        ]);
+
         $this->call(DepartmentsTableSeeder::class);
         $this->call(MemosTableSeeder::class);
         $this->call(RequestFormTableSeeder::class);

@@ -86,7 +86,6 @@
     import toastr from 'toastr'
     import _ from 'lodash'
     import User from './../../api/user'
-    import Cookie from 'js-cookie'
     import moment from 'moment'
     import swal from 'sweetalert'
 
@@ -127,7 +126,7 @@
 
         methods: {
             search() {
-
+                
             },
 
             uploadFiles() {
@@ -136,7 +135,7 @@
                 }, fileArray => { 
                     fileArray = _.map(fileArray, (file) => {
                         var currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-                        file['user_id'] = Cookie.get('auth_user_id');
+                        file['user_id'] = JSON.parse(cookie.get('auth')).id;
                         file['description'] = 'Test description';
                         file['created_at'] = currentDateTime;
                         file['updated_at'] = currentDateTime;

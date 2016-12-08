@@ -75,7 +75,6 @@
     import _ from 'lodash'
     import User from './../../api/user'
     import Department from './../../api/department'
-    import Cookie from 'js-cookie'
     import moment from 'moment'
 
     export default {
@@ -142,7 +141,7 @@
                 }, fileArray => {
                     fileArray = _.map(fileArray, (file) => {
                         var currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-                        file['user_id'] = Cookie.get('auth_user_id');
+                        file['user_id'] = JSON.parse(cookie.get('auth')).id;
                         file['description'] = 'Test description';
                         file['department_id'] = this.departmentId;
                         file['created_at'] = currentDateTime;
