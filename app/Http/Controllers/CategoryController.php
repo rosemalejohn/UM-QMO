@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -16,7 +17,16 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::withCount('files')->paginate(10);
+        if(Auth::user()->isAdmin()){
+            $categories = Category::withCount('files')->paginate(10);
+        }else{
+            $dep_id = Auth::user()->department_id;
+            $categories = Category::withCount(['files'=>function($query) use ($dep_id)
+            {
+                return $query->where('department_id',$dep_id);
+            }])->paginate(10);
+        }
+        
 
         return response()->json($categories);
     }
@@ -46,12 +56,33 @@ class CategoryController extends Controller
             $category->files()->attach($file->id);
         }
 
-        return response()->json($category->files, 200);
+        $files = [];
+
+        if(Auth::user()->isAdmin()){
+            $files = $category->files;
+        }
+        else{
+            $files = $category->files()->where('department_id',Auth::user()->department_id)->get();
+        }
+
+        return response()->json($files, 200);
     }
 
     public function showFiles($id)
     {
-        $categoryWithFiles = Category::with('files')->orderBy('created_at')->findOrFail($id);
+        
+        if( Auth::user()->isAdmin() ){
+            $categoryWithFiles = Category::with('files')->orderBy('created_at')->findOrFail($id);
+        }else{
+            $dep_id = Auth::user()->department_id;
+
+            $categoryWithFiles = Category::with(['files' => function($query) use ($dep_id)
+                {
+                    return $query->where('department_id',$dep_id);
+                }])
+                ->orderBy('created_at')->findOrFail($id);
+        }
+        
 
         return response()->json($categoryWithFiles);
     }

@@ -41,7 +41,8 @@
 
     <script>
         window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?>;
-        document.cookie = 'auth=<?php echo json_encode(Auth::user()) ?>';
+        var userCookie = <?php echo json_encode(Auth::user()) ?>;
+        document.cookie = 'auth='+JSON.stringify(userCookie);
     </script>
 </head>
 

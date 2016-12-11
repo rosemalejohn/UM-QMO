@@ -109,13 +109,14 @@
         computed: {
 
             noFiles() {
-            	return this.category.files.length < 1;
+            	    return this.category.files.length < 1;
             }
 
         },
 
         beforeRouteEnter(to, from, next) {
             Category.GetFiles(to.params.categoryId).then(response => {
+                console.log(response.data);
                 next(vm => {
                     vm.category = response.data
                 })
@@ -136,6 +137,7 @@
                     fileArray = _.map(fileArray, (file) => {
                         var currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
                         file['user_id'] = JSON.parse(cookie.get('auth')).id;
+                        file['department_id'] = JSON.parse(cookie.get('auth')).department_id;
                         file['description'] = 'Test description';
                         file['created_at'] = currentDateTime;
                         file['updated_at'] = currentDateTime;
