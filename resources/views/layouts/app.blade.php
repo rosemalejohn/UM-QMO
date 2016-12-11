@@ -40,9 +40,8 @@
     <link rel="shortcut icon" href="favicon.ico" />
 
     <script>
-        window.Laravel = <?php echo json_encode([
-    'csrfToken' => csrf_token(),
-]); ?>
+        window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?>;
+        document.cookie = 'auth=<?php echo json_encode(Auth::user()) ?>';
     </script>
 </head>
 
