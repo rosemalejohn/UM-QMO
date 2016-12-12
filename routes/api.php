@@ -77,6 +77,7 @@ Route::group(['prefix' => 'files'], function () {
     Route::delete('/{id}/remove', 'FileController@remove');
     Route::get('/trashed', 'FileController@trashed');
     Route::get('/{key}/by-search', 'FileController@search');
+    Route::post('/search', 'SearchController@search');
     Route::get('/count', 'FileController@filesCount');
     Route::get('/count/{date}/by-date', 'FileController@filesCountByDate');
     Route::get('/graph-uploaded-yearly/{year}', 'FileController@report');
