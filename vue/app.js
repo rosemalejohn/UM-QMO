@@ -6,6 +6,7 @@ import _ from 'lodash'
 import filepicker from 'filepicker-js'
 import Cookie from 'js-cookie'
 
+import AppRoot from './components/AppRoot.vue'
 import Header from './components/Header.vue'
 import Sidebar from './components/Sidebar.vue'
 import Footer from './components/Footer.vue'
@@ -17,6 +18,7 @@ Vue.use(VueRouter)
 Vue.http.options.root = '/api';
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
+Vue.component('app-root', AppRoot)
 Vue.component('app-header', Header)
 Vue.component('app-sidebar', Sidebar)
 Vue.component('app-content', Content)

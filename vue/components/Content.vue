@@ -48,13 +48,7 @@
 
 		components: {
 			'breadcrumbs': Breadcrumbs
-		},
-
-    created() {
-      User.GetAuthenticatedUser().then(response => {
-          cookie.set('auth', response.data);
-      })
-    }
+		}
 	}
 
   Vue.filter('date', (value, format) => {

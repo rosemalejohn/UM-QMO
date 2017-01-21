@@ -44,28 +44,76 @@
         var userCookie = <?php echo json_encode(Auth::user()) ?>;
         document.cookie = 'auth='+JSON.stringify(userCookie);
     </script>
+    <style type="text/css">
+        #app_loading{
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+        #app_loading h1{
+            font-size: 50px;
+        }
+
+        .spinner {
+          margin: 30px auto 0;
+          width: 70px;
+          text-align: center;
+        }
+
+        .spinner > div {
+          width: 18px;
+          height: 18px;
+          background-color: #FB5557;
+
+          border-radius: 100%;
+          display: inline-block;
+          -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+          animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        }
+
+        .spinner .bounce1 {
+          -webkit-animation-delay: -0.32s;
+          animation-delay: -0.32s;
+        }
+
+        .spinner .bounce2 {
+          -webkit-animation-delay: -0.16s;
+          animation-delay: -0.16s;
+        }
+
+        @-webkit-keyframes sk-bouncedelay {
+          0%, 80%, 100% { -webkit-transform: scale(0) }
+          40% { -webkit-transform: scale(1.0) }
+        }
+
+        @keyframes sk-bouncedelay {
+          0%, 80%, 100% { 
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        } 40% { 
+            -webkit-transform: scale(1.0);
+            transform: scale(1.0);
+        }
+        }
+    </style>
 </head>
 
 <body class="page-md page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed">
 
     <div id="app">
-        <app-header></app-header>
-
-        <div class="clearfix"></div>
-
-        <div class="container">
-
-            <div class="page-container">
-
-                <app-sidebar></app-sidebar>
-
-                <app-content></app-content>
-
+        <app-root>
+            <div id="app_loading">
+                <h1>QUALITY MANAGEMENT SYSTEM</h1>
             </div>
-
-            <app-footer></app-footer>
-        </div>
+        </app-root>
     </div>
+
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 
