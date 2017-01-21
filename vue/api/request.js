@@ -12,6 +12,10 @@ export default {
 
 	RejectMultiple(requests) {
 		return Vue.http.post('/api/requests/reject-multiple', {requests});
+	},
+
+	getNewRequestCount(){
+		return Vue.http.get('/api/requests/new-requests-count');
 	}
 
 }

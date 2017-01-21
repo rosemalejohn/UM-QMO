@@ -12,7 +12,7 @@ class RequestFormController extends Controller
     {
         $this->authorize('admin');
 
-        $requestForms = RequestForm::paginate(10);
+        $requestForms = RequestForm::orderBy('is_done','asc')->orderBy('updated_at','desc')->paginate(50);
 
         return response()->json($requestForms);
     }
@@ -125,6 +125,13 @@ class RequestFormController extends Controller
             $requestForm->is_done = true;
             $requestForm->save();
         }
+    }
+
+    public function newRequestCount()
+    {
+        $count = RequestForm::where('is_done',0)->count();
+
+        return response()->json($count);
     }
 
     private function validateRequestForm(Request $request)

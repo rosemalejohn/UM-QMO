@@ -88,6 +88,7 @@ Route::group(['prefix' => 'files'], function () {
 Route::group(['prefix' => 'requests'], function () {
 
     Route::get('/', 'RequestFormController@index');
+    Route::get('/new-requests-count', 'RequestFormController@newRequestCount');
     Route::get('/done', 'RequestFormController@showDone');
     Route::get('/undone', 'RequestFormController@showUndone');
     Route::get('/{id}', 'RequestFormController@show');
