@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\Category;
 use Carbon\Carbon;
+use Auth;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -43,7 +44,11 @@ class SearchController extends Controller
 
     private function getFilesByFileName($filename){
 
-        $files = File::where('filename',$filename)->get();
+        $files = File::where('filename','like',"%$filename%");
+        if(!Auth::user()->isAdmin()){
+            $files->where('department_id',Auth::user()->department_id);
+        }
+        $files = $files->get();
 
         return $files;
 
@@ -53,7 +58,14 @@ class SearchController extends Controller
 
         $date = new Carbon($date);
         
-        $files = File::whereDate('created_at', $date->toDateString())->get();
+        $files = File::whereDate('created_at', $date->toDateString());
+
+        if(!Auth::user()->isAdmin()){
+            $files->where('department_id',Auth::user()->department_id);
+        }
+        $files = $files->get();
+
+
         
         return $files;
 
@@ -61,7 +73,12 @@ class SearchController extends Controller
 
     private function getFolderByName($name){
 
-        $folders = Category::where('name',$name)->get();
+        $folders = Category::where('name','like',"%$name%");
+        if(!Auth::user()->isAdmin()){
+            $folders->where('department_id',Auth::user()->department_id);
+        }
+        $folders = $folders->get();
+
 
         return $folders;
 
@@ -71,7 +88,12 @@ class SearchController extends Controller
 
         $date = new Carbon($date);
         
-        $folders = Category::whereDate('created_at', $date->toDateString())->get();
+        $folders = Category::whereDate('created_at', $date->toDateString());
+
+        if(!Auth::user()->isAdmin()){
+            $folders->where('department_id',Auth::user()->department_id);
+        }
+        $folders = $folders->get();
         
         return $folders;
 

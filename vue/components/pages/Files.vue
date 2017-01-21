@@ -40,20 +40,18 @@
                     </div>
                     <div class="tab-pane active" id="files">
                         <div class="margin-top-10">
-                            <ul class="mix-filter">
+                            <ul class="mix-filter" v-if="is_admin">
                                 <li @click="uploadResources()">
                                     <i class="fa fa-file"></i>
                                     Add resources
                                 </li>
-                                <li class="filter" data-filter="all">
+                                <!-- <li class="filter" data-filter="all">
                                      All
-                                </li>
+                                </li> -->
                             </ul>
                             <div class="row mix-grid">
-                                <div class="col-md-12">
-                                    <div class="tiles">
-                                        <folder v-for="folder in categories" :folder="folder"></folder>
-                                    </div>
+                                <div class="col-md-3" v-for="folder in categories">
+                                    <folder  :folder="folder"></folder>
                                 </div>
                             </div>
                             <div class="row mix-grid">
@@ -120,7 +118,10 @@
         },
 
         computed: {
-
+            is_admin() {
+                var auth = JSON.parse(cookie.get('auth'))
+                return auth.is_admin;
+            },
             noFiles() {
                 return this.categories.length < 1 && this.search_files.length < 1;
             }

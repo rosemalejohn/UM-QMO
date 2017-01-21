@@ -39,7 +39,7 @@
                 .then(()=>{
                     setTimeout(()=>{
                         this.isAppReady = true;    
-                    },2000);
+                    },0);
                 });
         },
 

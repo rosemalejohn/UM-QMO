@@ -31,11 +31,11 @@
                                     <i class="fa fa-chevron-left"></i>
                                     Back 
                                 </li>
-                                <li @click="uploadFiles()">
+                                <li @click="uploadFiles()" v-if="is_admin">
                                     <i class="fa fa-plus"></i>
                                     Add files
                                 </li>
-                                <li @click="deleteCategory()">
+                                <li @click="deleteCategory()" v-if="is_admin">
                                     <i class="fa fa-trash"></i>
                                     Delete
                                 </li>
@@ -45,6 +45,9 @@
                             		<div class="well">
                             			<h3 class="title">{{ category.name }}</h3>
                             			<p>{{ category.description }}</p>
+                                        <small class="text-muted">
+                                            <i v-if="category.department"> {{category.department.name}} </i>
+                                        </small>
                             		</div>
                             	</div>
                             	<div class="col-md-9">
@@ -107,7 +110,10 @@
         },
 
         computed: {
-
+            is_admin() {
+                var auth = JSON.parse(cookie.get('auth'))
+                return auth.is_admin;
+            },
             noFiles() {
             	    return this.category.files.length < 1;
             }
@@ -116,7 +122,6 @@
 
         beforeRouteEnter(to, from, next) {
             Category.GetFiles(to.params.categoryId).then(response => {
-                console.log(response.data);
                 next(vm => {
                     vm.category = response.data
                 })
