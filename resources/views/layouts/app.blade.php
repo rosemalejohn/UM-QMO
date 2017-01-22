@@ -34,10 +34,18 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" rel="stylesheet" />
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.css" type="text/css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/css/bootstrap-datetimepicker.min.css" />
+<!-- 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.print.css" type="text/css" rel="stylesheet" />     -->
+
+
     <link rel="stylesheet" type="text/css" href="/css/animate.css">
     <link rel="stylesheet" href="/css/app.css">
 
     <link rel="shortcut icon" href="favicon.ico" />
+
 
     <script>
         window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?>;
@@ -143,6 +151,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js" type="text/javascript" charset="utf-8"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/js/bootstrap-datetimepicker.min.js"></script>
+  
+
     <script src="/js/app-theme.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="/js/app.js"></script>
@@ -152,6 +169,9 @@
             Metronic.init();
             Layout.init();
             jQuery('a.attachment').fancybox();
+            jQuery(function () {
+                $('.datetimepicker').datetimepicker();
+            });
         });
     </script>
 </body>

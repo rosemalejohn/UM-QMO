@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
     "filepicker-js": "^2.4.18",
+    "fullcalendar": "^2.9.0",
     "gulp": "^3.9.1",
     "jquery": "^3.1.0",
     "js-cookie": "^2.1.3",
@@ -23,6 +24,7 @@
     "sweetalert": "^1.1.3",
     "toastr": "^2.1.2",
     "vue": "^2.0.1",
+    "vue-full-calendar": "^1.0.0",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.0",
     "vuex": "^2.0.0"

@@ -114,3 +114,11 @@ Route::group(['prefix' => 'memos'], function () {
     Route::delete('/{id}/restore', 'MemoController@restore');
     Route::delete('/{id}/remove', 'MemoController@remove');
 });
+
+
+Route::group(['prefix' => 'events'], function () {
+
+    Route::post('/', 'EventController@store');
+    Route::get('/', 'EventController@index');
+
+});
