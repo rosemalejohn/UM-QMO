@@ -1,6 +1,6 @@
 <template>
 	<div class="row">
-        <div class="col-sm-7" style="padding-right:1px">
+        <div class="col-sm-8" style="padding-right:2px">
             <div class="portlet light " style="min-height:300px">
                 <div class="portlet-title ">
                     <div class="caption">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-5" style="padding-left:1px">
+        <div class="col-sm-4" style="padding-left:2px">
             <!-- BEGIN PORTLET-->
             <div class="portlet light" v-show="!showAddEvents">
                 <div class="portlet-title tabbable-line">
@@ -58,21 +58,23 @@
                                         <a href="javascript:;">
                                         <div class="col1">
                                             <div class="cont">
-                                                <div class="cont-col1">
-                                                    <div class="label label-sm " :class="getEventsColor(event.type)">
-                                                        <i class="fa" :class="getEventsIcon(event.type)"></i>
-                                                    </div>
-                                                </div>
                                                 <div class="cont-col2">
                                                     <div class="desc">
-                                                        {{event.title}}
+                                                        <b class="text-muted">{{event.title}}</b>
+                                                        <p class="text-muted" style="margin-top:4px;">
+                                                            <small>
+                                                                <span class="label" :class="getEventsColor(event.type)">
+                                                                    <i class="fa" :class="getEventsIcon(event.type)"></i>
+                                                                    {{event.type}}
+                                                                </span> 
+                                                                <span style="margin-right:10px"></span>
+                                                                <i class="fa fa-calendar"></i>
+                                                                <span>{{event.from}}</span>
+                                                                <span v-if="event.from != event.to"> to {{event.to}}</span>
+                                                            </small>
+                                                        </p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col2">
-                                            <div class="date">
-                                                {{event.from}}
                                             </div>
                                         </div>
                                         </a>
@@ -88,21 +90,23 @@
                                         <a href="javascript:;">
                                         <div class="col1">
                                             <div class="cont">
-                                                <div class="cont-col1">
-                                                    <div class="label label-sm " :class="getEventsColor(event.type)">
-                                                        <i class="fa" :class="getEventsIcon(event.type)"></i>
-                                                    </div>
-                                                </div>
                                                 <div class="cont-col2">
                                                     <div class="desc">
-                                                        {{event.title}}
+                                                        <b class="text-muted">{{event.title}}</b>
+                                                        <p class="text-muted" style="margin-top:4px;">
+                                                            <small>
+                                                                <span class="label" :class="getEventsColor(event.type)">
+                                                                    <i class="fa" :class="getEventsIcon(event.type)"></i>
+                                                                    {{event.type}}
+                                                                </span> 
+                                                                <span style="margin-right:10px"></span>
+                                                                <i class="fa fa-calendar"></i>
+                                                                <span>{{event.from}}</span>
+                                                                <span v-if="event.from != event.to"> to {{event.to}}</span>
+                                                            </small>
+                                                        </p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col2">
-                                            <div class="date">
-                                                {{event.from}}
                                             </div>
                                         </div>
                                         </a>
@@ -118,21 +122,23 @@
                                         <a href="javascript:;">
                                         <div class="col1">
                                             <div class="cont">
-                                                <div class="cont-col1">
-                                                    <div class="label label-sm " :class="getEventsColor(event.type)">
-                                                        <i class="fa" :class="getEventsIcon(event.type)"></i>
-                                                    </div>
-                                                </div>
                                                 <div class="cont-col2">
                                                     <div class="desc">
-                                                        {{event.title}}
+                                                        <b class="text-muted">{{event.title}}</b>
+                                                        <p class="text-muted" style="margin-top:4px;">
+                                                            <small>
+                                                                <span class="label" :class="getEventsColor(event.type)">
+                                                                    <i class="fa" :class="getEventsIcon(event.type)"></i>
+                                                                    {{event.type}}
+                                                                </span> 
+                                                                <span style="margin-right:10px"></span>
+                                                                <i class="fa fa-calendar"></i>
+                                                                <span>{{event.from}}</span>
+                                                                <span v-if="event.from != event.to"> to {{event.to}}</span>
+                                                            </small>
+                                                        </p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col2">
-                                            <div class="date">
-                                                {{event.from}}
                                             </div>
                                         </div>
                                         </a>
@@ -149,12 +155,6 @@
                     <div class="caption">
                         <i class="icon-calendar font-green-sharp"></i>
                         <span class="caption-subject font-green-sharp bold uppercase">New Calendar Event</span>
-                    </div>
-                    <div class="actions">
-                        <a href="javascript:;" class="btn btn-circle btn-primary"
-                            v-on:click="showAddEvents = false">
-                            <i class="fa fa-ban"></i> Cancel 
-                        </a>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -184,12 +184,14 @@
                             <select class="form-control" required="required" v-model="event.type">
                                 <option value="activity">Activity</option>
                                 <option value="meeting">Meeting</option>
-                                <option value="dealine">Dealine</option>
+                                <option value="deadline">Deadline</option>
                             </select>
                         </div>
-
                         <div class="clearfix">
-                            <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default " v-on:click="showAddEvents = false">Cancel</button>
+                            <button type="submit" class="btn btn-primary ">Submit</button>
+                        </div>
                         </div>
                     </form>
                 </div>
@@ -210,10 +212,11 @@
     .todo-tasklist-item-title{
         padding-bottom:0px;
     }
-    .feeds li .col2 {
-        float: left;
-        width: 100px;
-        margin-left: -100px;
+    .feeds li .col1 > .cont {
+        margin-right: 0px;
+    }
+    .feeds li .col1 > .cont > .cont-col2 > .desc {
+        margin-left: 10px;
     }
     .fc-today{
         background-color: #fdf770 !important;
