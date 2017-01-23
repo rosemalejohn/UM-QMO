@@ -9,7 +9,7 @@
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn btn-circle btn-primary"
-                            v-on:click="showAddEvents = true">
+                            v-on:click="addNewEvent()">
                             <i class="fa fa-plus"></i> Add 
                         </a>
                     </div>
@@ -55,7 +55,7 @@
                                 <h4 class="text-muted text-center" style="margin-top:50px;" v-if="todayEvents.length == 0">NO EVENTS</h4>
                                 <ul class="feeds" v-else>
                                     <li v-for="event in todayEvents">
-                                        <a href="javascript:;">
+                                        <a href="javascript:;" v-on:click="showEventDetails(event)">
                                         <div class="col1">
                                             <div class="cont">
                                                 <div class="cont-col2">
@@ -87,7 +87,7 @@
                                 <h4 class="text-muted text-center" style="margin-top:50px;" v-if="upcomingEvents.length == 0">NO EVENTS</h4>
                                 <ul class="feeds" v-else>
                                     <li v-for="event in upcomingEvents">
-                                        <a href="javascript:;">
+                                        <a href="javascript:;" v-on:click="showEventDetails(event)">
                                         <div class="col1">
                                             <div class="cont">
                                                 <div class="cont-col2">
@@ -119,7 +119,7 @@
                                 <h4 class="text-muted text-center" style="margin-top:50px;" v-if="previousEvents.length == 0">NO EVENTS</h4>
                                 <ul class="feeds" v-else>
                                     <li v-for="event in previousEvents">
-                                        <a href="javascript:;">
+                                        <a href="javascript:;" v-on:click="showEventDetails(event)">
                                         <div class="col1">
                                             <div class="cont">
                                                 <div class="cont-col2">
@@ -154,43 +154,52 @@
                 <div class="portlet-title tabbable-line">
                     <div class="caption">
                         <i class="icon-calendar font-green-sharp"></i>
-                        <span class="caption-subject font-green-sharp bold uppercase">New Calendar Event</span>
+                        <span class="caption-subject font-green-sharp bold uppercase">
+                            <span v-if="event.hasOwnProperty('id')">Calendar Event</span>
+                            <span v-else>New Calendar Event</span>
+                        </span>
                     </div>
                 </div>
                 <div class="portlet-body">
                     <form @submit.prevent="submit" role="form">
                         <div class="form-group">
                             <label for="">Title</label>
-                            <input type="text" class="form-control" placeholder="Event Title..." required v-model="event.title">
+                            <input type="text" class="form-control" placeholder="Event Title..." required v-model="event.title" :disabled="canotUpdateEvent(event)">
                         </div>
 
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea class="form-control" rows="3" placeholder="Tell me about it..." required v-model="event.body"></textarea>
+                            <textarea class="form-control" rows="4" placeholder="Tell me about it..." required v-model="event.body" :disabled="canotUpdateEvent(event)"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="">Date from</label>
-                            <input type="date" class="form-control" placeholder="Date start.." required v-model="event.from">
+                            <input type="date" class="form-control" placeholder="Date start.." required v-model="event.from"
+                            :disabled="canotUpdateEvent(event)">
                         </div>
 
                         <div class="form-group">
                             <label for="">Date to <small class="text-muted">(Optional)</small> </label>
-                            <input type="date" class="form-control" placeholder="Date end..." v-model="event.to">
+                            <input type="date" class="form-control" placeholder="Date end..." v-model="event.to"
+                            :disabled="canotUpdateEvent(event)">
                         </div>
 
                         <div class="form-group">
                             <label for="">Type</label>
-                            <select class="form-control" required="required" v-model="event.type">
+                            <select class="form-control" required="required" v-model="event.type"
+                             :disabled="canotUpdateEvent(event)">
                                 <option value="activity">Activity</option>
                                 <option value="meeting">Meeting</option>
                                 <option value="deadline">Deadline</option>
                             </select>
                         </div>
                         <div class="clearfix">
-                        <div class="pull-right">
+                        <div class="pull-right" v-if="!canotUpdateEvent(event)">
                             <button type="button" class="btn btn-default " v-on:click="showAddEvents = false">Cancel</button>
-                            <button type="submit" class="btn btn-primary ">Submit</button>
+                            <button type="submit" class="btn btn-primary ">
+                                <span v-show="!event.hasOwnProperty('id')"> Submit </span>
+                                <span v-show="event.hasOwnProperty('id')"> Update </span>
+                            </button>
                         </div>
                         </div>
                     </form>
@@ -234,6 +243,7 @@
         mounted() {
             
             this.getEvents();
+            this.authUser = JSON.parse(cookie.get('auth'));
             
         },
 
@@ -245,7 +255,8 @@
                 upcomingEvents : [],
                 previousEvents : [],
                 showAddEvents: false,
-                showCalendar: false
+                showCalendar: false,
+                authUser: {}
             }
 		},
         
@@ -263,6 +274,14 @@
                 .catch(err => {
                     toastr.error('Something wrong with the input!')
                 })
+            },
+            showEventDetails(event){
+                this.event = event;
+                this.showAddEvents = true;
+            },
+            addNewEvent(){
+                this.event = {title : null,body : null,from : moment().format('YYYY-MM-DD'),to : null,type : 'activity'};
+                this.showAddEvents = true;
             },
             getEvents(){
                 this.showCalendar = false;
@@ -311,6 +330,13 @@
                 }else{
                     return '#F3565D';
                 }
+            },
+            canotUpdateEvent(event){
+                if(!event.hasOwnProperty('id')) return false;
+
+                if(event.user_id == this.authUser.id){
+                   return false; 
+               } return true;
             }
 
         }

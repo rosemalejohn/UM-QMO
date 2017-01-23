@@ -34,7 +34,12 @@ class EventController extends Controller
     	if($event['to'] == null || $event['to'] == ''){
     		$event['to'] = $event['from'];
     	}
-    	$newEvent = auth()->user()->events()->create($event);
+    	if(isset($event['id'])){
+    		$newEvent = Event::findOrFail($event['id'])->update($event);
+    	}else{
+    		$newEvent = auth()->user()->events()->create($event);
+    	}
+    	
 
     	return response()->json($newEvent, 201);
     }
