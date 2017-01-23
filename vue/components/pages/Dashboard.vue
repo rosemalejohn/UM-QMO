@@ -1,6 +1,6 @@
 <template>
 <div>
-	<div class="row">
+	<div class="row" v-if="is_admin">
 		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 margin-bottom-10">
 			<stat color="blue-madison" icon="fa fa-briefcase" description="Files uploaded" :stat="files" url="files"></stat>
 		</div>
@@ -74,7 +74,8 @@
 
 		computed: {
 			is_admin() {
-				return Boolean(localStorage.getItem('is_admin') == 'true')
+				var auth = JSON.parse(cookie.get('auth'))
+				return auth.is_admin;
 			}
 		}
 	}

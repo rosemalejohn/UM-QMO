@@ -201,6 +201,8 @@
                                 <span v-show="event.hasOwnProperty('id')"> Update </span>
                             </button>
                         </div>
+                        <button type="button" class="btn btn-default pull-right" v-if="!authUser.is_admin || canotUpdateEvent(event)"
+                                v-on:click="showAddEvents = false">Close</button>
                         </div>
                     </form>
                 </div>
