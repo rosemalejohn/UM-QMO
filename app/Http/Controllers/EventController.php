@@ -17,10 +17,9 @@ class EventController extends Controller
 
     public function index()
     {
-    	$now = Carbon::now();	
-    	$tom = Carbon::now()->addDay(1);	
-    	$today = Event::whereDate('from','>=',$now)->whereDate('from','<=',$tom)->get();
-    	$upcoming = Event::whereDate('from','>',$tom)->get();
+    	$now = Carbon::now()->toDateString();	
+    	$today = Event::whereDate('from','<=',$now)->whereDate('from','>=',$now)->get();
+    	$upcoming = Event::whereDate('from','>',$now)->get();
     	$previous = Event::whereDate('to','<',$now)->get();
     	$events = Event::all();
     	$data  = compact('today','upcoming','previous','events');
