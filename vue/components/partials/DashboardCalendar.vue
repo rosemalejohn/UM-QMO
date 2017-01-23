@@ -294,8 +294,12 @@
                     this.previousEvents = _events.previous;
                     let formatedEvents = _events.events.map(_event => {
                         return {
+                            id : _event.id ,
                             title : _event.title,
+                            body : _event.body,
+                            from : _event.from,
                             start : _event.from,
+                            to : _event.to,
                             end : _event.to || null,
                             color : this.getEventsCColor(_event.type)
                         };
