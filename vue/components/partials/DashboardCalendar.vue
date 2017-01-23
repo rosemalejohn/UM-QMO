@@ -7,7 +7,7 @@
                         <i class="icon-calendar font-green-sharp"></i>
                         <span class="caption-subject font-green-sharp bold uppercase">Calendar</span>
                     </div>
-                    <div class="actions">
+                    <div class="actions" v-if="authUser.is_admin">
                         <a href="javascript:;" class="btn btn-circle btn-primary"
                             v-on:click="addNewEvent()">
                             <i class="fa fa-plus"></i> Add 
