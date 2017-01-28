@@ -1,7 +1,7 @@
 <template>
 	<div class="row">
         <div class="col-sm-8" style="padding-right:2px">
-            <div class="portlet light " style="min-height:300px">
+            <div class="portlet light " style="height:700px; overflow-y:auto">
                 <div class="portlet-title ">
                     <div class="caption">
                         <i class="icon-calendar font-green-sharp"></i>
@@ -18,8 +18,8 @@
                     <div v-if="showCalendar">
                         <full-calendar :events="events" 
                             default-view="month" 
-                            editable="false"
-                            selectable="false"
+                            :editable="false"
+                            :selectable="true"
                         ></full-calendar>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
         </div>
         <div class="col-sm-4" style="padding-left:2px">
             <!-- BEGIN PORTLET-->
-            <div class="portlet light" v-show="!showAddEvents">
+            <div class="portlet light" v-show="!showAddEvents" style="height:700px; overflow-y:auto">
                 <div class="portlet-title tabbable-line">
                     <div class="caption">
                         <i class="icon-list font-green-sharp"></i>
@@ -51,7 +51,7 @@
                 <div class="portlet-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1_1">
-                            <div class="scroller" style="height: 379px;overflow-y:auto">
+                            <div class="scroller">
                                 <h4 class="text-muted text-center" style="margin-top:50px;" v-if="todayEvents.length == 0">NO EVENTS</h4>
                                 <ul class="feeds" v-else>
                                     <li v-for="event in todayEvents">
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="tab_1_2">
-                            <div class="scroller" style="height: 379px;overflow-y:auto">
+                            <div class="scroller">
                                 <h4 class="text-muted text-center" style="margin-top:50px;" v-if="upcomingEvents.length == 0">NO EVENTS</h4>
                                 <ul class="feeds" v-else>
                                     <li v-for="event in upcomingEvents">
@@ -115,7 +115,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="tab_1_3">
-                            <div class="scroller" style="height: 379px;overflow-y:auto" >
+                            <div class="scroller" >
                                 <h4 class="text-muted text-center" style="margin-top:50px;" v-if="previousEvents.length == 0">NO EVENTS</h4>
                                 <ul class="feeds" v-else>
                                     <li v-for="event in previousEvents">
@@ -150,7 +150,7 @@
                 </div>
             </div>
 
-            <div class="portlet light" v-show="showAddEvents">
+            <div class="portlet light" v-show="showAddEvents" style="height:700px; overflow-y:auto">
                 <div class="portlet-title tabbable-line">
                     <div class="caption">
                         <i class="icon-calendar font-green-sharp"></i>
