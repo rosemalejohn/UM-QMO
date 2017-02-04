@@ -20,6 +20,7 @@
                             default-view="month" 
                             :editable="false"
                             :selectable="true"
+                            @event-selected="showEventDetails"
                         ></full-calendar>
                     </div>
                 </div>
@@ -344,7 +345,6 @@
                    return false; 
                } return true;
             }
-
         }
 
 	}
