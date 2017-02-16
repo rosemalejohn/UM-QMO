@@ -12,7 +12,7 @@ class RequestFormController extends Controller
     {
         $this->authorize('admin');
 
-        $requestForms = RequestForm::orderBy('is_done','asc')->orderBy('updated_at','desc')->paginate(50);
+        $requestForms = RequestForm::orderBy('is_approved','asc')->orderBy('updated_at','desc')->paginate(50);
 
         return response()->json($requestForms);
     }
@@ -26,7 +26,13 @@ class RequestFormController extends Controller
     {
         $this->validateRequestForm($request);
 
-        $newRequestForm = RequestForm::create($request->all());
+        $data = $request->all();
+
+        $data['request_number'] = date('ymd');
+
+        $newRequestForm = RequestForm::create($data);
+        $newRequestForm->request_number = date('ymd').'-'.$newRequestForm->id;
+        $newRequestForm->save();
 
         return view('request.requestFormSuccess');
     }
@@ -82,8 +88,6 @@ class RequestFormController extends Controller
     {
         $requestForm = RequestForm::findOrFail($id);
 
-        $this->validateRequestForm($request);
-
         $requestForm->update($request->all());
 
         return response()->json($requestForm);
@@ -138,12 +142,13 @@ class RequestFormController extends Controller
     {
 
         $this->validate($request, [
-            'name' => 'required|min:2|max:50',
-            'college' => 'required|min:2|max:255',
-            'school_year' => 'required|date_format:"Y"',
+            'branch' => 'required',
+            'request_nature' => 'required',
+            'document_title' => 'required',
+            'description' => 'required',
+            'reason' => 'required',
+            'request_by' => 'required|min:2|max:255',
             'email' => 'email',
-            'contact_number' => 'required|min:11|max:12',
-            'request_for' => 'required|min:2|max:255',
         ]);
 
     }

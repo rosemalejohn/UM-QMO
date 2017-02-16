@@ -43,7 +43,7 @@
 
     <link rel="stylesheet" type="text/css" href="/css/animate.css">
     <link rel="stylesheet" href="/css/app.css">
-
+    <link rel="stylesheet" href="/css/check.css">
     <link rel="shortcut icon" href="favicon.ico" />
 
 

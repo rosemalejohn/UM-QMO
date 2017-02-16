@@ -10,8 +10,11 @@
 						<li :class="{'active': !statusFilter}">
 							<a href="javascript:;" v-on:click="statusFilter = 0"> New </a>
 						</li>
-						<li :class="{'active': statusFilter}">
-							<a href="javascript:;" v-on:click="statusFilter = 1"> Done </a>
+						<li :class="{'active': statusFilter == 1}">
+							<a href="javascript:;" v-on:click="statusFilter = 1"> Approved </a>
+						</li>
+						<li :class="{'active': statusFilter == 2}">
+							<a href="javascript:;" v-on:click="statusFilter = 2"> Disaproved </a>
 						</li>
 					</ul>
 					<div class="pull-right" style="margin:8px 30px 0 0;" v-if="checked.length">
@@ -24,31 +27,34 @@
 					<table v-if="requests.length" class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th class="table-checkbox" v-if="statusFilter == 0" width="1%">
+								<!-- <th class="table-checkbox" v-if="statusFilter == 0" width="1%"> -->
 									<!-- <input type="checkbox" class="group-checkable"/> -->
-								</th>
-								<th>Name</th>
-								<th>College</th>
-								<th>School year</th>
-								<th>Email</th>
-								<th>Contact number</th>
-								<th width="30%">Request for</th>
-								<th width="5%">Status</th>
+								<!-- </th> -->
+								<th>Request #</th>
+								<th>Request by</th>
+								<th>Branch</th>
+								<th>Nature</th>
+								<th>Document tile</th>
+								<th>Request Description</th>
+								<th width="1%"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="request in filteredRequests(requests)" class="odd gradeX">
-								<td v-if="statusFilter == 0">
+								<!-- <td v-if="statusFilter == 0">
 									<input v-model="checked" type="checkbox" class="checkboxes" :value="request.id"/>
-								</td>
-								<td>{{ request.name }}</td>
-								<td>{{ request.college }}</td>
-								<td>{{ request.school_year }}</td>
-								<td>{{ request.email }}</td>
-								<td>{{ request.contact_number }}</td>
-								<td>{{ request.request_for }}</td>
+								</td> -->
+								<td>{{ request.request_number }}</td>
+								<td>{{ request.request_by }}</td>
 								<td>
-									<span class="label label-info">{{ request.is_done ? 'Done' : 'New' }}</span>
+									{{ request.branch }}
+									<span v-if="specific_branch">{{ request.specific_branch }}</span>
+								</td>
+								<td>{{ request.request_nature }}</td>
+								<td>{{ request.document_title }}</td>
+								<td>{{ request.description }}</td>
+								<td>
+									<router-link class="btn btn-xs btn-success" :to="{ path: 'request/'+request.id }">View</router-link>
 								</td>
 							</tr>
 						</tbody>
@@ -74,7 +80,7 @@
 
 	export default {
 
-		name: 'departments',
+		name: 'requests',
 		
 		components: {
 			'portlet': Portlet,
@@ -117,7 +123,7 @@
 			},
 			filteredRequests( requests ){
 				return requests.filter(request => {
-					return request.is_done == this.statusFilter;
+					return request.is_approved == this.statusFilter;
 				});
 			},
 

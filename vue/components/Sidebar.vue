@@ -45,9 +45,9 @@
 		            </router-link>
 		        </li>
 			    <li v-if="is_admin" style="position:relative">
-		            <router-link :to="{ path: '/request' }">
+		            <router-link :to="{ path: '/requests' }">
 		                <i class="icon-folder"></i>
-		                <span class="title">Request </span>
+		                <span class="title">Requests </span>
 		                <span class="arrow "></span>
 		                <span class="badge badge-danger sidebar-link-badge" 
 		                	v-if="newRequestCount > 0"

@@ -9,6 +9,7 @@ import Departments from './components/pages/Departments.vue'
 import DepartmentForm from './components/pages/DepartmentForm.vue'
 import Report from './components/pages/Report.vue'
 import Requests from './components/pages/Requests.vue'
+import Request from './components/pages/Request.vue'
 import ChangePasswordForm from './components/pages/ChangePasswordForm.vue'
 import Error404 from './components/errors/404.vue'
 import Error403 from './components/errors/403.vue'
@@ -44,7 +45,8 @@ export default {
 
 		{ path: '/reports', name: 'Reports', component: Report },
 
-		{ path: '/request', name: 'Request', component: Requests },
+		{ path: '/requests', name: 'Requests', component: Requests },
+		{ path: '/request/:requestId', name: 'View Request', component: Request },
 
 		{ path: '/change-password', name: 'Change password', component: ChangePasswordForm },
 
