@@ -1,5 +1,7 @@
 # University of Mindanao QMO Web Application
 
+Built with Laravel and VueJS
+
 ## Requirements
 
 - PHP 5.6+
