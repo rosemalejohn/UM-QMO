@@ -1,53 +1,71 @@
 <template>
 	<div class="row">
 		<div class="col-md-12">
-			<portlet>
-				<span slot="title">Requests</span>
-				<div slot="tools" class="tools">
-					<div class="actions" v-if="checked.length">
+			<div class="portlet light">
+				<div class="portlet-title tabbable-line">
+					<div class="caption">
+						<span class="caption-subject font-green-sharp bold uppercase">Requests</span>
+					</div>
+					<ul class="nav nav-tabs">
+						<li :class="{'active': !statusFilter}">
+							<a href="javascript:;" v-on:click="statusFilter = 0"> New </a>
+						</li>
+						<li :class="{'active': statusFilter == 1}">
+							<a href="javascript:;" v-on:click="statusFilter = 1"> Approved </a>
+						</li>
+						<li :class="{'active': statusFilter == 2}">
+							<a href="javascript:;" v-on:click="statusFilter = 2"> Disaproved </a>
+						</li>
+					</ul>
+					<div class="pull-right" style="margin:8px 30px 0 0;" v-if="checked.length">
 						<a @click="approve()" class="btn btn-circle btn-default btn-sm">
 							<i class="fa fa-check"></i>Mark done
 						</a>
 					</div>
 				</div>
-				<table v-if="requests.length" class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th class="table-checkbox">
-								<input type="checkbox" class="group-checkable"/>
-							</th>
-							<th>Name</th>
-							<th>College</th>
-							<th>School year</th>
-							<th>Email</th>
-							<th>Contact number</th>
-							<th>Request for</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="request in requests" class="odd gradeX">
-							<td width="5%">
-								<input v-model="checked" type="checkbox" class="checkboxes" :value="request.id"/>
-							</td>
-							<td>{{ request.name }}</td>
-							<td>{{ request.college }}</td>
-							<td>{{ request.school_year }}</td>
-							<td>{{ request.email }}</td>
-							<td>{{ request.contact_number }}</td>
-							<td>{{ request.request_for }}</td>
-							<td>
-								<span class="label label-info">{{ request.is_done ? 'Done' : 'In process' }}</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<div v-else class="note note-info note-bordered">
-                    <p>No request. You are done for today.</p>
-                </div>
+				<div class="portlet-body">
+					<table v-if="requests.length" class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<!-- <th class="table-checkbox" v-if="statusFilter == 0" width="1%"> -->
+									<!-- <input type="checkbox" class="group-checkable"/> -->
+								<!-- </th> -->
+								<th>Request #</th>
+								<th>Request by</th>
+								<th>Branch</th>
+								<th>Nature</th>
+								<th>Document tile</th>
+								<th>Request Description</th>
+								<th width="1%"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="request in filteredRequests(requests)" class="odd gradeX">
+								<!-- <td v-if="statusFilter == 0">
+									<input v-model="checked" type="checkbox" class="checkboxes" :value="request.id"/>
+								</td> -->
+								<td>{{ request.request_number }}</td>
+								<td>{{ request.request_by }}</td>
+								<td>
+									{{ request.branch }}
+									<span v-if="specific_branch">{{ request.specific_branch }}</span>
+								</td>
+								<td>{{ request.request_nature }}</td>
+								<td>{{ request.document_title }}</td>
+								<td>{{ request.description }}</td>
+								<td>
+									<router-link class="btn btn-xs btn-success" :to="{ path: 'request/'+request.id }">View</router-link>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div v-else class="note note-info note-bordered" style="margin:10px 20px">
+	                    <p>No request. You are done for today.</p>
+	                </div>
 
-                <infinite-scroll :paginator.sync="paginator" @fetched="requestsPulled"></infinite-scroll>
-			</portlet>
+	                <infinite-scroll :paginator.sync="paginator" @fetched="requestsPulled"></infinite-scroll>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -62,7 +80,7 @@
 
 	export default {
 
-		name: 'departments',
+		name: 'requests',
 		
 		components: {
 			'portlet': Portlet,
@@ -88,15 +106,25 @@
 
 			approve() {
 				Request.ApproveMultiple(this.checked).then(response => {
+					Request.GetAll().then(response => {
+            			this.paginator = response.data;
+            			this.requests = response.data.data;
+		            }).catch(err => {
+		            	toastr.error('Cannot load requests!');
+		            });
+				})
+				.then(()=>{
 					toastr.success('Request approved!');
-					this.requests = _.each(this.requests, request => {
-						return request.is_done = true;
-					})
-
-                	this.checked = [];
-				}).catch(err => {
+					this.checked = [];
+				})
+				.catch(err => {
 					toastr.error('Cannot approve! Something went wrong.');
 				})
+			},
+			filteredRequests( requests ){
+				return requests.filter(request => {
+					return request.is_approved == this.statusFilter;
+				});
 			},
 
 			requestsPulled(paginator) {
@@ -112,7 +140,8 @@
 			return {
 				paginator: {},
 				checked: [],
-				requests: []
+				requests: [],
+				statusFilter : 0
 			}
 		}
 	}

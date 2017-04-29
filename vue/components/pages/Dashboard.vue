@@ -1,5 +1,6 @@
 <template>
-	<div class="row">
+<div>
+	<div class="row" v-if="is_admin">
 		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 margin-bottom-10">
 			<stat color="blue-madison" icon="fa fa-briefcase" description="Files uploaded" :stat="files" url="files"></stat>
 		</div>
@@ -13,11 +14,21 @@
 			<stat color="purple-soft" icon="fa fa-sticky-note-o" description="Memos" :stat="memos" url="memos"></stat>
 		</div>
 	</div>
+	<dashboard-calendar></dashboard-calendar>
+</div>
 </template>
+<style type="text/css">
+	img.media-object{
+		width: 30px;
+		border-radius: 50%;
+	}
+
+</style>
 
 <script>
 	import Authorize from './../../services/authorize'
 	import Stat from './../partials/Stat.vue'
+	import DashboardCalendar from './../partials/DashboardCalendar.vue'
 	import StatService from './../../api/stat'
 
 	export default {
@@ -25,7 +36,8 @@
 		name: 'dashboard',
 
 		components: {
-			'stat': Stat
+			'stat': Stat,
+			'dashboard-calendar': DashboardCalendar
 		},
 
 		beforeRouteEnter(to, from, next) {
@@ -62,7 +74,8 @@
 
 		computed: {
 			is_admin() {
-				return Boolean(localStorage.getItem('is_admin') == 'true')
+				var auth = JSON.parse(cookie.get('auth'))
+				return auth.is_admin;
 			}
 		}
 	}

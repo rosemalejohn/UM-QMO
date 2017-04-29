@@ -10,10 +10,23 @@
 		<div class="form-group" v-bind:class="{ 'has-error': form_errors.body }">
 			<label class="col-sm-3 control-label">Body</label>
 			<div class="col-sm-7">
-				<textarea v-model="category.description" class="form-control" rows="10"></textarea>
+				<textarea v-model="category.description" class="form-control" rows="3"></textarea>
                 <div class="help-block" v-if="form_errors.description">{{form_errors.description[0]}}</div>
 			</div>
 		</div>
+
+		<div class="form-group" v-bind:class="{ 'has-error': form_errors.body }">
+			<label class="col-sm-3 control-label">Department</label>
+			<div class="col-sm-7">
+				<select class="form-control" required="required" v-model="category.department_id" >
+					<option v-for="department in departments" v-bind:value="department.id">
+						{{department.name}}
+					</option>
+				</select>
+                <div class="help-block" v-if="form_errors.department_id">{{form_errors.department_id[0]}}</div>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<label class="col-sm-3 control-label"></label>
 			<div class="col-sm-7">
@@ -61,6 +74,7 @@
 	import UploadFiles from './../partials/UploadFiles.vue'
 	import Category from './../../api/category'
 	import toastr from 'toastr'
+	import Deparment from './../../api/department'
 
 	export default {
 
@@ -68,11 +82,20 @@
 			'upload-files': UploadFiles
 		},
 
+		created(){
+
+			Deparment.GetAll().then(response =>{
+				this.departments = response.data;
+			});
+
+		},
+
 		data() {
 			return {
 				category: {
 					fileArray: []
 				},
+				departments: [],
 				form_errors: []
 			}
 		},
