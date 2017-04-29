@@ -34,38 +34,94 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" rel="stylesheet" />
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.css" type="text/css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/css/bootstrap-datetimepicker.min.css" />
+<!-- 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.print.css" type="text/css" rel="stylesheet" />     -->
+
+
     <link rel="stylesheet" type="text/css" href="/css/animate.css">
     <link rel="stylesheet" href="/css/app.css">
-
+    <link rel="stylesheet" href="/css/check.css">
     <link rel="shortcut icon" href="favicon.ico" />
 
+
     <script>
-        window.Laravel = <?php echo json_encode([
-    'csrfToken' => csrf_token(),
-]); ?>
+        window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?>;
+        var userCookie = <?php echo json_encode(Auth::user()) ?>;
+        document.cookie = 'auth='+JSON.stringify(userCookie);
     </script>
+    <style type="text/css">
+        #app_loading{
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+        #app_loading h1{
+            font-size: 50px;
+        }
+
+        .spinner {
+          margin: 30px auto 0;
+          width: 70px;
+          text-align: center;
+        }
+
+        .spinner > div {
+          width: 18px;
+          height: 18px;
+          background-color: #FB5557;
+
+          border-radius: 100%;
+          display: inline-block;
+          -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+          animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        }
+
+        .spinner .bounce1 {
+          -webkit-animation-delay: -0.32s;
+          animation-delay: -0.32s;
+        }
+
+        .spinner .bounce2 {
+          -webkit-animation-delay: -0.16s;
+          animation-delay: -0.16s;
+        }
+
+        @-webkit-keyframes sk-bouncedelay {
+          0%, 80%, 100% { -webkit-transform: scale(0) }
+          40% { -webkit-transform: scale(1.0) }
+        }
+
+        @keyframes sk-bouncedelay {
+          0%, 80%, 100% { 
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        } 40% { 
+            -webkit-transform: scale(1.0);
+            transform: scale(1.0);
+        }
+        }
+    </style>
 </head>
 
 <body class="page-md page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed">
 
     <div id="app">
-        <app-header></app-header>
-
-        <div class="clearfix"></div>
-
-        <div class="container">
-
-            <div class="page-container">
-
-                <app-sidebar></app-sidebar>
-
-                <app-content></app-content>
-
+        <app-root>
+            <div id="app_loading">
+                <h1>QUALITY MANAGEMENT SYSTEM</h1>
             </div>
-
-            <app-footer></app-footer>
-        </div>
+        </app-root>
     </div>
+
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 
@@ -95,6 +151,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js" type="text/javascript" charset="utf-8"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/js/bootstrap-datetimepicker.min.js"></script>
+  
+
     <script src="/js/app-theme.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="/js/app.js"></script>
@@ -104,6 +169,9 @@
             Metronic.init();
             Layout.init();
             jQuery('a.attachment').fancybox();
+            jQuery(function () {
+                $('.datetimepicker').datetimepicker();
+            });
         });
     </script>
 </body>

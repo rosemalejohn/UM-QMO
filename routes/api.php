@@ -77,6 +77,7 @@ Route::group(['prefix' => 'files'], function () {
     Route::delete('/{id}/remove', 'FileController@remove');
     Route::get('/trashed', 'FileController@trashed');
     Route::get('/{key}/by-search', 'FileController@search');
+    Route::post('/search', 'SearchController@search');
     Route::get('/count', 'FileController@filesCount');
     Route::get('/count/{date}/by-date', 'FileController@filesCountByDate');
     Route::get('/graph-uploaded-yearly/{year}', 'FileController@report');
@@ -87,6 +88,7 @@ Route::group(['prefix' => 'files'], function () {
 Route::group(['prefix' => 'requests'], function () {
 
     Route::get('/', 'RequestFormController@index');
+    Route::get('/new-requests-count', 'RequestFormController@newRequestCount');
     Route::get('/done', 'RequestFormController@showDone');
     Route::get('/undone', 'RequestFormController@showUndone');
     Route::get('/{id}', 'RequestFormController@show');
@@ -111,4 +113,12 @@ Route::group(['prefix' => 'memos'], function () {
     Route::delete('/delete-multiple', 'MemoController@destroyMultiple');
     Route::delete('/{id}/restore', 'MemoController@restore');
     Route::delete('/{id}/remove', 'MemoController@remove');
+});
+
+
+Route::group(['prefix' => 'events'], function () {
+
+    Route::post('/', 'EventController@store');
+    Route::get('/', 'EventController@index');
+
 });

@@ -22,6 +22,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Uniform.js/4.0.1/css/default.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/check.css">
 
     <link rel="shortcut icon" href="favicon.ico" />
 
@@ -37,14 +38,17 @@
             margin: 30px;
             color: #fff;
         }
-        .form-group > label{
+        /*.form-group > label{
             font-weight: 700;
             font-size: 16px;
             color: #a4a4a4;
-        }
+        }*/
         legend{
             font-weight: 700;
             font-size: 24px;
+        }
+        .div-inline{
+            display: inline;
         }
     </style>
 
@@ -54,6 +58,7 @@
     <div class="container">
         @yield('content')
     </div>
+
 </body>
 
 </html>

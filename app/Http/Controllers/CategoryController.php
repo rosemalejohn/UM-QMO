@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -16,7 +17,16 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::withCount('files')->paginate(10);
+        if(Auth::user()->isAdmin()){
+            $categories = Category::with('department')->withCount('files')->paginate(10);
+        }else{
+            $dep_id = Auth::user()->department_id;
+            $categories = Category::with('department')
+                ->where('department_id',$dep_id)
+                ->withCount('files')
+                ->paginate(10);
+        }
+        
 
         return response()->json($categories);
     }
@@ -30,6 +40,7 @@ class CategoryController extends Controller
         $newCategory = Category::create($request->all());
 
         foreach ($request->fileArray as $file) {
+            $file['department_id'] = $newCategory->department_id;
             $file = auth()->user()->files()->create($file);
             $newCategory->files()->attach($file->id);
         }
@@ -42,17 +53,32 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
 
         foreach ($request->fileArray as $file) {
+            $file['department_id'] = $category->department_id;
             $file = File::create($file);
             $category->files()->attach($file->id);
         }
 
-        return response()->json($category->files, 200);
+        $files = [];
+
+        if(Auth::user()->isAdmin()){
+            $files = $category->files;
+        }
+        else{
+            $files = $category->files()->where('department_id',Auth::user()->department_id)->get();
+        }
+
+        return response()->json($files, 200);
     }
 
     public function showFiles($id)
     {
-        $categoryWithFiles = Category::with('files')->orderBy('created_at')->findOrFail($id);
 
+        $categoryWithFiles = Category::with('files','department')->orderBy('created_at')->findOrFail($id);
+
+        if( !Auth::user()->isAdmin() && $categoryWithFiles->department_id != Auth::user()->department_id){
+            abort(401);
+        }
+        
         return response()->json($categoryWithFiles);
     }
 
@@ -108,6 +134,7 @@ class CategoryController extends Controller
 
         $this->validate($request, [
             'name' => 'required|min:2|max:50',
+            'department_id' => 'required'
         ]);
 
     }

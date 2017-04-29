@@ -34,6 +34,10 @@ export default {
 		return Vue.http.post('/api/files/delete-multiple', {fileArray});
 	},
 
+	PowerSearch(searchData) {
+		return Vue.http.post(`/api/files/search`,searchData);
+	},
+
 	Search(search) {
 		return Vue.http.get(`/api/files/${search}/by-search`);
 	}
